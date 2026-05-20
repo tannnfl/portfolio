@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blockdog Audio Design — Anna Tan</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-name" data-zh="谈方琳">Anna Tan</span>
+    <div class="nav-links">
+      <a href="/about.html" data-zh="关于">About</a>
+      <a href="https://www.linkedin.com/in/fanglin-tan-2b5745329/" target="_blank">LinkedIn ↗</a>
+      <a href="https://geo404anna.itch.io/" target="_blank">itch.io ↗</a>
+      <a href="https://github.com/tannnfl" target="_blank">GitHub ↗</a>
+      <div class="lang-switch">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="detail-wrap">
+  <div class="detail-inner">
+
+    <a class="back-link" href="/">← All Work</a>
+
+    <div class="detail-num">14</div>
+    <h1 class="detail-title">Blockdog Audio Design</h1>
+    <div class="detail-role">Solo Audio Designer · FMOD · 2025</div>
+
+    <div class="detail-tags">
+      <span class="tag">Audio Design</span>
+      <span class="tag">FMOD</span>
+      <span class="tag">Unity</span>
+      <span class="tag">Solo Dev</span>
+    </div>
+
+    <div class="detail-section">
+      <h2>Overview</h2>
+      <p>A complete audio design implementation for a block-stacking game. Sound effects layer bubble, jelly, and dog-bark samples to characterize each player action — pickup, throw, and death — with volume and pitch communicating effort and consequence. Background music adapts in real time via an FMOD danger-level parameter, escalating across three intensity phases as the stack height increases.</p>
+    </div>
+
+    <div class="detail-section">
+      <h2>My Role</h2>
+      <ul>
+        <li>Designed and implemented all SFX using layered sample composition in FMOD</li>
+        <li>Built the adaptive music system: FMOD parameter-driven stems sourced from freesound.org</li>
+        <li>Applied random pitch automation to all looping SFX to prevent listener fatigue</li>
+        <li>Tuned loudness relationships between actions to maintain gameplay readability</li>
+      </ul>
+    </div>
+
+    <div class="detail-section">
+      <h2>Design Notes</h2>
+      <ul>
+        <li>The gentler pickup versus louder throw relationship encodes relative effort; subdued death audio creates emotional weight without melodrama</li>
+        <li>The three-phase music escalation rewards spatial awareness — players who read the stack height also read the tension</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<script type="module" src="/lang.js"></script>
+<script type="module" src="/cursor-trail.js"></script>
+</body>
+</html>
