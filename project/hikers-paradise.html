@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hiker's Paradise — Anna Tan</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-name" data-zh="谈方琳">Anna Tan</span>
+    <div class="nav-links">
+      <a href="/about.html" data-zh="关于">About</a>
+      <a href="https://www.linkedin.com/in/fanglin-tan-2b5745329/" target="_blank">LinkedIn ↗</a>
+      <a href="https://geo404anna.itch.io/" target="_blank">itch.io ↗</a>
+      <a href="https://github.com/tannnfl" target="_blank">GitHub ↗</a>
+      <div class="lang-switch">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="detail-wrap">
+  <div class="detail-inner">
+
+    <a class="back-link" href="/">← All Work</a>
+
+    <div class="detail-num">09</div>
+    <h1 class="detail-title">Hiker's Paradise</h1>
+    <div class="detail-role">Solo Developer · Procedural Terrain · 2025</div>
+
+    <div class="detail-tags">
+      <span class="tag">Game Prototype</span>
+      <span class="tag">Procedural Generation</span>
+      <span class="tag">Unity</span>
+      <span class="tag">Solo Dev</span>
+    </div>
+
+    <div class="detail-section">
+      <h2>Overview</h2>
+      <p>A national-park management simulator in which players sculpt infinite procedurally generated mountains and maintain terrain in real time. Six tool modes — dig, raise, flatten, smooth, paint, and tree edit — give players direct authorship over the landscape.</p>
+    </div>
+
+    <div class="detail-section">
+      <h2>My Role</h2>
+      <ul>
+        <li>Designed and implemented all six terrain-editing tools</li>
+        <li>Built the procedural mesh system: vertex and triangle generation, Perlin-noise height shaping with edge falloff</li>
+        <li>Authored an intersection shader for real-time brush feedback</li>
+        <li>Implemented slope- and height-based vertex coloring with procedural tree placement</li>
+        <li>Designed and built the full UI flow</li>
+      </ul>
+    </div>
+
+    <div class="detail-section">
+      <h2>Design Notes</h2>
+      <p>The challenge was keeping terrain editing tactile and immediate — each brush stroke had to feel responsive without causing frame drops. Future development targets trail placement and a lightweight economy layer.</p>
+    </div>
+
+  </div>
+</div>
+
+<script type="module" src="/lang.js"></script>
+<script type="module" src="/cursor-trail.js"></script>
+</body>
+</html>
