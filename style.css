@@ -363,6 +363,25 @@ a.tag:hover { background: #000; color: #fff; }
 .about-section ul li.skill-secondary { color: #666; }
 .about-links { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
 
+/* ── About project entries ── */
+.about-project { margin-bottom: 1.4rem; }
+.about-project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.3rem;
+}
+.about-project-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+.about-project-meta {
+  font-size: 0.75rem;
+  color: #666;
+  white-space: nowrap;
+}
+
 /* ── Language switch ── */
 .lang-switch {
   display: flex;
@@ -384,3 +403,21 @@ a.tag:hover { background: #000; color: #fff; }
 .lang-btn + .lang-btn { border-left: none; }
 .lang-btn.active { background: #000; color: #fff; }
 .lang-btn:hover:not(.active) { background: #f0f0f0; }
+
+/* ── Resume language switching ── */
+.resume-zh { display: none; }
+body.lang-zh .resume-en { display: none; }
+body.lang-zh .resume-zh { display: inline-flex; }
+
+/* ── Video language switching ── */
+.video-local { display: none; }
+body.lang-zh .video-youtube { display: none; }
+body.lang-zh .video-local { display: block; }
+.video-wrap video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}

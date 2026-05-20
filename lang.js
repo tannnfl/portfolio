@@ -5,6 +5,7 @@ function applyLang(lang) {
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
+  document.body.classList.toggle('lang-zh', lang === 'zh');
   localStorage.setItem('portfolio-lang', lang);
 }
 

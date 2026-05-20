@@ -27,42 +27,44 @@
 <div class="detail-wrap">
   <div class="detail-inner">
 
-    <a class="back-link" href="/">← All Work</a>
+    <a class="back-link" href="/" data-zh="← 全部作品">← All Work</a>
 
-    <div class="detail-num">04 — Design Doc</div>
+    <div class="detail-num" data-zh="04 — 设计文档">04 — Design Doc</div>
     <h1 class="detail-title">Timeplex — Mechanics Design Document</h1>
-    <div class="detail-role">Lead Designer · Multi-character Control, Enemy AI Specification &amp; Level Design Guidelines</div>
+    <div class="detail-role" data-zh="主策划 · 多角色控制、敌人 AI 规范与关卡设计准则">Lead Designer · Multi-character Control, Enemy AI Specification &amp; Level Design Guidelines</div>
 
     <div class="detail-tags">
-      <span class="tag">Design Doc</span>
-      <span class="tag">AI Behavior</span>
-      <a class="tag" href="/project/timeplex.html">← View Game</a>
+      <span class="tag" data-zh="设计文档">Design Doc</span>
+      <span class="tag" data-zh="AI 行为">AI Behavior</span>
+      <a class="tag" href="/project/timeplex.html" data-zh="← 查看游戏">← View Game</a>
     </div>
 
     <div class="detail-section">
-      <h2>Document Overview</h2>
-      <p>Mechanics design document covering the core systems of Timeplex — a 2D grid-based puzzle game built around simultaneous multi-character control. Documents the design rationale, technical specification, and level design guidelines for the mechanics section of the project.</p>
+      <h2 data-zh="文档简介">Document Overview</h2>
+      <p data-zh="Timeplex 的机制设计文档——一款以同步多角色控制为核心的 2D 格子解谜游戏。记录了项目机制部分的设计逻辑、技术规范与关卡设计准则。">Mechanics design document covering the core systems of Timeplex — a 2D grid-based puzzle game built around simultaneous multi-character control. Documents the design rationale, technical specification, and level design guidelines for the mechanics section of the project.</p>
     </div>
 
     <div class="detail-section">
-      <h2>Contents</h2>
+      <h2 data-zh="文档目录">Contents</h2>
       <ul>
-        <li>Multi-character control system — simultaneous control of 2–4 character instances sharing the same input</li>
-        <li>Wall clipping mechanic — design intent, edge cases, and constraint rules</li>
-        <li>4 enemy AI behavior specifications: A*, Player Mirror, and two additional behavior types</li>
-        <li>Level design guidelines — using multi-character tension as the puzzle's core challenge</li>
-        <li>Frame-swap system — how swapping panel sequences alters character movement paths</li>
-        <li>Playtesting notes and mechanic iteration history</li>
+        <li data-zh="玩家角色系统：Erma 的四个时间线分身同享一套输入，各占独立格子窗口；角色持有单格道具栏">Player character system: four Erma instances across separate timeline windows sharing one input; each holds a single inventory slot</li>
+        <li data-zh="四种 NPC 行为规范 — 镜像型（复制玩家动作）、反向型（方向相反）、守卫型（固定位置 + 探照灯视线，检测后 3 格追击）、巡逻型（预设路径 + 视线触发追击）">4 NPC behavior specs — Mirror (copies input), Inverse Mirror (opposite direction), Stationary Guard (flashlight sight-line, 3-tile pursuit on detection), Patrol (preset path, sight-line pursuit)</li>
+        <li data-zh="门机制：所有角色必须同时抵达对应出口；多余角色需先被击倒才可通过">Door mechanic: all character instances must occupy matching exits simultaneously; excess characters require incapacitation before passage</li>
+        <li data-zh="传送门机制：跨时间线传输，单次使用计数（仅出发端递减），目的地被占用时阻塞">Portal mechanic: cross-timeline transport with one-way usage counter (departure portal only); blocked when destination is occupied</li>
+        <li data-zh="时间线交换：点击两个帧格互换位置，改变各角色周围环境与 NPC 行为链">Timeline swap: clicking two frames exchanges their positions, altering each character's surrounding environment and NPC behavior chains</li>
+        <li data-zh="时间线连续性：早帧的状态变化会向后级联——重排前段帧会影响所有后续帧的对象与效果">Timeline continuity: state changes cascade forward — reordering an earlier frame retroactively applies effects to all later frames</li>
+        <li data-zh="机制渐进顺序：移动 → 门 → 道具互动 → 联动移动 → 出口 → 时间线交换 → 时间线连续性 → 传送门">Mechanic progression sequence: Movement → Doors → Object Interaction → Connected Movement → Level Exit → Timeline Swap → Timeline Continuity → Portals</li>
       </ul>
     </div>
 
     <div class="detail-section">
-      <h2>Design Process</h2>
-      <p>The mechanic was designed around a single insight: actions that help one character instance can trap another. The GDD documents how we found configurations where this tension is the puzzle — not a frustration. The enemy AI specs were written alongside the Unity implementation, bridging design intent with technical constraints.</p>
+      <h2 data-zh="设计思路">Design Process</h2>
+      <p data-zh="这套机制围绕一个核心洞察展开：帮助一个角色分身的操作，可能会困住另一个。GDD 记录了我们如何找到让这种张力本身成为谜题——而非挫败感——的关卡构型。敌人 AI 规范与 Unity 实现同步撰写，在设计意图与技术约束之间搭建桥梁。">The mechanic was designed around a single insight: actions that help one character instance can trap another. The GDD documents how we found configurations where this tension is the puzzle — not a frustration. The enemy AI specs were written alongside the Unity implementation, bridging design intent with technical constraints.</p>
     </div>
 
     <div class="detail-links">
-      <a class="play-badge" href="https://docs.google.com/document/d/1c-aMvkEScfXF5v9WMeSQV_B_QDLEkEiwcQnyi0nfNp0/edit?tab=t.1pluao2v72mw" target="_blank" data-zh="查看 Google 文档 ↗">View Google Doc ↗</a>
+      <a class="play-badge" href="https://docs.google.com/document/d/1cQz9ZdWjozJpfaB5Ch_nxXYF0j8h2bUdgs4XpnhQUac/edit?tab=t.0" target="_blank" data-zh="查看 Google 文档 ↗">View Google Doc ↗</a>
+      <a class="play-badge" href="/assets/timeplex-gdd.pdf" download="Timeplex-GDD.pdf" data-zh="下载 PDF">Download PDF</a>
       <a class="play-badge" href="/project/timeplex.html" data-zh="查看游戏页面">View Game Page</a>
     </div>
 

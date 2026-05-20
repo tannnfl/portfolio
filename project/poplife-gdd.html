@@ -27,43 +27,48 @@
 <div class="detail-wrap">
   <div class="detail-inner">
 
-    <a class="back-link" href="/">← All Work</a>
+    <a class="back-link" href="/" data-zh="← 全部作品">← All Work</a>
 
-    <div class="detail-num">02 — Design Doc</div>
+    <div class="detail-num" data-zh="02 — 设计文档">02 — Design Doc</div>
     <h1 class="detail-title">POPLife — Game Design Document</h1>
-    <div class="detail-role">Lead Designer · Systems, NPC, Quest &amp; Economy Design · Full Production GDD for a team of 7+</div>
+    <div class="detail-role" data-zh="主策划 · 系统、NPC、任务与经济设计 · 7+ 人团队完整制作 GDD">Lead Designer · Systems, NPC, Quest &amp; Economy Design · Full Production GDD for a team of 7+</div>
 
     <div class="detail-tags">
-      <span class="tag">Design Doc</span>
-      <span class="tag">Systems Design</span>
-      <span class="tag">Narrative Design</span>
-      <a class="tag" href="/project/poplife.html">← View Game</a>
+      <span class="tag" data-zh="设计文档">Design Doc</span>
+      <span class="tag" data-zh="系统设计">Systems Design</span>
+      <span class="tag" data-zh="叙事设计">Narrative Design</span>
+      <a class="tag" href="/project/poplife.html" data-zh="← 查看游戏">← View Game</a>
     </div>
 
     <div class="detail-section">
-      <h2>Document Overview</h2>
-      <p>Full production Game Design Document for POPLife — a 2D pixel management simulator. Covers the complete design specification for the game's core systems, authored across the full development cycle for a cross-functional team of 7+ (designers, engineers, artists).</p>
+      <h2 data-zh="文档简介">Document Overview</h2>
+      <p data-zh="POPLife 的完整制作 GDD——一款 2D 像素经营模拟游戏。覆盖游戏核心系统的全部设计规范，贯穿完整开发周期，服务于 7+ 人跨职能团队（策划、工程师、美术）。">Full production Game Design Document for POPLife — a 2D pixel management simulator. Covers the complete design specification for the game's core systems, authored across the full development cycle for a cross-functional team of 7+ (designers, engineers, artists).</p>
     </div>
 
     <div class="detail-section">
-      <h2>Contents</h2>
+      <h2 data-zh="文档目录">Contents</h2>
       <ul>
-        <li>80+ shop shelves — each with category, pricing tiers, and unlock conditions</li>
-        <li>40+ NPC profiles — personality, preference sets, and interaction decision trees</li>
-        <li>5 quest lines (30+ main quests, 20+ side achievements) derived from narrative dialogue design</li>
-        <li>Economy loop specification — supply chain, customer demand, pricing strategy</li>
-        <li>Gameplay loop documentation and cross-team implementation notes</li>
-        <li>System expansion roadmap — mini-quest integration per NPC/shelf</li>
+        <li data-zh="货架与商品系统：80+ 种货架类型，含品类等级（1–5 级）、售价、进货成本、维护费用、吸引力公式及解锁条件">Shelf &amp; Product System: 80+ shelf types with category tiers (1–5), sell price, stock cost, maintenance fee, appeal formula, and unlock conditions</li>
+        <li data-zh="捆绑系统：2–4 个相邻货架自动激活，通过抽奖解锁捆绑配方，享受售价与进货折扣">Bundle System: 2–4 adjacent shelves auto-activate; bundle recipes unlocked via lottery with discounted sell and stock prices</li>
+        <li data-zh="顾客 AI 系统：40+ NPC 档案，含兴趣货架偏好、钱包等级（10–300）、羞耻值积累与自动升级逻辑；完整购物路径决策树">Customer AI: 40+ NPC profiles with 4-shelf interest sets, money bag tiers (10–300), embarrassment tracking, experience-based level upgrades, and full purchase path decision logic</li>
+        <li data-zh="每日循环：清晨备货阶段 → 实时营业时段（12:00–23:00）→ 日终结算面板；含暂停 / 1× / 2× 速度控制">Day Loop: Morning stock phase → real-time store hours (12:00–23:00) → end-of-day settlement panel; pause / 1× / 2× speed control</li>
+        <li data-zh="店铺政策：五种可切换日常效果，含明确权衡——延长营业、品类促销、超级促销、广告投放、环保经营，各附吸引力与成本倍率">Store Policies: Five toggleable daily effects with explicit multipliers — Extended Hours, Category Sale, Super Sale, Advertisement, Eco-friendly Business</li>
+        <li data-zh="双货币经济：金钱（运营资金，破产触发机制）+ 人气（通过任务与结算获得，消耗于升级与蓝图）">Dual-Currency Economy: Money (operations, bankruptcy trigger) + Fame (earned via quests and settlement, spent on upgrades and blueprints)</li>
+        <li data-zh="任务与剧情系统：5 条叙事任务线、VIP 剧情任务（同时一条）、每日成就三连随机轮换；奖励含蓝图、货币、人气与新顾客">Quest &amp; Narrative System: 5 story quest lines, VIP Story Missions (one active at a time), 3 concurrent daily achievements; rewards include blueprints, currency, fame, and new customers</li>
+        <li data-zh="玩家进阶：门店星级系统（0–5 星），含货架数量、顾客数与收入达成门槛">Player Progression: Store star rating (0–5 stars) with shelf count, customer, and income thresholds</li>
+        <li data-zh="建筑与设施：按楼层 / 房间扩建，收银台、ATM、空调等设施，含建设耗时规范（15 秒摆放 / 5 秒移动）">Building &amp; Facilities: Floor and room expansion, cashiers, ATMs, air conditioners, with construction timing specs (place 15s / move 5s)</li>
+        <li data-zh="叙事工具：NPC 对话树（Node Canvas）、信息面板风味文本、VIP 任务隐性谜题叙事；UI 规范含气泡、广播消息与颜色编码消息系统">Storytelling &amp; UI: NPC dialogue trees (Node Canvas), flavor text, VIP implicit puzzle narrative; UI spec includes pop bubbles, broadcast messages, and color-coded message system</li>
       </ul>
     </div>
 
     <div class="detail-section">
-      <h2>Design Process</h2>
-      <p>The GDD emerged from narrative-first design: NPC dialogue and story context drove what quests existed, which in turn shaped what shelf/item categories needed to be designed. This bottom-up approach kept the economy grounded in character motivation rather than abstract mechanics.</p>
+      <h2 data-zh="设计思路">Design Process</h2>
+      <p data-zh="GDD 以叙事优先为出发点：NPC 的对话与故事背景决定了任务的内容，任务又反过来塑造了需要设计的货架与商品品类。这种自下而上的方式让经济系统扎根于角色动机，而非抽象数值。">The GDD emerged from narrative-first design: NPC dialogue and story context drove what quests existed, which in turn shaped what shelf and item categories needed to be designed. This bottom-up approach kept the economy grounded in character motivation rather than abstract mechanics.</p>
     </div>
 
     <div class="detail-links">
-      <a class="play-badge" href="https://docs.google.com/document/d/1aeH3MieYuRzXxqHSQzuvZHX4tu3lne5i4YjBKm8GAVI/edit?tab=t.3m78zgu0bo37" target="_blank" data-zh="查看 Google 文档 ↗">View Google Doc ↗</a>
+      <a class="play-badge" href="https://docs.google.com/document/d/1c-aMvkEScfXF5v9WMeSQV_B_QDLEkEiwcQnyi0nfNp0/edit?tab=t.1pluao2v72mw" target="_blank" data-zh="查看 Google 文档 ↗">View Google Doc ↗</a>
+      <a class="play-badge" href="/assets/poplife-gdd.pdf" download="POPLife-GDD.pdf" data-zh="下载 PDF">Download PDF</a>
       <a class="play-badge" href="/project/poplife.html" data-zh="查看游戏页面">View Game Page</a>
     </div>
 
