@@ -1,0 +1,70 @@
+<h2>Portfolio 视觉风格方向</h2>
+<p class="subtitle">选一个最接近你想要的感觉（可以选多个或说"介于A和C之间"）</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0d0d0d; padding:1.2rem; font-family:monospace; color:#00ff88; font-size:0.75rem; line-height:1.6; min-height:120px;">
+      <div style="color:#888;">// game_designer.js</div>
+      <div><span style="color:#ff6b6b;">const</span> <span style="color:#00d4ff;">fanglin</span> = {</div>
+      <div style="padding-left:1rem;">role: <span style="color:#ffd93d;">"Game Designer"</span>,</div>
+      <div style="padding-left:1rem;">skills: [<span style="color:#ffd93d;">"Unity"</span>, <span style="color:#ffd93d;">"Systems"</span>]</div>
+      <div>}</div>
+      <div style="margin-top:0.5rem; color:#00ff88;">▌</div>
+    </div>
+    <div class="card-body">
+      <h3>A — Technical Dark</h3>
+      <p>黑底绿字，代码美学，terminal 风格。强调"我是会写代码的设计师"。适合 Technical Designer / QA 岗位。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f5f0e8; padding:1.2rem; font-family:'Georgia',serif; min-height:120px; display:flex; flex-direction:column; justify-content:center;">
+      <div style="font-size:1.5rem; font-weight:bold; color:#1a1a1a; letter-spacing:-0.5px;">FANGLIN TAN</div>
+      <div style="color:#666; font-size:0.8rem; margin-top:0.3rem; letter-spacing:2px;">GAME DESIGNER</div>
+      <div style="margin-top:1rem; display:flex; gap:0.5rem;">
+        <div style="width:40px; height:40px; background:#1a1a1a;"></div>
+        <div style="width:40px; height:40px; background:#888;"></div>
+        <div style="width:40px; height:40px; background:#d4a853;"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Clean Editorial</h3>
+      <p>米白底色，衬线字，排版克制。专业感强，像设计类杂志。适合强调设计思维和文档能力。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: linear-gradient(135deg, #1a0533 0%, #0d1b4a 50%, #0a2e1a 100%); padding:1.2rem; min-height:120px; display:flex; flex-direction:column; justify-content:center; position:relative; overflow:hidden;">
+      <div style="position:absolute; top:0; left:0; right:0; bottom:0; background: radial-gradient(circle at 30% 50%, rgba(180,100,255,0.15) 0%, transparent 60%), radial-gradient(circle at 70% 30%, rgba(0,200,255,0.1) 0%, transparent 50%);"></div>
+      <div style="position:relative; color:#e0d0ff; font-size:1.2rem; font-weight:700; letter-spacing:1px;">FANGLIN TAN</div>
+      <div style="position:relative; color:#9b7fff; font-size:0.75rem; margin-top:0.2rem;">Game Designer · NYU BFA</div>
+      <div style="position:relative; margin-top:0.8rem; display:flex; gap:4px;">
+        <div style="flex:1; height:3px; background:linear-gradient(90deg, #9b7fff, transparent);"></div>
+        <div style="flex:1; height:3px; background:linear-gradient(90deg, #00c8ff, transparent);"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Indie Game Vibes</h3>
+      <p>深色渐变，霓虹点缀，带游戏质感。有个性，记忆点强。适合展示创意和游戏氛围。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="d" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#fafafa; padding:1.2rem; min-height:120px; display:flex; flex-direction:column; justify-content:center;">
+      <div style="font-size:1.3rem; font-weight:800; color:#111; font-family:sans-serif;">Anna Tan</div>
+      <div style="color:#555; font-size:0.8rem; margin-top:0.2rem;">Game Designer</div>
+      <div style="margin-top:0.8rem; display:grid; grid-template-columns:1fr 1fr; gap:4px;">
+        <div style="background:#111; height:50px; border-radius:4px;"></div>
+        <div style="background:#e5e5e5; height:50px; border-radius:4px;"></div>
+        <div style="background:#e5e5e5; height:24px; border-radius:4px;"></div>
+        <div style="background:#111; height:24px; border-radius:4px;"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>D — Minimal Modern</h3>
+      <p>白底黑字，无装饰，强网格布局。简洁有力，加载快。内容说话，适合快速浏览的招聘官。</p>
+    </div>
+  </div>
+
+</div>

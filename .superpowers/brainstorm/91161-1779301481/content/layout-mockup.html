@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mockup — Anna Tan Portfolio</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; background: #fff; color: #111; display: flex; min-height: 100vh; }
+
+  /* Sidebar */
+  .sidebar {
+    width: 140px;
+    min-width: 140px;
+    padding: 2rem 1rem;
+    border-right: 1px solid #e5e5e5;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .sidebar-title {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 0.5rem;
+  }
+  .filter-btn {
+    font-size: 0.8rem;
+    color: #555;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 0.2rem 0.4rem;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  .filter-btn.active {
+    background: #111;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* Main */
+  .main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Top bar */
+  .topbar {
+    padding: 1.2rem 2rem;
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .topbar-name { font-size: 0.95rem; font-weight: 700; }
+  .topbar-links { font-size: 0.75rem; color: #888; display: flex; gap: 1rem; }
+  .topbar-links a { color: #888; text-decoration: none; }
+  .topbar-links a:hover { color: #111; }
+
+  /* Feed */
+  .feed { display: flex; flex-direction: column; }
+
+  .project-item {
+    position: relative;
+    border-bottom: 1px solid #e5e5e5;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .project-item:hover .overlay { opacity: 1; }
+  .project-item img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.85);
+    transition: filter 0.2s;
+  }
+  .project-item:hover img { filter: brightness(0.7); }
+
+  /* Placeholder image */
+  .img-placeholder {
+    width: 100%;
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: #aaa;
+    transition: filter 0.2s;
+  }
+
+  .project-label {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 2rem;
+    right: 2rem;
+  }
+  .project-num {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 0.3rem;
+  }
+  .project-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .project-desc {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.8);
+    margin-top: 0.4rem;
+  }
+  .project-tags {
+    margin-top: 0.5rem;
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="sidebar-title">Filter</div>
+  <button class="filter-btn active">all</button>
+  <button class="filter-btn">featured</button>
+  <button class="filter-btn">game</button>
+  <button class="filter-btn">design doc</button>
+  <button class="filter-btn">tool dev</button>
+  <button class="filter-btn">board game</button>
+</div>
+
+<!-- Main -->
+<div class="main">
+  <div class="topbar">
+    <span class="topbar-name">Anna Tan — Game Designer</span>
+    <div class="topbar-links">
+      <a href="#">About</a>
+      <a href="#">Resume</a>
+      <a href="#">itch.io</a>
+      <a href="#">GitHub</a>
+    </div>
+  </div>
+
+  <div class="feed">
+
+    <!-- Project 1: POPLife -->
+    <div class="project-item">
+      <div class="img-placeholder" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);">
+        <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4440160/header.jpg"
+             alt="POPLife"
+             style="width:100%;height:320px;object-fit:cover;display:block;filter:brightness(0.75);"
+             onerror="this.style.display='none'">
+      </div>
+      <div class="project-label">
+        <div class="project-num">01</div>
+        <div class="project-title">POPLife</div>
+        <div class="project-desc">2D Pixel Management Sim · Lead Designer · GDC 2025 · Steam</div>
+        <div class="project-tags">
+          <span class="tag">Game Design</span>
+          <span class="tag">Systems</span>
+          <span class="tag">Narrative</span>
+          <span class="tag">Featured</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2: Timeplex -->
+    <div class="project-item">
+      <div class="img-placeholder" style="background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%); position:relative;">
+        <div style="position:relative;z-index:1;text-align:center;">
+          <div style="display:grid;grid-template-columns:repeat(5,20px);gap:4px;margin:0 auto;">
+            <div style="width:20px;height:20px;background:#fff;border-radius:2px;"></div>
+            <div style="width:20px;height:20px;background:#fff;border-radius:2px;"></div>
+            <div style="width:20px;height:20px;background:#333;border-radius:2px;"></div>
+            <div style="width:20px;height:20px;background:#fff;border-radius:2px;"></div>
+            <div style="width:20px;height:20px;background:#333;border-radius:2px;"></div>
+          </div>
+          <div style="color:#555;font-size:0.7rem;margin-top:8px;">Grid placeholder</div>
+        </div>
+      </div>
+      <div class="project-label">
+        <div class="project-num">02</div>
+        <div class="project-title">Timeplex</div>
+        <div class="project-desc">2D Grid-Based Puzzle · Lead Designer · Multi-character mechanic + 4 AI behaviors</div>
+        <div class="project-tags">
+          <span class="tag">Game Design</span>
+          <span class="tag">AI</span>
+          <span class="tag">Puzzle</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 3: Beans and Guns -->
+    <div class="project-item">
+      <div class="img-placeholder" style="background: linear-gradient(135deg, #2d1b00 0%, #1a3300 100%);">
+        <div style="color:#555;font-size:0.7rem;">Beans & Guns placeholder</div>
+      </div>
+      <div class="project-label">
+        <div class="project-num">03</div>
+        <div class="project-title">Beans and Guns</div>
+        <div class="project-desc">Online 3D Collaborative Puzzle Sandbox · Async relay mechanic · Unity Editor tooling</div>
+        <div class="project-tags">
+          <span class="tag">Game Design</span>
+          <span class="tag">Tool Dev</span>
+          <span class="tag">Multiplayer</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 4: Survival Skills -->
+    <div class="project-item">
+      <div class="img-placeholder" style="background: linear-gradient(135deg, #1a0010 0%, #330020 100%);">
+        <div style="color:#555;font-size:0.7rem;">Survival Skills placeholder</div>
+      </div>
+      <div class="project-label">
+        <div class="project-num">04</div>
+        <div class="project-title">The Survival Skills Game</div>
+        <div class="project-desc">Solo Dev · Physics mini-games · Browser playable on itch.io</div>
+        <div class="project-tags">
+          <span class="tag">Solo Dev</span>
+          <span class="tag">Physics</span>
+          <span class="tag">itch.io</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

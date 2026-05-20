@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timeplex — Anna Tan</title>
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    .video-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      border: var(--border);
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+    .video-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-name" data-zh="谈方琳">Anna Tan</span>
+    <div class="nav-links">
+      <a href="/about.html" data-zh="关于">About</a>
+      <a href="https://www.linkedin.com/in/fanglin-tan-2b5745329/" target="_blank">LinkedIn ↗</a>
+      <a href="https://geo404anna.itch.io/" target="_blank">itch.io ↗</a>
+      <a href="https://github.com/tannnfl" target="_blank">GitHub ↗</a>
+      <div class="lang-switch">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="detail-wrap">
+  <div class="detail-inner">
+
+    <a class="back-link" href="/">← All Work</a>
+
+    <div class="detail-num">02</div>
+    <h1 class="detail-title">Timeplex</h1>
+    <div class="detail-role">Lead Designer · 2D Grid-Based Puzzle · 2024–2025 · NYU Spring Showcase</div>
+
+    <div class="detail-tags">
+      <span class="tag">Game Design</span>
+      <span class="tag">AI Behavior</span>
+      <span class="tag">Puzzle</span>
+      <a class="tag tag-black" href="https://episode42.itch.io/timeplex" target="_blank">Play on itch.io ↗</a>
+      <a class="tag" href="/project/timeplex-gdd.html">Design Doc ↗</a>
+    </div>
+
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/thjS79PUgD8"
+              title="Timeplex Gameplay"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+
+    <img class="detail-img"
+         src="https://img.itch.zone/aW1nLzIxMDMzMTY4LnBuZw==/original/rmOR8j.png"
+         alt="Timeplex cover" />
+
+    <div class="detail-section">
+      <h2>Overview</h2>
+      <ul>
+        <li>2D grid-based puzzle game; screen splits into 1–4 simultaneous timeline frames</li>
+        <li>Players control Erma — trapped in a fractured mental institution — across up to 4 timelines at once</li>
+        <li>All timelines share the same player input; NPC types (Mirror, A*, Guard, Patrol) create divergent outcomes per frame</li>
+        <li>Core mechanic: clicking two timeline frames swaps their order, altering every character's movement sequence in those panels</li>
+        <li>Portals transport characters across timelines; door puzzles require all characters to reach matching exits simultaneously</li>
+        <li>Timeline Continuity: state changes cascade forward — swapping an earlier frame ripples through every later one</li>
+        <li>Narrative delivered through comic-style cutscenes exploring trauma, memory, and healing</li>
+      </ul>
+    </div>
+
+    <img class="detail-img"
+         src="https://img.itch.zone/aW1hZ2UvMzM5MTU1Ny8yMTExNTY5NC5wbmc=/original/G9GlmZ.png"
+         alt="Timeplex screenshot 1" />
+
+    <img class="detail-img"
+         src="https://img.itch.zone/aW1hZ2UvMzM5MTU1Ny8yMTExNTY5My5wbmc=/original/R3fnKG.png"
+         alt="Timeplex screenshot 2" />
+
+    <div class="detail-section">
+      <h2>Recognition</h2>
+      <ul>
+        <li>Selected for NYU Spring Showcase</li>
+      </ul>
+    </div>
+
+    <div class="detail-section">
+      <h2>My Role</h2>
+      <ul>
+        <li>Designed the core mechanic: simultaneous control of 2–4 character instances sharing the same input</li>
+        <li>Authored the mechanics section of the Game Design Document</li>
+        <li>Implemented 4 distinct enemy AI behaviors in Unity: A*, Player Mirror, and two additional types</li>
+        <li>Optimized level design tooling to accelerate iteration</li>
+        <li>Continuously refined the mechanic through playtesting</li>
+      </ul>
+    </div>
+
+    <img class="detail-img"
+         src="https://img.itch.zone/aW1hZ2UvMzM5MTU1Ny8yMTExNTY5NS5wbmc=/original/Hy502O.png"
+         alt="Timeplex screenshot 3" />
+
+    <div class="detail-section">
+      <h2>Design Notes</h2>
+      <ul>
+        <li>Tension is structural: helping one timeline can trap another — that conflict is the puzzle, not a side effect</li>
+        <li>Frame-swapping adds a meta layer: the player edits the sequence of events that shapes the space, not just navigates it</li>
+        <li>Four NPC types create distinct puzzle archetypes while sharing one unified movement ruleset</li>
+        <li>Mechanic complexity introduced incrementally: movement → doors → object interaction → timeline swap → continuity → portals</li>
+      </ul>
+    </div>
+
+    <div class="detail-links">
+      <a class="play-badge" href="https://episode42.itch.io/timeplex" target="_blank" data-zh="在 itch.io 上玩 ↗">Play on itch.io ↗</a>
+      <a class="play-badge" href="/project/timeplex-gdd.html" data-zh="机制设计文档 ↗">Mechanics Design Document ↗</a>
+    </div>
+
+  </div>
+</div>
+
+<script type="module" src="/lang.js"></script>
+<script type="module" src="/cursor-trail.js"></script>
+</body>
+</html>

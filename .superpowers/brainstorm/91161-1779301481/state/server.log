@@ -1,0 +1,10 @@
+{"type":"server-started","port":62542,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:62542","screen_dir":"/Users/fanglintan/WebstormProjects/Portfolio/.superpowers/brainstorm/91161-1779301481/content","state_dir":"/Users/fanglintan/WebstormProjects/Portfolio/.superpowers/brainstorm/91161-1779301481/state"}
+{"type":"screen-added","file":"/Users/fanglintan/WebstormProjects/Portfolio/.superpowers/brainstorm/91161-1779301481/content/welcome.html"}
+{"type":"screen-added","file":"/Users/fanglintan/WebstormProjects/Portfolio/.superpowers/brainstorm/91161-1779301481/content/style-direction.html"}
+{"source":"user-event","type":"click","text":"// game_designer.js\n      const fanglin = {\n      role: \"Game Designer\",\n      skills: [\"Unity\", \"Systems\"]\n      }\n      ▌\n    \n    \n      A — Technical Dark\n      黑底绿字，代码美学，terminal 风格。强调\"我是会写代码的设计师\"。适合 Technical Designer / QA 岗位。","choice":"a","id":null,"timestamp":1779301885213}
+{"source":"user-event","type":"click","text":"Fanglin Tan\n      Game Designer\n      \n        \n        \n        \n        \n      \n    \n    \n      D — Minimal Modern\n      白底黑字，无装饰，强网格布局。简洁有力，加载快。内容说话，适合快速浏览的招聘官。","choice":"d","id":null,"timestamp":1779301886627}
+{"type":"screen-added","file":"/Users/fanglintan/WebstormProjects/Portfolio/.superpowers/brainstorm/91161-1779301481/content/waiting-1.html"}
+{"type":"screen-added","file":"/Users/fanglintan/WebstormProjects/Portfolio/.superpowers/brainstorm/91161-1779301481/content/approaches.html"}
+{"type":"screen-added","file":"/Users/fanglintan/WebstormProjects/Portfolio/.superpowers/brainstorm/91161-1779301481/content/layout-mockup.html"}
+{"type":"screen-added","file":"/Users/fanglintan/WebstormProjects/Portfolio/.superpowers/brainstorm/91161-1779301481/content/layout-v2.html"}
+{"type":"server-stopped","reason":"idle timeout"}

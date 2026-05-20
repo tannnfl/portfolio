@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timeplex Mechanics GDD — Anna Tan</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-name" data-zh="谈方琳">Anna Tan</span>
+    <div class="nav-links">
+      <a href="/about.html" data-zh="关于">About</a>
+      <a href="https://www.linkedin.com/in/fanglin-tan-2b5745329/" target="_blank">LinkedIn ↗</a>
+      <a href="https://geo404anna.itch.io/" target="_blank">itch.io ↗</a>
+      <a href="https://github.com/tannnfl" target="_blank">GitHub ↗</a>
+      <div class="lang-switch">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="detail-wrap">
+  <div class="detail-inner">
+
+    <a class="back-link" href="/">← All Work</a>
+
+    <div class="detail-num">04 — Design Doc</div>
+    <h1 class="detail-title">Timeplex — Mechanics Design Document</h1>
+    <div class="detail-role">Lead Designer · Multi-character Control, Enemy AI Specification &amp; Level Design Guidelines</div>
+
+    <div class="detail-tags">
+      <span class="tag">Design Doc</span>
+      <span class="tag">AI Behavior</span>
+      <a class="tag" href="/project/timeplex.html">← View Game</a>
+    </div>
+
+    <div class="detail-section">
+      <h2>Document Overview</h2>
+      <p>Mechanics design document covering the core systems of Timeplex — a 2D grid-based puzzle game built around simultaneous multi-character control. Documents the design rationale, technical specification, and level design guidelines for the mechanics section of the project.</p>
+    </div>
+
+    <div class="detail-section">
+      <h2>Contents</h2>
+      <ul>
+        <li>Multi-character control system — simultaneous control of 2–4 character instances sharing the same input</li>
+        <li>Wall clipping mechanic — design intent, edge cases, and constraint rules</li>
+        <li>4 enemy AI behavior specifications: A*, Player Mirror, and two additional behavior types</li>
+        <li>Level design guidelines — using multi-character tension as the puzzle's core challenge</li>
+        <li>Frame-swap system — how swapping panel sequences alters character movement paths</li>
+        <li>Playtesting notes and mechanic iteration history</li>
+      </ul>
+    </div>
+
+    <div class="detail-section">
+      <h2>Design Process</h2>
+      <p>The mechanic was designed around a single insight: actions that help one character instance can trap another. The GDD documents how we found configurations where this tension is the puzzle — not a frustration. The enemy AI specs were written alongside the Unity implementation, bridging design intent with technical constraints.</p>
+    </div>
+
+    <div class="detail-links">
+      <a class="play-badge" href="https://docs.google.com/document/d/1c-aMvkEScfXF5v9WMeSQV_B_QDLEkEiwcQnyi0nfNp0/edit?tab=t.1pluao2v72mw" target="_blank" data-zh="查看 Google 文档 ↗">View Google Doc ↗</a>
+      <a class="play-badge" href="/project/timeplex.html" data-zh="查看游戏页面">View Game Page</a>
+    </div>
+
+  </div>
+</div>
+
+<script type="module" src="/lang.js"></script>
+<script type="module" src="/cursor-trail.js"></script>
+</body>
+</html>

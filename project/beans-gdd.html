@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beans and Guns Design Doc — Anna Tan</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-name" data-zh="谈方琳">Anna Tan</span>
+    <div class="nav-links">
+      <a href="/about.html" data-zh="关于">About</a>
+      <a href="https://www.linkedin.com/in/fanglin-tan-2b5745329/" target="_blank">LinkedIn ↗</a>
+      <a href="https://geo404anna.itch.io/" target="_blank">itch.io ↗</a>
+      <a href="https://github.com/tannnfl" target="_blank">GitHub ↗</a>
+      <div class="lang-switch">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="detail-wrap">
+  <div class="detail-inner">
+
+    <a class="back-link" href="/">← All Work</a>
+
+    <div class="detail-num">06 — Design Doc</div>
+    <h1 class="detail-title">Beans and Guns — Design Document</h1>
+    <div class="detail-role">Lead Designer · Async Relay Mechanic, Fog Reveal System &amp; Item–Scene Mapping</div>
+
+    <div class="detail-tags">
+      <span class="tag">Design Doc</span>
+      <span class="tag">Systems</span>
+      <a class="tag" href="/project/beans-and-guns.html">← View Game</a>
+    </div>
+
+    <div class="detail-section">
+      <h2>Document Overview</h2>
+      <p>Design document for Beans and Guns — an online 3D collaborative puzzle sandbox. Covers the full mechanic design for the asynchronous relay system, fog reveal logic, item–scene relationship mapping, and the Unity Editor tooling built to support content authoring.</p>
+    </div>
+
+    <div class="detail-section">
+      <h2>Contents</h2>
+      <ul>
+        <li>Asynchronous relay mechanic — per-player item limits, FIFO eviction rules, scene inheritance</li>
+        <li>Fog reveal system — correct object combination conditions and reveal progression</li>
+        <li>Item–scene mapping specification — authoring schema for hint text and object relationships</li>
+        <li>Unity Editor tooling design — hint text editor window, item–scene relationship editor</li>
+        <li>Scene upload/download pipeline — design requirements and handoff to engineering</li>
+        <li>Scene replay system (in development) — timeline playback specification</li>
+      </ul>
+    </div>
+
+    <div class="detail-section">
+      <h2>Design Process</h2>
+      <p>The FIFO eviction rule — oldest items removed when the scene cap is hit — emerged as the most generative constraint in the design. Players can't just accumulate; they must build with intention. Documenting this helped the team understand why the rule was load-bearing and shouldn't be relaxed even when playtesters initially found it frustrating.</p>
+    </div>
+
+    <div class="detail-links">
+      <a class="play-badge" href="https://docs.google.com/document/d/1cQz9ZdWjozJpfaB5Ch_nxXYF0j8h2bUdgs4XpnhQUac/edit?tab=t.0" target="_blank" data-zh="查看 Google 文档 ↗">View Google Doc ↗</a>
+      <a class="play-badge" href="/project/beans-and-guns.html" data-zh="查看游戏页面">View Game Page</a>
+    </div>
+
+  </div>
+</div>
+
+<script type="module" src="/lang.js"></script>
+<script type="module" src="/cursor-trail.js"></script>
+</body>
+</html>

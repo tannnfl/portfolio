@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beans and Guns — Anna Tan</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-name" data-zh="谈方琳">Anna Tan</span>
+    <div class="nav-links">
+      <a href="/about.html" data-zh="关于">About</a>
+      <a href="https://www.linkedin.com/in/fanglin-tan-2b5745329/" target="_blank">LinkedIn ↗</a>
+      <a href="https://geo404anna.itch.io/" target="_blank">itch.io ↗</a>
+      <a href="https://github.com/tannnfl" target="_blank">GitHub ↗</a>
+      <div class="lang-switch">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="detail-wrap">
+  <div class="detail-inner">
+
+    <a class="back-link" href="/">← All Work</a>
+
+    <div class="detail-num">03</div>
+    <h1 class="detail-title">Beans and Guns</h1>
+    <div class="detail-role">Lead Designer · Online 3D Collaborative Puzzle Sandbox · 2026–Present</div>
+
+    <div class="detail-tags">
+      <span class="tag">Game Design</span>
+      <span class="tag">Tool Dev</span>
+      <span class="tag">Multiplayer</span>
+      <a class="tag tag-black" href="https://psycanic.itch.io/been-and-gone" target="_blank">Play on itch.io ↗</a>
+      <a class="tag" href="/project/beans-gdd.html">Design Doc ↗</a>
+    </div>
+
+    <img class="detail-img"
+         src="https://img.itch.zone/aW1nLzI0ODcxODM1LnBuZw==/original/iCSqMQ.png"
+         alt="Beans and Guns" />
+
+    <div class="detail-section">
+      <h2>Overview</h2>
+      <ul>
+        <li>Asynchronous relay experience: each player inherits the previous player's 3D scene and places up to 5 items</li>
+        <li>Scene cap of 50 items; when exceeded, the oldest items are removed first (FIFO eviction)</li>
+        <li>Items carry hidden attributes; their sum determines the scene's proximity to one of six childhood-themed endings</li>
+        <li>Three phases: free creation (0–50% similarity) → locked-in ending (50–90%) → forgetting (players click items to dissolve them)</li>
+        <li>Visual style — color, dither size, outline weight, blur — shifts in real time via post-processing as scene attributes change</li>
+        <li>Dynamic music (FMOD): grows richer as ending-relevant items accumulate; fades to silence during the forgetting phase</li>
+        <li>Each scene contains a spirit that narrates the experience; collective goal is to free each spirit across six scenes</li>
+      </ul>
+    </div>
+
+    <div class="detail-section">
+      <h2>My Role</h2>
+      <ul>
+        <li>Designed the full asynchronous relay mechanic: item placement limit, FIFO eviction, fog reveal through correct combinations</li>
+        <li>Led gameplay expansion discussions as the project grew post-jam</li>
+        <li>Built Unity Editor windows for hint text authoring and item–scene relationship mapping</li>
+        <li>Sole implementer of hint system logic in C#</li>
+        <li>Participated in scene upload/download pipeline and imported two scenes with corresponding items</li>
+      </ul>
+    </div>
+
+    <div class="detail-section">
+      <h2>Design Notes</h2>
+      <ul>
+        <li>FIFO eviction is a generative constraint: placing something meaningful means accepting something earlier may vanish</li>
+        <li>Asynchronous format makes each session a conversation across time — no synchronous coordination needed</li>
+        <li>Six endings anchor emergent play: scenes drift toward a childhood emotional archetype even without explicit player intent</li>
+        <li>The forgetting phase completes the arc — creation and loss are both part of the same collective story</li>
+      </ul>
+    </div>
+
+    <div class="detail-links">
+      <a class="play-badge" href="https://psycanic.itch.io/been-and-gone" target="_blank" data-zh="在 itch.io 上玩 ↗">Play on itch.io ↗</a>
+      <a class="play-badge" href="/project/beans-gdd.html" data-zh="设计文档 ↗">Design Document ↗</a>
+    </div>
+
+  </div>
+</div>
+
+<script type="module" src="/lang.js"></script>
+<script type="module" src="/cursor-trail.js"></script>
+</body>
+</html>
