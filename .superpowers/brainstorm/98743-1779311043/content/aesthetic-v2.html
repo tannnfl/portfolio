@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aesthetic Direction</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Courier New', monospace;
+    background: #111;
+    color: #eee;
+    padding: 40px 24px 80px;
+  }
+
+  h1 {
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 8px;
+  }
+  .intro {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 40px;
+    letter-spacing: 0.06em;
+  }
+
+  .directions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .dir-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .dir-wrap:hover { transform: translateY(-3px); }
+
+  .dir-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #555;
+    padding-left: 2px;
+  }
+
+  .dir-desc {
+    font-size: 11px;
+    color: #555;
+    line-height: 1.6;
+    padding-left: 2px;
+  }
+
+  /* ════════════════════════════════════════
+     DIRECTION A — GLITCH ZINE
+     白底 + 粗偏移阴影 + 抖动扫描线 + 彩色残影
+  ════════════════════════════════════════ */
+
+  .preview-a {
+    background: #fff;
+    padding: 20px;
+    font-family: 'Courier New', monospace;
+    position: relative;
+    overflow: hidden;
+    border: 3px solid #000;
+    box-shadow: 5px 5px 0 #FFDE00, 8px 8px 0 #000;
+  }
+
+  /* scanline overlay */
+  .preview-a::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(0,0,0,0.025) 3px,
+      rgba(0,0,0,0.025) 4px
+    );
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .a-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    border-bottom: 2px solid #000;
+    padding-bottom: 10px;
+  }
+  .a-name {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    position: relative;
+  }
+  /* glitch layers */
+  .a-name::before {
+    content: 'ANNA TAN';
+    position: absolute;
+    left: 2px;
+    top: 0;
+    color: #ff00ff;
+    opacity: 0.5;
+    clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
+  }
+  .a-name::after {
+    content: 'ANNA TAN';
+    position: absolute;
+    left: -2px;
+    top: 0;
+    color: #00ffff;
+    opacity: 0.5;
+    clip-path: polygon(0 55%, 100% 55%, 100% 75%, 0 75%);
+  }
+
+  .a-links {
+    display: flex;
+    gap: 8px;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #666;
+  }
+
+  .a-filters {
+    display: flex;
+    margin-bottom: 14px;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .a-filter {
+    border: 2px solid #000;
+    border-right: none;
+    padding: 3px 8px;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    font-size: 8px;
+    color: #000;
+    background: none;
+  }
+  .a-filter:last-child { border-right: 2px solid #000; }
+  .a-filter.on { background: #FFDE00; color: #000; }
+
+  .a-card {
+    border: 2px solid #000;
+    margin-bottom: 10px;
+    position: relative;
+    box-shadow: 3px 3px 0 #000;
+    transition: box-shadow 0.1s, transform 0.1s;
+  }
+  .a-card:hover {
+    box-shadow: 5px 5px 0 #FFDE00, 7px 7px 0 #000;
+    transform: translate(-2px, -2px);
+  }
+
+  .a-card-img {
+    width: 100%;
+    height: 80px;
+    background: #e0e0e0;
+    border-bottom: 2px solid #000;
+    position: relative;
+    overflow: hidden;
+  }
+  .a-card-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      rgba(255,222,0,0.08),
+      rgba(255,222,0,0.08) 1px,
+      transparent 1px,
+      transparent 8px
+    );
+  }
+
+  .a-card-body {
+    padding: 8px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .a-card-num { font-size: 7px; color: #aaa; letter-spacing: 0.15em; }
+  .a-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; }
+  .a-card-desc { font-size: 7px; color: #666; margin-top: 2px; }
+
+  .a-tag {
+    font-size: 7px;
+    border: 1.5px solid #000;
+    padding: 2px 6px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: inline-block;
+    font-weight: 700;
+  }
+  .a-tag.featured {
+    background: #FFDE00;
+    animation: rainbow-border 2s linear infinite;
+  }
+  @keyframes rainbow-border {
+    0%   { border-color: #ff0000; }
+    16%  { border-color: #ff8800; }
+    33%  { border-color: #00cc00; }
+    50%  { border-color: #0088ff; }
+    66%  { border-color: #8800ff; }
+    83%  { border-color: #ff00ff; }
+    100% { border-color: #ff0000; }
+  }
+
+  .a-play {
+    border-top: 2px solid #000;
+    padding: 6px 10px;
+    display: flex;
+    gap: 6px;
+  }
+  .a-badge {
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: #FFDE00;
+    color: #000;
+    border: 1.5px solid #000;
+    padding: 4px 8px;
+  }
+
+  .a-label {
+    font-size: 8px;
+    color: #aaa;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  /* ════════════════════════════════════════
+     DIRECTION B — TERMINAL PHOSPHOR
+     黑底 + 绿/黄磷光 + CRT 弯曲 + 扫描余辉
+  ════════════════════════════════════════ */
+
+  .preview-b {
+    background: #080c08;
+    padding: 20px;
+    font-family: 'Courier New', monospace;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #1a3a1a;
+  }
+
+  .preview-b::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, transparent 60%, rgba(0,0,0,0.5) 100%);
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .preview-b::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 80, 0.02) 2px,
+      rgba(0, 255, 80, 0.02) 4px
+    );
+    pointer-events: none;
+    z-index: 11;
+    animation: scanmove 8s linear infinite;
+  }
+  @keyframes scanmove {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(40px); }
+  }
+
+  .b-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,255,80,0.2);
+  }
+  .b-name {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #FFDE00;
+    text-shadow: 0 0 8px rgba(255,222,0,0.6), 0 0 20px rgba(255,222,0,0.3);
+  }
+  .b-links {
+    display: flex;
+    gap: 10px;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(0,255,80,0.5);
+  }
+
+  .b-filters {
+    display: flex;
+    margin-bottom: 14px;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    gap: 0;
+  }
+  .b-filter {
+    border: 1px solid rgba(0,255,80,0.25);
+    border-right: none;
+    padding: 3px 8px;
+    color: rgba(0,255,80,0.4);
+    font-family: 'Courier New', monospace;
+    font-size: 8px;
+    font-weight: 700;
+    background: none;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .b-filter:last-child { border-right: 1px solid rgba(0,255,80,0.25); }
+  .b-filter.on {
+    background: #FFDE00;
+    color: #080c08;
+    border-color: #FFDE00;
+    box-shadow: 0 0 12px rgba(255,222,0,0.4);
+  }
+
+  .b-card {
+    border: 1px solid rgba(0,255,80,0.2);
+    margin-bottom: 10px;
+    position: relative;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .b-card:hover {
+    border-color: rgba(255,222,0,0.5);
+    box-shadow: 0 0 16px rgba(255,222,0,0.1), inset 0 0 30px rgba(255,222,0,0.03);
+  }
+
+  .b-card-img {
+    width: 100%;
+    height: 80px;
+    background: #0d150d;
+    border-bottom: 1px solid rgba(0,255,80,0.15);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .b-card-img::before {
+    content: 'LOADING...';
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    color: rgba(0,255,80,0.2);
+  }
+  .b-card-img::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #FFDE00, transparent);
+    animation: scan 2s ease-in-out infinite;
+  }
+  @keyframes scan {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+  }
+
+  .b-card-body {
+    padding: 8px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .b-card-num { font-size: 7px; color: rgba(0,255,80,0.3); letter-spacing: 0.15em; }
+  .b-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; color: rgba(255,255,255,0.9); }
+  .b-card-desc { font-size: 7px; color: rgba(0,255,80,0.4); margin-top: 2px; }
+
+  .b-tag {
+    font-size: 7px;
+    border: 1px solid rgba(0,255,80,0.3);
+    padding: 2px 6px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: inline-block;
+    font-weight: 700;
+    color: rgba(0,255,80,0.6);
+  }
+  .b-tag.featured {
+    background: rgba(255,222,0,0.1);
+    border-color: rgba(255,222,0,0.4);
+    color: #FFDE00;
+    text-shadow: 0 0 8px rgba(255,222,0,0.5);
+  }
+
+  .b-play {
+    border-top: 1px solid rgba(0,255,80,0.15);
+    padding: 6px 10px;
+    display: flex;
+    gap: 6px;
+  }
+  .b-badge {
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: transparent;
+    color: #FFDE00;
+    border: 1px solid rgba(255,222,0,0.4);
+    padding: 4px 8px;
+    text-shadow: 0 0 8px rgba(255,222,0,0.5);
+  }
+
+  /* ════════════════════════════════════════
+     DIRECTION C — HYPER STICKER
+     白底 + 过度装饰 + 贴纸感 + 漫画印刷错位
+  ════════════════════════════════════════ */
+
+  .preview-c {
+    background: #fffff0;
+    padding: 20px;
+    font-family: 'Courier New', monospace;
+    position: relative;
+    overflow: hidden;
+    border: 3px solid #000;
+  }
+
+  /* dot grid background */
+  .preview-c::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, #00000018 1px, transparent 1px);
+    background-size: 12px 12px;
+    pointer-events: none;
+  }
+
+  .c-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    position: relative;
+  }
+  .c-nav::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: repeating-linear-gradient(
+      90deg,
+      #000 0, #000 8px,
+      #FFDE00 8px, #FFDE00 16px
+    );
+  }
+
+  .c-name {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: #FFDE00;
+    padding: 2px 8px;
+    border: 2px solid #000;
+    position: relative;
+    box-shadow: 2px 2px 0 #000;
+    display: inline-block;
+    transform: rotate(-0.5deg);
+  }
+
+  .c-links {
+    display: flex;
+    gap: 6px;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #000;
+  }
+  .c-link-item {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-style: wavy;
+    text-decoration-color: #FFDE00;
+  }
+
+  .c-filters {
+    display: flex;
+    margin-bottom: 14px;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .c-filter {
+    border: 2px solid #000;
+    padding: 3px 8px;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    font-size: 8px;
+    background: #fff;
+    color: #000;
+    box-shadow: 2px 2px 0 #000;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    position: relative;
+  }
+  .c-filter.on {
+    background: #FFDE00;
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 #000;
+  }
+
+  .c-card {
+    border: 2px solid #000;
+    margin-bottom: 10px;
+    position: relative;
+    background: #fff;
+    box-shadow: 3px 3px 0 #000;
+    transition: transform 0.12s, box-shadow 0.12s;
+  }
+  .c-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 #000;
+  }
+
+  .c-card-img {
+    width: 100%;
+    height: 80px;
+    border-bottom: 2px solid #000;
+    position: relative;
+    overflow: hidden;
+    background: #f0f0f0;
+  }
+  /* halftone dots on the image area */
+  .c-card-img::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,222,0,0.4) 2px, transparent 2px);
+    background-size: 10px 10px;
+    background-position: 0 0;
+  }
+  .c-card-img::after {
+    content: '★ NEW ★';
+    position: absolute;
+    top: 6px;
+    right: -12px;
+    background: #ff3333;
+    color: #fff;
+    font-size: 7px;
+    font-weight: 700;
+    padding: 3px 18px 3px 8px;
+    transform: rotate(3deg);
+    letter-spacing: 0.1em;
+    border: 1.5px solid #000;
+  }
+
+  .c-card-body {
+    padding: 8px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .c-card-num {
+    font-size: 7px;
+    color: #aaa;
+    letter-spacing: 0.15em;
+  }
+  .c-card-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+  }
+  /* underline offset decoration */
+  .c-card-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #FFDE00;
+  }
+  .c-card-desc { font-size: 7px; color: #555; margin-top: 5px; }
+
+  .c-tag {
+    font-size: 7px;
+    border: 1.5px solid #000;
+    padding: 2px 6px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: inline-block;
+    font-weight: 700;
+    background: #fff;
+    position: relative;
+  }
+  .c-tag.featured {
+    background: #FFDE00;
+    transform: rotate(1deg);
+    box-shadow: 1px 1px 0 #000;
+  }
+  .c-tag.systems { transform: rotate(-0.5deg); }
+
+  .c-play {
+    border-top: 2px dashed #000;
+    padding: 6px 10px;
+    display: flex;
+    gap: 6px;
+    background: #fffde0;
+  }
+  .c-badge {
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: #FFDE00;
+    color: #000;
+    border: 1.5px solid #000;
+    padding: 4px 8px;
+    box-shadow: 2px 2px 0 #000;
+    display: inline-block;
+    position: relative;
+  }
+  .c-badge::before {
+    content: '▶ ';
+    font-size: 6px;
+  }
+
+  /* ── selector chrome ── */
+
+  .selector-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 20px auto 0;
+  }
+
+  .selector-btn {
+    background: none;
+    border: 1px solid #333;
+    color: #555;
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: left;
+  }
+  .selector-btn:hover {
+    border-color: #FFDE00;
+    color: #FFDE00;
+  }
+  .selector-btn.picked {
+    background: #FFDE00;
+    color: #000;
+    border-color: #FFDE00;
+  }
+
+  .dir-letter {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    display: block;
+  }
+  .dir-name {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .dir-desc-text {
+    font-size: 10px;
+    color: inherit;
+    line-height: 1.5;
+    opacity: 0.8;
+  }
+
+  .page-title {
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto 32px;
+  }
+  .page-title h1 {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #444;
+    margin-bottom: 6px;
+  }
+  .page-title p {
+    font-size: 11px;
+    color: #444;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-title">
+  <h1>Y2K 改版 — 美学方向</h1>
+  <p>三个方向在真实排版里的实际效果。点击下方按钮选择。</p>
+</div>
+
+<div class="directions">
+
+  <!-- ── A: GLITCH ZINE ── -->
+  <div>
+    <div class="preview-a">
+      <div class="a-nav">
+        <span class="a-name">ANNA TAN</span>
+        <div class="a-links">
+          <span>About</span>
+          <span>LinkedIn ↗</span>
+          <span>itch.io ↗</span>
+        </div>
+      </div>
+      <div class="a-filters">
+        <button class="a-filter on">All</button>
+        <button class="a-filter">Game</button>
+        <button class="a-filter">Design Doc</button>
+        <button class="a-filter">Tool Dev</button>
+      </div>
+      <div class="a-card">
+        <div class="a-card-img"></div>
+        <div class="a-card-body">
+          <div>
+            <div class="a-card-num">01</div>
+            <div class="a-card-title">POPLife</div>
+            <div class="a-card-desc">2D Pixel Mgmt Sim · GDC 2026</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:3px;align-items:flex-end;">
+            <span class="a-tag featured">Featured</span>
+            <span class="a-tag">Systems</span>
+          </div>
+        </div>
+        <div class="a-play">
+          <span class="a-badge">☆ Wishlist on Steam</span>
+        </div>
+      </div>
+      <div class="a-card">
+        <div class="a-card-body">
+          <div>
+            <div class="a-card-num">02</div>
+            <div class="a-card-title">POPLife GDD</div>
+            <div class="a-card-desc">Full production GDD</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:3px;align-items:flex-end;">
+            <span class="a-tag">Design Doc</span>
+          </div>
+        </div>
+        <div class="a-play">
+          <span class="a-badge">View Doc ↗</span>
+          <span class="a-badge" style="background:#fff;">Download PDF</span>
+        </div>
+      </div>
+      <div class="a-label">— 保留白底 + 加 GLITCH 残影 + 粗偏移阴影 —</div>
+    </div>
+  </div>
+
+  <!-- ── B: TERMINAL PHOSPHOR ── -->
+  <div>
+    <div class="preview-b">
+      <div class="b-nav">
+        <span class="b-name">ANNA TAN</span>
+        <div class="b-links">
+          <span>About</span>
+          <span>LinkedIn ↗</span>
+          <span>itch.io ↗</span>
+        </div>
+      </div>
+      <div class="b-filters">
+        <button class="b-filter on">All</button>
+        <button class="b-filter">Game</button>
+        <button class="b-filter">Doc</button>
+        <button class="b-filter">Tool</button>
+      </div>
+      <div class="b-card">
+        <div class="b-card-img"></div>
+        <div class="b-card-body">
+          <div>
+            <div class="b-card-num">01</div>
+            <div class="b-card-title">POPLife</div>
+            <div class="b-card-desc">2D Pixel Mgmt Sim · GDC 2026</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:3px;align-items:flex-end;">
+            <span class="b-tag featured">Featured</span>
+            <span class="b-tag">Systems</span>
+          </div>
+        </div>
+        <div class="b-play">
+          <span class="b-badge">☆ Wishlist on Steam</span>
+        </div>
+      </div>
+      <div class="b-card">
+        <div class="b-card-body">
+          <div>
+            <div class="b-card-num">02</div>
+            <div class="b-card-title">POPLife GDD</div>
+            <div class="b-card-desc">Full production GDD</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:3px;align-items:flex-end;">
+            <span class="b-tag">Design Doc</span>
+          </div>
+        </div>
+        <div class="b-play">
+          <span class="b-badge">View Doc ↗</span>
+        </div>
+      </div>
+      <div style="font-size:8px;color:rgba(0,255,80,0.25);text-align:center;margin-top:10px;letter-spacing:0.15em;">— 深色模式 + 磷光 CRT + 黄色 ACCENT 保留 —</div>
+    </div>
+  </div>
+
+  <!-- ── C: HYPER STICKER ── -->
+  <div>
+    <div class="preview-c">
+      <div class="c-nav">
+        <span class="c-name">ANNA TAN</span>
+        <div class="c-links">
+          <span class="c-link-item">About</span>
+          <span class="c-link-item">LinkedIn ↗</span>
+          <span class="c-link-item">itch.io ↗</span>
+        </div>
+      </div>
+      <div class="c-filters">
+        <button class="c-filter on">All</button>
+        <button class="c-filter">Game</button>
+        <button class="c-filter">Doc</button>
+        <button class="c-filter">Tool</button>
+      </div>
+      <div class="c-card">
+        <div class="c-card-img"></div>
+        <div class="c-card-body">
+          <div>
+            <div class="c-card-num">01</div>
+            <div class="c-card-title">POPLife</div>
+            <div class="c-card-desc">2D Pixel Mgmt Sim · GDC 2026</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;">
+            <span class="c-tag featured">Featured</span>
+            <span class="c-tag systems">Systems</span>
+          </div>
+        </div>
+        <div class="c-play">
+          <span class="c-badge">Wishlist on Steam</span>
+        </div>
+      </div>
+      <div class="c-card">
+        <div class="c-card-body">
+          <div>
+            <div class="c-card-num">02</div>
+            <div class="c-card-title">POPLife GDD</div>
+            <div class="c-card-desc">Full production GDD</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;">
+            <span class="c-tag">Design Doc</span>
+          </div>
+        </div>
+        <div class="c-play">
+          <span class="c-badge">View Doc</span>
+          <span class="c-badge" style="background:#fff;">PDF</span>
+        </div>
+      </div>
+      <div style="font-size:8px;color:#aaa;text-align:center;margin-top:10px;letter-spacing:0.12em;">— 白底 + 贴纸错位 + 点阵纹理 + DASHED 边框 —</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="selector-row">
+  <button class="selector-btn" data-choice="glitch-zine" onclick="pick(this)">
+    <span class="dir-letter">A</span>
+    <span class="dir-name">Glitch Zine</span>
+    <span class="dir-desc-text">保留白底，加 glitch RGB 残影 + 粗偏移阴影 + 扫描线 + 彩虹边框动画。Zine/独立出版感。</span>
+  </button>
+  <button class="selector-btn" data-choice="terminal-phosphor" onclick="pick(this)">
+    <span class="dir-letter">B</span>
+    <span class="dir-name">Terminal Phosphor</span>
+    <span class="dir-desc-text">深色模式，磷光绿 CRT 纹理，黄色 accent 保留并加发光。Terminal / 赛博朋克感。改动最大。</span>
+  </button>
+  <button class="selector-btn" data-choice="hyper-sticker" onclick="pick(this)">
+    <span class="dir-letter">C</span>
+    <span class="dir-name">Hyper Sticker</span>
+    <span class="dir-desc-text">白底不变，元素微错位 + 点阵背景 + 粗 box-shadow + dashed 分隔线 + 贴纸轻旋转。最接近现有方案的演进。</span>
+  </button>
+</div>
+
+<script>
+function pick(btn) {
+  document.querySelectorAll('.selector-btn').forEach(b => b.classList.remove('picked'));
+  btn.classList.add('picked');
+  if (window.__companion) {
+    window.__companion.select(btn.dataset.choice, btn.querySelector('.dir-name').textContent);
+  }
+}
+</script>
+
+</body>
+</html>

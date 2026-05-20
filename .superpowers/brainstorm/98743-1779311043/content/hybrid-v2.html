@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hybrid v2</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Courier New', monospace;
+    background: #111;
+    color: #eee;
+    padding: 40px 24px 80px;
+  }
+
+  .page-title {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 28px;
+    font-size: 11px;
+    color: #444;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1.8;
+  }
+
+  .preview-wrap {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* ════════════════════════════════
+     FLAT ZINE — no shadows, collage
+  ════════════════════════════════ */
+
+  .preview {
+    background: #fff;
+    padding: 24px;
+    font-family: 'Courier New', monospace;
+    position: relative;
+    overflow: hidden;
+    border: 3px solid #000;
+  }
+
+  /* scanline */
+  .preview::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(0,0,0,0.018) 3px,
+      rgba(0,0,0,0.018) 4px
+    );
+    pointer-events: none;
+    z-index: 20;
+  }
+
+  /* dot grid */
+  .preview::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, #0000000e 1px, transparent 1px);
+    background-size: 14px 14px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ── Nav ── */
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #000;
+    position: relative;
+    z-index: 5;
+  }
+
+  .nav-name {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #000;
+    /* subtle yellow underline accent */
+    border-bottom: 3px solid #FFDE00;
+    padding-bottom: 1px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 12px;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #555;
+  }
+
+  /* ── Filters ── */
+  .filters {
+    display: flex;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 5;
+  }
+  .filter-btn {
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: none;
+    border: 2px solid #000;
+    border-right: none;
+    padding: 4px 10px;
+    cursor: pointer;
+    color: #000;
+  }
+  .filter-btn:last-child { border-right: 2px solid #000; }
+  .filter-btn.active { background: #000; color: #FFDE00; }
+
+  /* ── Cards — FLAT ── */
+  .card {
+    border: 2px solid #000;
+    margin-bottom: 14px;
+    position: relative;
+    background: #fff;
+    z-index: 5;
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .card:hover { background: #fffde8; }
+
+  .card-img {
+    width: 100%;
+    height: 100px;
+    border-bottom: 2px solid #000;
+    position: relative;
+    overflow: hidden;
+    background: #e8e8e8;
+  }
+  /* halftone on image */
+  .card-img::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,222,0,0.3) 1.5px, transparent 1.5px);
+    background-size: 8px 8px;
+    mix-blend-mode: multiply;
+  }
+  /* zine texture: diagonal stripe */
+  .card-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 6px,
+      rgba(0,0,0,0.04) 6px,
+      rgba(0,0,0,0.04) 7px
+    );
+  }
+
+  .card-meta {
+    padding: 10px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .card-num {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 3px;
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #000;
+    line-height: 1.1;
+  }
+  .card-desc {
+    font-size: 8px;
+    color: #555;
+    margin-top: 5px;
+    line-height: 1.6;
+  }
+
+  /* Tags — flat, black text, slight rotation for zine feel */
+  .tags {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-end;
+    flex-shrink: 0;
+  }
+  .tag {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 2px solid #000;
+    padding: 2px 7px;
+    display: inline-block;
+    background: #fff;
+    color: #000;
+  }
+  .tag.featured {
+    background: #FFDE00;
+    color: #000;
+    transform: rotate(0.6deg);
+    animation: rainbow-border 2.5s linear infinite;
+  }
+  .tag.s2 { transform: rotate(-0.5deg); }
+  .tag.s3 { transform: rotate(0.3deg); }
+
+  @keyframes rainbow-border {
+    0%   { border-color: #e00; }
+    16%  { border-color: #e80; }
+    33%  { border-color: #0a0; }
+    50%  { border-color: #07e; }
+    66%  { border-color: #70e; }
+    83%  { border-color: #e0e; }
+    100% { border-color: #e00; }
+  }
+
+  /* Play bar — dashed */
+  .card-play {
+    border-top: 2px dashed #000;
+    padding: 8px 12px;
+    display: flex;
+    gap: 6px;
+    background: transparent;
+  }
+  .badge {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: #FFDE00;
+    color: #000;
+    border: 2px solid #000;
+    padding: 5px 10px;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .badge:hover { background: #000; color: #FFDE00; }
+  .badge.secondary {
+    background: #fff;
+    color: #000;
+  }
+  .badge.secondary:hover { background: #000; color: #fff; }
+
+  /* ── Doc card: no black header, just flat ── */
+  .card-doc-top {
+    border-bottom: 2px solid #000;
+    padding: 12px;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .doc-stamp {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #000;
+    border: 2px solid #000;
+    padding: 3px 8px;
+    transform: rotate(-1deg);
+    display: inline-block;
+  }
+  .doc-top-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #000;
+    letter-spacing: 0.04em;
+  }
+
+  /* annotation */
+  .annotation {
+    font-size: 10px;
+    color: #444;
+    text-align: center;
+    margin-top: 20px;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+  }
+  .annotation b { color: #fff; }
+
+  /* confirm */
+  .confirm-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .confirm-btn {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 2px solid #333;
+    background: none;
+    color: #555;
+    padding: 10px 24px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .confirm-btn.yes { border-color: #FFDE00; background: #FFDE00; color: #000; }
+  .confirm-btn:hover { border-color: #aaa; color: #aaa; }
+</style>
+</head>
+<body>
+
+<div class="page-title">
+  平面拼贴 Zine — 无立体感 · 黑字 · 无黑色 doc 头部
+</div>
+
+<div class="preview-wrap">
+  <div class="preview">
+
+    <div class="nav">
+      <span class="nav-name">ANNA TAN</span>
+      <div class="nav-links">
+        <span>About</span>
+        <span>LinkedIn ↗</span>
+        <span>itch.io ↗</span>
+        <span>GitHub ↗</span>
+      </div>
+    </div>
+
+    <div class="filters">
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">Game</button>
+      <button class="filter-btn">Design Doc</button>
+      <button class="filter-btn">Tool Dev</button>
+    </div>
+
+    <!-- Card with image -->
+    <div class="card">
+      <div class="card-img"></div>
+      <div class="card-meta">
+        <div>
+          <div class="card-num">01</div>
+          <div class="card-title">POPLife</div>
+          <div class="card-desc">2D Pixel Management Sim · Lead Designer · GDC 2026</div>
+        </div>
+        <div class="tags">
+          <span class="tag featured">Featured</span>
+          <span class="tag s2">Systems</span>
+          <span class="tag s3">Narrative</span>
+        </div>
+      </div>
+      <div class="card-play">
+        <span class="badge">☆ Wishlist on Steam</span>
+        <span class="badge secondary">Website ↗</span>
+      </div>
+    </div>
+
+    <!-- Doc card: no black header -->
+    <div class="card">
+      <div class="card-doc-top">
+        <span class="doc-stamp">GDD</span>
+        <span class="doc-top-title">POPLife Design Document</span>
+      </div>
+      <div class="card-meta">
+        <div>
+          <div class="card-num">02</div>
+          <div class="card-title">POPLife GDD</div>
+          <div class="card-desc">Full production GDD · Systems, NPC, Quest &amp; Economy Design · Team 7+</div>
+        </div>
+        <div class="tags">
+          <span class="tag s2">Design Doc</span>
+          <span class="tag s3">Systems</span>
+        </div>
+      </div>
+      <div class="card-play">
+        <span class="badge">View Doc ↗</span>
+        <span class="badge secondary">Download PDF</span>
+      </div>
+    </div>
+
+    <!-- Another game card -->
+    <div class="card">
+      <div class="card-img" style="background:#ddd;"></div>
+      <div class="card-meta">
+        <div>
+          <div class="card-num">03</div>
+          <div class="card-title">Timeplex</div>
+          <div class="card-desc">2D Grid Puzzle · Lead Designer · NYU Spring Showcase</div>
+        </div>
+        <div class="tags">
+          <span class="tag s2">Game Design</span>
+          <span class="tag s3">AI Behavior</span>
+        </div>
+      </div>
+      <div class="card-play">
+        <span class="badge">▶ Play on itch.io</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="annotation">
+    去掉：立体 box-shadow · glitch 效果 · 黑色 doc 头<br>
+    保留：scanline 叠加 · 点阵背景 · dashed play 栏 · tag 微旋转 · Featured 彩虹边框
+  </div>
+
+  <div class="confirm-row">
+    <button class="confirm-btn yes" data-choice="confirmed" onclick="pick(this)">就这个方向 ✓</button>
+    <button class="confirm-btn" data-choice="adjust" onclick="pick(this)">还要调整</button>
+  </div>
+</div>
+
+<script>
+function pick(btn) {
+  document.querySelectorAll('.confirm-btn').forEach(b => {
+    b.classList.remove('yes');
+    b.style.borderColor = '';
+    b.style.background = '';
+    b.style.color = '';
+  });
+  btn.classList.add('yes');
+  if (window.__companion) window.__companion.select(btn.dataset.choice, btn.textContent.trim());
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beans and Guns Item Editor — Anna Tan</title>
+  <script type="module" crossorigin src="/portfolio/assets/cursor-trail-Cv3zRzco.js"></script>
+  <link rel="stylesheet" crossorigin href="/portfolio/assets/cursor-trail-CYZb0a0Q.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-name" data-zh="谈方琳">Anna Tan</span>
+    <div class="nav-links">
+      <a href="/about.html" data-zh="关于">About</a>
+      <a href="https://www.linkedin.com/in/fanglin-tan-2b5745329/" target="_blank">LinkedIn ↗</a>
+      <a href="https://geo404anna.itch.io/" target="_blank">itch.io ↗</a>
+      <a href="https://github.com/tannnfl" target="_blank">GitHub ↗</a>
+      <div class="lang-switch">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="detail-wrap">
+  <div class="detail-inner">
+
+    <a class="back-link" href="/" data-zh="← 全部作品">← All Work</a>
+
+    <div class="detail-num" data-zh="09 — 工具开发">09 — Tool Dev</div>
+    <h1 class="detail-title">Beans and Guns Item Editor</h1>
+    <div class="detail-role" data-zh="工具开发 · 视觉技术美术 · Unity 编辑器扩展 · C# · 2026">Tool Developer · Visual Tech Art · Unity Editor Extension · C# · 2026</div>
+
+    <div class="detail-tags">
+      <span class="tag" data-zh="工具开发">Tool Dev</span>
+      <span class="tag">Unity Editor</span>
+      <span class="tag">C#</span>
+      <a class="tag" href="/project/beans-and-guns.html" data-zh="← 查看游戏">← View Game</a>
+      <a class="tag" href="/project/beans-gdd.html" data-zh="← 查看设计文档">← View Design Doc</a>
+    </div>
+
+    <div class="detail-section">
+      <h2 data-zh="总览">Overview</h2>
+      <p data-zh="Beans and Guns Item Editor 是一个自定义 Unity 编辑器窗口，用于管理游戏中所有可放置道具的定义数据。游戏拥有六个不同场景（房间），每个道具需要绑定 3D 模型、图标、预制体、场景归属标签及灵魂对话内容——这些数据散落在大量 ScriptableObject 资产中，默认 Inspector 无法高效处理跨场景的批量管理。">Beans and Guns Item Editor is a custom Unity Editor window for authoring and managing all placeable item definitions in the game. With six distinct scenes, each item requires a 3D mesh, icon, prefab, room tag, and spirit dialogue content — data spread across many ScriptableObject assets that the default Inspector cannot efficiently manage at scale across rooms.</p>
+      <p style="margin-top:0.8rem;" data-zh="编辑器将所有道具聚合进单一面板，支持按场景过滤（Esra、Jumie、Katula、Massar、Porda、Yann），并提供「同步至道具池」功能，将已定义的道具一键推送至玩家可用的共享背包池，无需手动逐个操作。">The editor aggregates all items into a single panel with per-scene filtering (Esra, Jumie, Katula, Massar, Porda, Yann) and a Sync → Pool feature that pushes defined items into the shared player backpack pool in one click — eliminating manual per-item setup.</p>
+    </div>
+
+    <div class="detail-section">
+      <h2 data-zh="成效">Impact</h2>
+      <ul>
+        <li data-zh="统一道具创作流程：3D 网格、图标、预制体、场景标签与对话内容在同一行内完成，无需在多个 Inspector 窗口间切换">Unified item authoring: mesh, icon, prefab, room tag, and dialogue content all editable in one row — no switching between multiple Inspector windows</li>
+        <li data-zh="按场景过滤让内容团队可单独审查每个场景的道具列表，快速定位缺失或错误的归属标签">Per-scene filtering lets the content team audit each room's item list independently and catch missing or misassigned room tags instantly</li>
+        <li data-zh="「同步至道具池」消除了手动维护玩家背包池的重复工作，确保道具定义与游戏运行时数据始终一致">Sync → Pool eliminates manual backpack pool maintenance, keeping item definitions in sync with runtime data automatically</li>
+        <li data-zh="预览缩略图提供视觉确认，减少因模型或图标引用错误导致的运行时 bug">Preview thumbnails provide visual confirmation, reducing runtime bugs caused by incorrect mesh or icon references</li>
+      </ul>
+    </div>
+
+    <img class="detail-img"
+         src="/portfolio/assets/beans-tool-items-_BDfPlEc.png"
+         alt="Item Definitions tab — full item list with room tag filtering and dialogue content" />
+
+    <div class="detail-section">
+      <h2 data-zh="功能">Features</h2>
+      <ul>
+        <li data-zh="道具定义表（Item Definitions）— 每行展示道具 ID、图标、预制体、网格、预览缩略图、场景标签与灵魂对话内容，支持内联编辑与一键删除"><strong>Item Definitions</strong> — each row displays Item ID, Icon, Prefab, Mesh, Preview thumbnail, Room Tag, and Dialogue Content with inline editing and one-click deletion</li>
+        <li data-zh="场景过滤（Room Filter）— 顶部过滤栏按六个场景（Esra、Jumie、Katula、Massar、Porda、Yann）分类，All 模式显示全部道具"><strong>Room Filter</strong> — tab bar filters by six scenes (Esra, Jumie, Katula, Massar, Porda, Yann); All shows the full list</li>
+        <li data-zh="同步至道具池（Sync → Pool）— 将当前所有道具定义批量推送至玩家共享背包池 ScriptableObject"><strong>Sync → Pool</strong> — batch-pushes all item definitions into the shared player backpack pool ScriptableObject</li>
+        <li data-zh="新增道具（+ New Item）— 在列表末尾追加空白条目，立即可编辑"><strong>+ New Item</strong> — appends a blank entry to the list, immediately editable</li>
+        <li data-zh="刷新（Refresh）— 重新加载所有 ScriptableObject 资产，确保编辑器与 Project 文件夹保持同步"><strong>Refresh</strong> — reloads all ScriptableObject assets to keep the editor in sync with the Project folder</li>
+      </ul>
+    </div>
+
+    <div class="detail-links">
+      <a class="play-badge" href="/project/beans-and-guns.html" data-zh="查看游戏页面 ↗">View Game Page ↗</a>
+      <a class="play-badge" href="/project/beans-gdd.html" data-zh="查看设计文档 ↗">View Design Doc ↗</a>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zine Direction</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ─── BASE ─── */
+body {
+  font-family: 'Courier New', monospace;
+  background: #1c1c1c;
+  padding: 40px 20px 80px;
+}
+
+.wrap {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #444;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* ─── THE PAGE ─── */
+.page {
+  background-color: #f0ead8;
+  position: relative;
+  overflow: hidden;
+
+  /* paper grain — SVG fractal noise */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23g)' opacity='0.12'/%3E%3C/svg%3E");
+  background-size: 250px 250px;
+}
+
+/* scanlines — very faint */
+.page::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.01) 2px,
+    rgba(0,0,0,0.01) 3px
+  );
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* registration marks — printing artifact */
+.page::before {
+  content: '+ +';
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  font-size: 9px;
+  letter-spacing: 20px;
+  color: rgba(0,0,0,0.12);
+  pointer-events: none;
+  z-index: 51;
+  font-family: 'Courier New', monospace;
+}
+
+/* ─── NAV ─── */
+.nav {
+  padding: 24px 20% 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+  z-index: 10;
+}
+
+/* full-bleed yellow ink bar — masthead accent */
+.nav-bar {
+  height: 3px;
+  background: #FFDE00;
+  margin: 10px 0 0;
+  position: relative;
+  z-index: 10;
+}
+/* overprint simulation: second thinner black bar */
+.nav-bar::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 0.5px;
+  background: rgba(0,0,0,0.35);
+}
+
+.nav-name {
+  font-family: 'Courier New', monospace;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #0d0d0d;
+  line-height: 1;
+  /* ink bleed: yellow shadow slightly offset */
+  text-shadow: 2px 2px 0 rgba(255,222,0,0.7);
+}
+
+.nav-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+}
+
+/* "issue" label — zine header element */
+.nav-issue {
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.35);
+  font-family: 'Courier New', monospace;
+}
+
+.nav-links {
+  display: flex;
+  gap: 10px;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(0,0,0,0.5);
+}
+
+/* ─── FILTER BAR ─── */
+.filters {
+  display: flex;
+  padding: 14px 20% 10px;
+  gap: 0;
+  border-bottom: 0.5px solid rgba(0,0,0,0.25);
+  position: relative;
+  z-index: 10;
+}
+.fbtn {
+  font-family: 'Courier New', monospace;
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: none;
+  border: 0.5px solid rgba(0,0,0,0.4);
+  border-right: none;
+  padding: 3px 9px;
+  cursor: pointer;
+  color: rgba(0,0,0,0.55);
+}
+.fbtn:last-child { border-right: 0.5px solid rgba(0,0,0,0.4); }
+.fbtn.on {
+  background: #0d0d0d;
+  color: #FFDE00;
+  border-color: #0d0d0d;
+}
+
+/* ─── FEED ─── */
+.feed {
+  padding: 20px 20% 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  z-index: 10;
+}
+
+/* ─── CARD ─── */
+.card {
+  background: #fff;
+  position: relative;
+  cursor: pointer;
+  border: 0.5px solid rgba(0,0,0,0.3);
+  transition: background 0.1s;
+}
+.card:hover { background: #fffef5; }
+
+/* featured: yellow left accent strip */
+.card.featured-card {
+  border-left: 3px solid #FFDE00;
+}
+
+/* ─── IMAGE AREA ─── */
+.card-img-wrap {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 0.5px solid rgba(0,0,0,0.2);
+}
+.card-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+  /* desaturate slightly — like photocopy */
+  filter: contrast(1.05) saturate(0.85);
+}
+
+/* halftone yellow overprint on images */
+.card-img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,222,0,0.28) 1px, transparent 1px);
+  background-size: 7px 7px;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* ─── CARD BODY ─── */
+.card-meta {
+  padding: 10px 12px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+.card-left { flex: 1; min-width: 0; }
+
+/* big number — editorial/zine hierarchy */
+.card-num {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.22);
+  margin-bottom: 3px;
+}
+.card-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #0d0d0d;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.card-desc {
+  font-size: 7.5px;
+  color: rgba(0,0,0,0.5);
+  margin-top: 4px;
+  line-height: 1.65;
+}
+
+/* ─── TAGS — cut-paper stickers, no borders ─── */
+.card-right {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: flex-end;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+.tag {
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  display: inline-block;
+  color: #0d0d0d;
+  /* cut-paper: no border, just background fills */
+  background: rgba(0,0,0,0.07);
+}
+.tag.featured {
+  background: #FFDE00;
+  transform: rotate(0.5deg);
+  animation: rbow-border 3s linear infinite;
+  border: 0.5px solid transparent;
+}
+@keyframes rbow-border {
+  0%   { border-color: rgba(200,0,0,0.7); }
+  20%  { border-color: rgba(180,100,0,0.7); }
+  40%  { border-color: rgba(0,130,0,0.7); }
+  60%  { border-color: rgba(0,80,200,0.7); }
+  80%  { border-color: rgba(120,0,200,0.7); }
+  100% { border-color: rgba(200,0,0,0.7); }
+}
+
+/* ─── PLAY BAR ─── */
+.card-play {
+  border-top: 0.5px solid rgba(0,0,0,0.12);
+  padding: 7px 12px;
+  display: flex;
+  gap: 6px;
+  background: rgba(0,0,0,0.02);
+}
+.badge {
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  background: #FFDE00;
+  color: #0d0d0d;
+  border: 0.5px solid rgba(0,0,0,0.35);
+  padding: 4px 9px;
+  display: inline-block;
+  cursor: pointer;
+}
+.badge:hover { background: #0d0d0d; color: #FFDE00; }
+.badge.ghost {
+  background: transparent;
+  color: rgba(0,0,0,0.5);
+  border-color: rgba(0,0,0,0.2);
+}
+.badge.ghost:hover { background: #0d0d0d; color: #fff; }
+
+/* ─── DOC CARD ─── */
+/* no header, just content — same as regular card minus image */
+.card-doc-label {
+  padding: 10px 12px 0;
+  font-size: 7px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.28);
+  font-weight: 700;
+  /* stamp feel: slightly uneven */
+}
+
+/* ─── CONFIRM ─── */
+.note {
+  font-size: 10px;
+  color: #444;
+  text-align: center;
+  margin-top: 18px;
+  line-height: 1.8;
+}
+.note b { color: #bbb; }
+
+.btns {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+.cbtn {
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 0.5px solid #555;
+  background: none;
+  color: #555;
+  padding: 9px 22px;
+  cursor: pointer;
+}
+.cbtn:hover { border-color: #FFDE00; color: #FFDE00; }
+.cbtn.yes { border-color: #FFDE00; background: #FFDE00; color: #000; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<div class="label">Zine / 拼贴 / 印刷物感 — 线条减半 · 纸质底 · 油墨晕染</div>
+
+<div class="page">
+
+  <!-- ── Nav ── -->
+  <div class="nav">
+    <div class="nav-name">ANNA TAN</div>
+    <div class="nav-right">
+      <div class="nav-issue">Game Designer · Portfolio 2026</div>
+      <div class="nav-links">
+        <span>About</span>
+        <span>LinkedIn ↗</span>
+        <span>itch.io ↗</span>
+        <span>GitHub ↗</span>
+        <span style="display:flex;border:0.5px solid rgba(0,0,0,0.4);">
+          <span style="border-right:0.5px solid rgba(0,0,0,0.4);padding:1px 5px;font-size:7px;font-weight:700;color:#000;">EN</span>
+          <span style="padding:1px 5px;font-size:7px;color:rgba(0,0,0,0.35);">中</span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="nav-bar"></div>
+
+  <!-- ── Filters ── -->
+  <div class="filters">
+    <button class="fbtn on">All</button>
+    <button class="fbtn">Game</button>
+    <button class="fbtn">Design Doc</button>
+    <button class="fbtn">Tool Dev</button>
+    <button class="fbtn">Student</button>
+  </div>
+
+  <!-- ── Feed ── -->
+  <div class="feed">
+
+    <!-- 01 POPLife -->
+    <div class="card featured-card">
+      <div class="card-img-wrap">
+        <img class="card-img"
+          src="http://localhost:5174/assets/poplife-ss.png"
+          onerror="this.onerror=null;this.src='http://localhost:5174/assets/poplife-cover.png'"
+          alt="POPLife" />
+      </div>
+      <div class="card-meta">
+        <div class="card-left">
+          <div class="card-num">01</div>
+          <div class="card-title">POPLife</div>
+          <div class="card-desc">2D Pixel Management Sim · Lead Designer · GDC 2026 · NYU Spring Showcase</div>
+        </div>
+        <div class="card-right">
+          <span class="tag featured">Featured</span>
+          <span class="tag">Systems Design</span>
+          <span class="tag">Narrative</span>
+        </div>
+      </div>
+      <div class="card-play">
+        <span class="badge">☆ Wishlist on Steam</span>
+        <span class="badge ghost">Website ↗</span>
+      </div>
+    </div>
+
+    <!-- 02 POPLife GDD — no header, no image -->
+    <div class="card">
+      <div class="card-doc-label">Design Document</div>
+      <div class="card-meta">
+        <div class="card-left">
+          <div class="card-num">02</div>
+          <div class="card-title">POPLife GDD</div>
+          <div class="card-desc">Full production GDD · Systems, NPC, Quest &amp; Economy · Team of 7+</div>
+        </div>
+        <div class="card-right">
+          <span class="tag">Design Doc</span>
+          <span class="tag">Systems</span>
+          <span class="tag">Narrative</span>
+        </div>
+      </div>
+      <div class="card-play">
+        <span class="badge">View Doc ↗</span>
+        <span class="badge ghost">Download PDF</span>
+      </div>
+    </div>
+
+    <!-- 03 Timeplex -->
+    <div class="card">
+      <div class="card-img-wrap">
+        <img class="card-img"
+          src="http://localhost:5174/assets/timeplex-cover.png"
+          onerror="this.style.display='none'"
+          alt="Timeplex" />
+      </div>
+      <div class="card-meta">
+        <div class="card-left">
+          <div class="card-num">03</div>
+          <div class="card-title">Timeplex</div>
+          <div class="card-desc">2D Grid-Based Puzzle · Lead Designer · NYU Spring Showcase</div>
+        </div>
+        <div class="card-right">
+          <span class="tag">Game Design</span>
+          <span class="tag">AI Behavior</span>
+        </div>
+      </div>
+      <div class="card-play">
+        <span class="badge">▶ Play on itch.io</span>
+      </div>
+    </div>
+
+    <!-- 05 Beans and Guns -->
+    <div class="card">
+      <div class="card-img-wrap">
+        <img class="card-img"
+          src="http://localhost:5174/assets/beans-cover.png"
+          onerror="this.style.display='none'"
+          alt="Beans and Guns" />
+      </div>
+      <div class="card-meta">
+        <div class="card-left">
+          <div class="card-num">05</div>
+          <div class="card-title">Beans and Guns</div>
+          <div class="card-desc">Online 3D Collaborative Puzzle · Lead Designer · Async Relay</div>
+        </div>
+        <div class="card-right">
+          <span class="tag">Game Design</span>
+          <span class="tag">Tool Dev</span>
+          <span class="tag">Multiplayer</span>
+        </div>
+      </div>
+      <div class="card-play">
+        <span class="badge">▶ Play on itch.io</span>
+      </div>
+    </div>
+
+  </div>
+</div><!-- .page -->
+
+<div class="note">
+  <b>质感来源：</b>SVG fractal grain 纸底 · 黄色油墨晕染阴影（name）· halftone 黄色覆盖图片 · 0.5px 线 · 左侧黄边 featured · 无边框 tag
+</div>
+
+<div class="btns">
+  <button class="cbtn yes" data-choice="yes" onclick="p(this)">方向对 ✓</button>
+  <button class="cbtn" data-choice="no" onclick="p(this)">还要调</button>
+</div>
+
+</div><!-- .wrap -->
+
+<script>
+function p(btn) {
+  document.querySelectorAll('.cbtn').forEach(b => b.classList.remove('yes'));
+  btn.classList.add('yes');
+  if (window.__companion) window.__companion.select(btn.dataset.choice, btn.textContent.trim());
+}
+</script>
+</body>
+</html>

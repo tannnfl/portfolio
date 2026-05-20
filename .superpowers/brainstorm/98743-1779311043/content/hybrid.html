@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hybrid Preview</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Courier New', monospace;
+    background: #111;
+    color: #eee;
+    padding: 40px 24px 80px;
+  }
+
+  .page-title {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 32px;
+  }
+  .page-title h1 {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #444;
+    margin-bottom: 6px;
+  }
+  .page-title p { font-size: 11px; color: #444; line-height: 1.6; }
+
+  .preview-wrap {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* ══════════════════════════
+     HYBRID: A UI + C CARDS
+  ══════════════════════════ */
+
+  .preview {
+    background: #fff;
+    padding: 24px;
+    font-family: 'Courier New', monospace;
+    position: relative;
+    overflow: hidden;
+    border: 3px solid #000;
+    box-shadow: 6px 6px 0 #FFDE00, 9px 9px 0 #000;
+  }
+
+  /* A's scanline overlay */
+  .preview::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(0,0,0,0.022) 3px,
+      rgba(0,0,0,0.022) 4px
+    );
+    pointer-events: none;
+    z-index: 20;
+  }
+
+  /* dot grid (from C, lighter) */
+  .preview::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, #00000010 1px, transparent 1px);
+    background-size: 14px 14px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ── Nav (A style) ── */
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #000;
+    position: relative;
+    z-index: 5;
+  }
+
+  .nav-name {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+  }
+  /* glitch layers */
+  .nav-name::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 2px;
+    top: 0;
+    color: #ff00ff;
+    opacity: 0.45;
+    clip-path: polygon(0 25%, 100% 25%, 100% 45%, 0 45%);
+    pointer-events: none;
+  }
+  .nav-name::after {
+    content: attr(data-text);
+    position: absolute;
+    left: -2px;
+    top: 0;
+    color: #00ffff;
+    opacity: 0.45;
+    clip-path: polygon(0 55%, 100% 55%, 100% 75%, 0 75%);
+    pointer-events: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 12px;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #555;
+  }
+
+  /* ── Filters (A style) ── */
+  .filters {
+    display: flex;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 5;
+  }
+  .filter-btn {
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: none;
+    border: 2px solid #000;
+    border-right: none;
+    padding: 4px 10px;
+    cursor: pointer;
+    color: #000;
+  }
+  .filter-btn:last-child { border-right: 2px solid #000; }
+  .filter-btn.active { background: #000; color: #fff; }
+
+  /* ── Cards (C style) ── */
+  .card {
+    border: 2px solid #000;
+    margin-bottom: 14px;
+    position: relative;
+    background: #fff;
+    box-shadow: 4px 4px 0 #000;
+    transition: transform 0.12s, box-shadow 0.12s;
+    z-index: 5;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 #000;
+  }
+
+  .card-img {
+    width: 100%;
+    height: 100px;
+    border-bottom: 2px solid #000;
+    position: relative;
+    overflow: hidden;
+    background: #e8e8e8;
+  }
+  /* halftone on image area */
+  .card-img::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,222,0,0.35) 1.5px, transparent 1.5px);
+    background-size: 8px 8px;
+  }
+
+  .card-meta {
+    padding: 10px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .card-num {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 3px;
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+  }
+  /* yellow underline accent (C) */
+  .card-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #FFDE00;
+  }
+  .card-desc {
+    font-size: 8px;
+    color: #666;
+    margin-top: 6px;
+    line-height: 1.6;
+  }
+
+  /* Tags — C sticker style */
+  .tags {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-end;
+  }
+  .tag {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1.5px solid #000;
+    padding: 2px 7px;
+    display: inline-block;
+    background: #fff;
+    box-shadow: 1.5px 1.5px 0 #000;
+  }
+  .tag.featured {
+    background: #FFDE00;
+    transform: rotate(0.8deg);
+    /* A's rainbow border animation */
+    animation: rainbow-border 2.5s linear infinite;
+  }
+  .tag.systems { transform: rotate(-0.6deg); }
+
+  @keyframes rainbow-border {
+    0%   { border-color: #ff0000; }
+    16%  { border-color: #ff8800; }
+    33%  { border-color: #00bb00; }
+    50%  { border-color: #0077ff; }
+    66%  { border-color: #8800ff; }
+    83%  { border-color: #ff00ff; }
+    100% { border-color: #ff0000; }
+  }
+
+  /* Play bar — C dashed style */
+  .card-play {
+    border-top: 2px dashed #000;
+    padding: 8px 12px;
+    display: flex;
+    gap: 6px;
+    background: #fffde8;
+  }
+  .badge {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: #FFDE00;
+    color: #000;
+    border: 1.5px solid #000;
+    padding: 5px 10px;
+    box-shadow: 2px 2px 0 #000;
+    display: inline-block;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+  .badge:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 #000;
+  }
+  .badge.secondary {
+    background: #fff;
+  }
+
+  /* doc card (no image) */
+  .card-doc-header {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    border-bottom: 2px solid #000;
+    padding: 14px 12px 12px;
+  }
+  .doc-label {
+    font-size: 7px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 4px;
+  }
+  .doc-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  /* annotation */
+  .annotation {
+    font-size: 10px;
+    color: #444;
+    text-align: center;
+    margin-top: 20px;
+    line-height: 1.6;
+    letter-spacing: 0.06em;
+  }
+  .annotation strong { color: #000; }
+
+  /* confirm button */
+  .confirm-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .confirm-btn {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 2px solid #333;
+    background: none;
+    color: #555;
+    padding: 10px 24px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .confirm-btn.yes {
+    border-color: #FFDE00;
+    background: #FFDE00;
+    color: #000;
+  }
+  .confirm-btn:hover { border-color: #FFDE00; color: #FFDE00; }
+  .confirm-btn.yes:hover { background: #ffe833; }
+</style>
+</head>
+<body>
+
+<div class="page-title">
+  <h1>合并方向 — A 氛围 × C 卡片</h1>
+  <p>白底 + 扫描线 + glitch 标题 + 粗偏移卡片 + 虚线 play 栏 + 贴纸 tag</p>
+</div>
+
+<div class="preview-wrap">
+  <div class="preview">
+
+    <div class="nav">
+      <span class="nav-name" data-text="ANNA TAN">ANNA TAN</span>
+      <div class="nav-links">
+        <span>About</span>
+        <span>LinkedIn ↗</span>
+        <span>itch.io ↗</span>
+        <span>GitHub ↗</span>
+      </div>
+    </div>
+
+    <div class="filters">
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">Game</button>
+      <button class="filter-btn">Design Doc</button>
+      <button class="filter-btn">Tool Dev</button>
+    </div>
+
+    <!-- Card 1: with image -->
+    <div class="card">
+      <div class="card-img"></div>
+      <div class="card-meta">
+        <div>
+          <div class="card-num">01</div>
+          <div class="card-title">POPLife</div>
+          <div class="card-desc">2D Pixel Management Sim · Lead Designer · GDC 2026</div>
+        </div>
+        <div class="tags">
+          <span class="tag featured">Featured</span>
+          <span class="tag systems">Systems Design</span>
+          <span class="tag">Narrative</span>
+        </div>
+      </div>
+      <div class="card-play">
+        <span class="badge">☆ Wishlist on Steam</span>
+        <span class="badge secondary">Website ↗</span>
+      </div>
+    </div>
+
+    <!-- Card 2: doc card (black header) -->
+    <div class="card">
+      <div class="card-doc-header">
+        <div class="doc-label">Design Document</div>
+        <div class="doc-title">POPLife GDD</div>
+      </div>
+      <div class="card-meta">
+        <div>
+          <div class="card-num">02</div>
+          <div class="card-title">POPLife GDD</div>
+          <div class="card-desc">Full production GDD · Systems, NPC, Quest &amp; Economy Design</div>
+        </div>
+        <div class="tags">
+          <span class="tag">Design Doc</span>
+          <span class="tag systems">Systems</span>
+        </div>
+      </div>
+      <div class="card-play">
+        <span class="badge">View Doc ↗</span>
+        <span class="badge secondary">Download PDF</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="annotation">
+    <strong>A 的部分：</strong>scanline 叠加 · glitch RGB 残影（nav name）· 外框粗阴影 · Featured tag 彩虹边框动画<br>
+    <strong>C 的部分：</strong>卡片 4px 偏移 box-shadow · hover 位移 · dashed 分隔线 · 贴纸旋转 tag · badge 阴影
+  </div>
+
+  <div class="confirm-row">
+    <button class="confirm-btn yes" data-choice="hybrid-yes" onclick="confirm_pick(this)">就这个方向 ✓</button>
+    <button class="confirm-btn" data-choice="hybrid-adjust" onclick="confirm_pick(this)">需要调整</button>
+  </div>
+</div>
+
+<script>
+function confirm_pick(btn) {
+  document.querySelectorAll('.confirm-btn').forEach(b => b.classList.remove('yes'));
+  btn.classList.add('yes');
+  if (window.__companion) {
+    window.__companion.select(btn.dataset.choice, btn.textContent.trim());
+  }
+}
+</script>
+
+</body>
+</html>

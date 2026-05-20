@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clash Palettes</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Courier New', monospace;
+  background: #141414;
+  padding: 32px 16px 80px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.swatch-row {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+.swatch {
+  height: 6px;
+  flex: 1;
+  border-radius: 0;
+}
+.pal-name {
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+/* ── shared structure ── */
+.page {
+  position: relative;
+  overflow: hidden;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23g)' opacity='0.09'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+}
+.page::before {
+  content: '+ +';
+  position: absolute;
+  top: 5px; right: 8px;
+  font-size: 7px;
+  letter-spacing: 14px;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 40;
+}
+
+.nav {
+  padding: 16px 20% 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+  z-index: 10;
+}
+.nav-name {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.nav-sub {
+  font-size: 7px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.35;
+  text-align: right;
+}
+
+.filters {
+  display: flex;
+  padding: 0 20% 12px;
+  position: relative;
+  z-index: 10;
+}
+.fb {
+  font-family: 'Courier New', monospace;
+  font-size: 7.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: none;
+  border: 0.5px solid;
+  border-right: none;
+  padding: 3px 7px;
+  cursor: pointer;
+}
+.fb:last-child { border-right: 0.5px solid; }
+
+.feed {
+  padding: 2px 20% 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  position: relative;
+  z-index: 10;
+}
+
+.card {
+  position: relative;
+  cursor: pointer;
+  border: 0.5px solid;
+  transition: opacity 0.1s;
+}
+.card:hover { opacity: 0.88; }
+.card.fc { border-left-width: 3px; }
+
+.cimg {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  display: block;
+  filter: contrast(1.04) saturate(0.82);
+  border-bottom: 0.5px solid;
+  position: relative;
+}
+.cimg-wrap {
+  position: relative;
+  overflow: hidden;
+}
+/* halftone uses var(--h1) — first accent color */
+.cimg-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--h1) 1px, transparent 1px);
+  background-size: 7px 7px;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.cdoc {
+  padding: 8px 10px 0;
+  font-size: 6.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  opacity: 0.25;
+}
+.cmeta {
+  padding: 7px 10px 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+.cleft { flex: 1; min-width: 0; }
+.cnum { font-size: 6.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.2; margin-bottom: 2px; }
+.ctitle { font-size: 11px; font-weight: 700; text-transform: uppercase; line-height: 1.1; letter-spacing: -0.01em; }
+.cdesc { font-size: 6.5px; margin-top: 3px; line-height: 1.6; opacity: 0.48; }
+.cright { display: flex; flex-direction: column; gap: 3px; align-items: flex-end; flex-shrink: 0; }
+.tag {
+  font-size: 6.5px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 2px 5px; display: inline-block;
+}
+/* featured tag uses --a2 (second accent) */
+.tag.ft { animation: rb 3s linear infinite; }
+@keyframes rb {
+  0%  { outline-color: red; }
+  33% { outline-color: blue; }
+  66% { outline-color: green; }
+  100%{ outline-color: red; }
+}
+
+.cplay {
+  padding: 6px 10px;
+  display: flex;
+  gap: 5px;
+  border-top: 0.5px solid;
+}
+.badge {
+  font-size: 7px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; border: 0.5px solid;
+  padding: 3px 7px; display: inline-block; cursor: pointer;
+}
+
+/* ════════════════════════
+   P1 — SOUR CANDY
+   lime #b8ff00 + coral #ff3d3d
+   paper: #faf4e4
+════════════════════════ */
+.p1 {
+  background-color: #faf4e4;
+  color: #141414;
+  --h1: rgba(184,255,0,0.3);
+}
+.p1 .nav-name { text-shadow: 2px 2px 0 rgba(184,255,0,0.6); }
+.p1 .fb { border-color: rgba(0,0,0,0.28); color: rgba(0,0,0,0.45); }
+.p1 .fb.on { background: #141414; color: #b8ff00; border-color: #141414; }
+.p1 .card { border-color: rgba(0,0,0,0.18); background: rgba(255,255,255,0.7); }
+.p1 .card.fc { border-left-color: #ff3d3d; }
+.p1 .cimg { border-bottom-color: rgba(0,0,0,0.1); }
+.p1 .cplay { border-top-color: rgba(0,0,0,0.08); background: rgba(0,0,0,0.02); }
+.p1 .tag { background: rgba(0,0,0,0.07); }
+.p1 .tag.ft { background: #b8ff00; color: #141414; outline: 0.5px solid #ff3d3d; }
+.p1 .badge { background: #ff3d3d; color: #fff; border-color: rgba(0,0,0,0.2); }
+.p1 .badge.g { background: transparent; color: rgba(0,0,0,0.4); border-color: rgba(0,0,0,0.15); }
+
+/* ════════════════════════
+   P2 — WET PAINT
+   cobalt #0038ff + vermillion #ff4400
+   paper: #f8f6f0
+════════════════════════ */
+.p2 {
+  background-color: #f8f6f0;
+  color: #0a0a0a;
+  --h1: rgba(0,56,255,0.15);
+}
+.p2 .nav-name { text-shadow: 2px 2px 0 rgba(255,68,0,0.4); }
+.p2 .fb { border-color: rgba(0,0,0,0.25); color: rgba(0,0,0,0.42); }
+.p2 .fb.on { background: #0038ff; color: #fff; border-color: #0038ff; }
+.p2 .card { border-color: rgba(0,0,0,0.16); background: #fff; }
+.p2 .card.fc { border-left-color: #0038ff; }
+.p2 .cimg { border-bottom-color: rgba(0,0,0,0.1); }
+.p2 .cplay { border-top-color: rgba(0,0,0,0.07); background: rgba(0,0,0,0.02); }
+.p2 .tag { background: rgba(0,0,0,0.06); }
+.p2 .tag.ft { background: #ff4400; color: #fff; outline: 0.5px solid #0038ff; }
+.p2 .badge { background: #0038ff; color: #fff; border-color: transparent; }
+.p2 .badge.g { background: transparent; color: rgba(0,0,0,0.38); border-color: rgba(0,0,0,0.14); }
+
+/* ════════════════════════
+   P3 — SUMMER ZINE
+   hot pink #ff2a8a + mint #00e0a0
+   paper: #fdf6ec
+════════════════════════ */
+.p3 {
+  background-color: #fdf6ec;
+  color: #0f0f0f;
+  --h1: rgba(255,42,138,0.18);
+}
+.p3 .nav-name { text-shadow: 2px 2px 0 rgba(0,224,160,0.55); }
+.p3 .fb { border-color: rgba(0,0,0,0.25); color: rgba(0,0,0,0.42); }
+.p3 .fb.on { background: #0f0f0f; color: #00e0a0; border-color: #0f0f0f; }
+.p3 .card { border-color: rgba(0,0,0,0.16); background: rgba(255,255,255,0.75); }
+.p3 .card.fc { border-left-color: #ff2a8a; }
+.p3 .cimg { border-bottom-color: rgba(0,0,0,0.1); }
+.p3 .cplay { border-top-color: rgba(0,0,0,0.07); background: rgba(0,0,0,0.015); }
+.p3 .tag { background: rgba(0,0,0,0.06); }
+.p3 .tag.ft { background: #ff2a8a; color: #fff; outline: 0.5px solid #00e0a0; }
+.p3 .badge { background: #00e0a0; color: #0f0f0f; border-color: transparent; }
+.p3 .badge.g { background: transparent; color: rgba(0,0,0,0.38); border-color: rgba(0,0,0,0.14); }
+
+/* ════════════════════════
+   P4 — 90s TOKYO
+   electric orange #ff6200 + electric blue #004cff
+   paper: #f5f2e8
+════════════════════════ */
+.p4 {
+  background-color: #f5f2e8;
+  color: #111;
+  --h1: rgba(255,98,0,0.2);
+}
+.p4 .nav-name { text-shadow: 2px 2px 0 rgba(0,76,255,0.45); }
+.p4 .fb { border-color: rgba(0,0,0,0.26); color: rgba(0,0,0,0.43); }
+.p4 .fb.on { background: #ff6200; color: #fff; border-color: #ff6200; }
+.p4 .card { border-color: rgba(0,0,0,0.17); background: rgba(255,255,255,0.72); }
+.p4 .card.fc { border-left-color: #004cff; }
+.p4 .cimg { border-bottom-color: rgba(0,0,0,0.1); }
+.p4 .cplay { border-top-color: rgba(0,0,0,0.07); background: rgba(0,0,0,0.02); }
+.p4 .tag { background: rgba(0,0,0,0.07); }
+.p4 .tag.ft { background: #004cff; color: #fff; outline: 0.5px solid #ff6200; }
+.p4 .badge { background: #ff6200; color: #fff; border-color: transparent; }
+.p4 .badge.g { background: transparent; color: rgba(0,0,0,0.38); border-color: rgba(0,0,0,0.15); }
+
+/* ════════════════════════
+   P5 — RISO CLASSIC
+   hunter green #0d5c3a + warm red #e8271e
+   paper: #f4f0e2
+════════════════════════ */
+.p5 {
+  background-color: #f4f0e2;
+  color: #0d0d0d;
+  --h1: rgba(13,92,58,0.2);
+}
+.p5 .nav-name { text-shadow: 2px 2px 0 rgba(232,39,30,0.4); }
+.p5 .fb { border-color: rgba(0,0,0,0.26); color: rgba(0,0,0,0.42); }
+.p5 .fb.on { background: #0d5c3a; color: #f4f0e2; border-color: #0d5c3a; }
+.p5 .card { border-color: rgba(0,0,0,0.17); background: rgba(255,255,255,0.65); }
+.p5 .card.fc { border-left-color: #e8271e; }
+.p5 .cimg { border-bottom-color: rgba(0,0,0,0.1); }
+.p5 .cplay { border-top-color: rgba(0,0,0,0.08); background: rgba(0,0,0,0.02); }
+.p5 .tag { background: rgba(0,0,0,0.07); }
+.p5 .tag.ft { background: #e8271e; color: #fff; outline: 0.5px solid #0d5c3a; }
+.p5 .badge { background: #e8271e; color: #fff; border-color: transparent; }
+.p5 .badge.g { background: transparent; color: rgba(0,0,0,0.38); border-color: rgba(0,0,0,0.14); }
+
+/* ════════════════════════
+   P6 — PUNK STICKER
+   neon yellow #ffe100 + deep violet #3800c8
+   paper: #f2f0f5
+════════════════════════ */
+.p6 {
+  background-color: #f2f0f5;
+  color: #0e0010;
+  --h1: rgba(56,0,200,0.15);
+}
+.p6 .nav-name { text-shadow: 2px 2px 0 rgba(255,225,0,0.7); }
+.p6 .fb { border-color: rgba(14,0,16,0.25); color: rgba(14,0,16,0.42); }
+.p6 .fb.on { background: #3800c8; color: #ffe100; border-color: #3800c8; }
+.p6 .card { border-color: rgba(14,0,16,0.17); background: rgba(255,255,255,0.72); }
+.p6 .card.fc { border-left-color: #3800c8; }
+.p6 .cimg { border-bottom-color: rgba(14,0,16,0.1); }
+.p6 .cplay { border-top-color: rgba(14,0,16,0.07); background: rgba(14,0,16,0.015); }
+.p6 .tag { background: rgba(14,0,16,0.07); color: #0e0010; }
+.p6 .tag.ft { background: #ffe100; color: #0e0010; outline: 0.5px solid #3800c8; }
+.p6 .badge { background: #3800c8; color: #ffe100; border-color: transparent; }
+.p6 .badge.g { background: transparent; color: rgba(14,0,16,0.38); border-color: rgba(14,0,16,0.14); }
+
+/* ── confirm ── */
+.btns {
+  display: flex; justify-content: center;
+  gap: 8px; margin-top: 28px; flex-wrap: wrap;
+}
+.cbtn {
+  font-family: 'Courier New', monospace;
+  font-size: 8.5px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  border: 0.5px solid #444; background: none;
+  color: #555; padding: 7px 16px; cursor: pointer;
+}
+.cbtn:hover { border-color: #aaa; color: #aaa; }
+.cbtn.picked { background: #fff; color: #000; border-color: #fff; }
+</style>
+</head>
+<body>
+<div class="grid">
+
+<!-- helper macro — same cards in each palette -->
+
+<!-- P1 SOUR CANDY -->
+<div>
+  <div class="swatch-row">
+    <div class="swatch" style="background:#faf4e4;border:0.5px solid #333;"></div>
+    <div class="swatch" style="background:#b8ff00;"></div>
+    <div class="swatch" style="background:#ff3d3d;"></div>
+    <div class="swatch" style="background:#141414;"></div>
+  </div>
+  <div class="pal-name">01 — Sour Candy &nbsp;·&nbsp; Lime + Coral</div>
+  <div class="page p1">
+    <div class="nav">
+      <div class="nav-name">ANNA TAN</div>
+      <div class="nav-sub">Game Designer · 2026</div>
+    </div>
+    <div class="filters">
+      <button class="fb on">All</button><button class="fb">Game</button><button class="fb">Doc</button><button class="fb">Tool</button>
+    </div>
+    <div class="feed">
+      <div class="card fc">
+        <div class="cimg-wrap"><img class="cimg" src="http://localhost:5174/assets/poplife-ss.png" onerror="this.onerror=null;this.src='http://localhost:5174/assets/poplife-cover.png'" alt=""></div>
+        <div class="cmeta">
+          <div class="cleft"><div class="cnum">01</div><div class="ctitle">POPLife</div><div class="cdesc">2D Pixel Mgmt Sim · GDC 2026</div></div>
+          <div class="cright"><span class="tag ft">Featured</span><span class="tag">Systems</span></div>
+        </div>
+        <div class="cplay"><span class="badge">☆ Steam</span><span class="badge g">Website ↗</span></div>
+      </div>
+      <div class="card">
+        <div class="cdoc">Design Document</div>
+        <div class="cmeta">
+          <div class="cleft"><div class="cnum">02</div><div class="ctitle">POPLife GDD</div><div class="cdesc">Full GDD · Team 7+</div></div>
+          <div class="cright"><span class="tag">Design Doc</span></div>
+        </div>
+        <div class="cplay"><span class="badge">View Doc ↗</span><span class="badge g">PDF</span></div>
+      </div>
+      <div class="card">
+        <div class="cimg-wrap"><img class="cimg" src="http://localhost:5174/assets/timeplex-cover.png" onerror="this.style.display='none'" alt=""></div>
+        <div class="cmeta">
+          <div class="cleft"><div class="cnum">03</div><div class="ctitle">Timeplex</div><div class="cdesc">2D Grid Puzzle · NYU</div></div>
+          <div class="cright"><span class="tag">Game Design</span></div>
+        </div>
+        <div class="cplay"><span class="badge">▶ itch.io</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P2 WET PAINT -->
+<div>
+  <div class="swatch-row">
+    <div class="swatch" style="background:#f8f6f0;border:0.5px solid #333;"></div>
+    <div class="swatch" style="background:#0038ff;"></div>
+    <div class="swatch" style="background:#ff4400;"></div>
+    <div class="swatch" style="background:#0a0a0a;"></div>
+  </div>
+  <div class="pal-name">02 — Wet Paint &nbsp;·&nbsp; Cobalt + Vermillion</div>
+  <div class="page p2">
+    <div class="nav">
+      <div class="nav-name">ANNA TAN</div>
+      <div class="nav-sub">Game Designer · 2026</div>
+    </div>
+    <div class="filters">
+      <button class="fb on">All</button><button class="fb">Game</button><button class="fb">Doc</button><button class="fb">Tool</button>
+    </div>
+    <div class="feed">
+      <div class="card fc">
+        <div class="cimg-wrap"><img class="cimg" src="http://localhost:5174/assets/poplife-ss.png" onerror="this.onerror=null;this.src='http://localhost:5174/assets/poplife-cover.png'" alt=""></div>
+        <div class="cmeta">
+          <div class="cleft"><div class="cnum">01</div><div class="ctitle">POPLife</div><div class="cdesc">2D Pixel Mgmt Sim · GDC 2026</div></div>
+          <div class="cright"><span class="tag ft">Featured</span><span class="tag">Systems</span></div>
+        </div>
+        <div class="cplay"><span class="badge">☆ Steam</span><span class="badge g">Website ↗</span></div>
+      </div>
+      <div class="card">
+        <div class="cdoc">Design Document</div>
+        <div class="cmeta">
+          <div class="cleft"><div class="cnum">02</div><div class="ctitle">POPLife GDD</div><div class="cdesc">Full GDD · Team 7+</div></div>
+          <div class="cright"><span class="tag">Design Doc</span></div>
+        </div>
+        <div class="cplay"><span class="badge">View Doc ↗</span><span class="badge g">PDF</span></div>
+      </div>
+      <div class="card">
+        <div class="cimg-wrap"><img class="cimg" src="http://localhost:5174/assets/timeplex-cover.png" onerror="this.style.display='none'" alt=""></div>
+        <div class="cmeta">
+          <div class="cleft"><div class="cnum">03</div><div class="ctitle">Timeplex</div><div class="cdesc">2D Grid Puzzle · NYU</div></div>
+          <div class="cright"><span class="tag">Game Design</span></div>
+        </div>
+        <div class="cplay"><span class="badge">▶ itch.io</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P3 SUMMER ZINE -->
+<div>
+  <div class="swatch-row">
+    <div class="swatch" style="background:#fdf6ec;border:0.5px solid #333;"></div>
+    <div class="swatch" style="background:#ff2a8a;"></div>
+    <div class="swatch" style="background:#00e0a0;"></div>
+    <div class="swatch" style="background:#0f0f0f;"></div>
+  </div>
+  <div class="pal-name">03 — Summer Zine &nbsp;·&nbsp; Hot Pink + Mint</div>
+  <div class="page p3">
+    <div class="nav">
+      <div class="nav-name">ANNA TAN</div>
+      <div class="nav-sub">Game Designer · 2026</div>
+    </div>
+    <div class="filters">
+      <button class="fb on">All</button><button class="fb">Game</button><button class="fb">Doc</button><button class="fb">Tool</button>
+    </div>
+    <div class="feed">
+      <div class="card fc">
+        <div class="cimg-wrap"><img class="cimg" src="http://localhost:5174/assets/poplife-ss.png" onerror="this.onerror=null;this.src='http://localhost:5174/assets/poplife-cover.png'" alt=""></div>
+        <div class="cmeta">
+          <div class="cleft"><div class="cnum">01</div><div class="ctitle">POPLife</div><div class="cdesc">2D Pixel Mgmt Sim · GDC 2026</div></div>
+          <div class="cright"><span class="tag ft">Featured</span><span class="tag">Systems</span></div>
+        </div>
+        <div class="cplay"><span class="badge">☆ Steam</span><span class="badge g">Website ↗</span></div>
+      </div>
+      <div class="card">
+        <div class="cdoc">Design Document</div>
+        <div class="cmeta">
+          <div class="cleft"><div class="cnum">02</div><div class="ctitle">POPLife GDD</div><div class="cdesc">Full GDD · Team 7+</div></div>
+          <div class="cright"><span class="tag">Design Doc</span></div>
+        </div>
+        <div class="cplay"><span class="badge">View Doc ↗</span><span class="badge g">PDF</span></div>
+      </div>
+      <div class="card">
+        <div class="cimg-wrap"><img class="cimg" src="http://localhost:5174/assets/timeplex-cover.png" onerror="this.style.display='none'" alt=""></div>
+        <div class="cmeta">
+          <div class="cleft"><div class="cnum">03</div><div class="ctitle">Timeplex</div><div class="cdesc">2D Grid Puzzle · NYU</div></div>
+          <div class="cright"><span class="tag">Game Design</span></div>
+        </div>
+        <div class="cplay"><span class="badge">▶ itch.io</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P4 90s TOKYO -->
+<div>
+  <div class="swatch-row">
+    <div class="swatch" style="background:#f5f2e8;border:0.5px solid #333;"></div>
+    <div class="swatch" style="background:#ff6200;"></div>
+    <div class="swatch" style="background:#004cff;"></div>
+    <div class="swatch" style="background:#111;"></div>
+  </div>
+  <div class="pal-name">04 — 90s Tokyo &nbsp;·&nbsp; Orange + Cobalt</div>
+  <div class="page p4">
+    <div class="nav">
+      <div class="nav-name">ANNA TAN</div>
+      <div class="nav-sub">Game Designer · 2026</div>
+    </div>
+    <div class="filters">
+      <button class="fb on">All</button><button class="fb">Game</button><button class="fb">Doc</button><button class="fb">Tool</button>
+    </div>
+    <div class="feed">
+      <div class="card fc">
+        <div class="cimg-wrap"><img class="cimg" src="http://localhost:5174/assets/poplife-ss.png" onerror="this.onerror=null;this.src='http://localhost:5174/assets/poplife-cover.png'" alt=""></div>
+        <div class="cmeta">
+          <div class="cleft"><div class="cnum">01</div><div class="ctitle">POPLife</div><div class="cdesc">2D Pixel Mgmt Sim · GDC 2026</div></div>
+          <div class="cright"><span class="tag ft">Featured</span><span class="tag">Systems</span></div>
+        </div>
+        <div class="cplay"><span class="badge">☆ Steam</span><span class="badge g">Website ↗</span></div>
+      </div>
+      <div class="card">
+        <div class="cdoc">Design Document</div>
+        <div class="cmeta">
+          <div class="cleft"><div class="cnum">02</div><div class="ctitle">POPLife GDD</div><div class="cdesc">Full GDD · Team 7+</div></div>
+          <div class="cright"><span class="tag">Design Doc</span></div>
+        </div>
+        <div class="cplay"><span class="badge">View Doc ↗</span><span class="badge g">PDF</span></div>
+      </div>
+      <div class="card">
+        <div class="cimg-wrap"><img class="cimg" src="http://localhost:5174/assets/timeplex-cover.png" onerror="this.style.display='none'" alt=""></div>
+        <div class="cmeta">
+          <div class="cleft"><div class="cnum">03</div><div class="ctitle">Timeplex</div><div class="cdesc">2D Grid Puzzle · NYU</div></div>
+          <div class="cright"><span class="tag">Game Design</span></div>
+        </div>
+        <div class="cplay"><span class="badge">▶ itch.io</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P5 RISO CLASSIC -->
+<div>
+  <div class="swatch-row">
+    <div class="swatch" style="background:#f4f0e2;border:0.5px solid #333;"></div>
+    <div class="swatch" style="background:#0d5c3a;"></div>
+    <div class="swatch" style="background:#e8271e;"></div>
+    <div class="swatch" style="background:#0d0d0d;"></div>
+  </div>
+  <div class="pal-name">05 — Riso Classic &nbsp;·&nbsp; Forest + Red</div>
+  <div class="page p5">
+    <div class="nav">
+      <div class="nav-name">ANNA TAN</div>
+      <div class="nav-sub">Game Designer · 2026</div>
+    </div>
+    <div class="filters">
+      <button class="fb on">All</button><button class="fb">Game</button><button class="fb">Doc</button><button class="fb">Tool</button>
+    </div>
+    <div class="feed">
+      <div class="card fc">
+        <div class="cimg-wrap"><img class="cimg" src="http://localhost:5174/assets/poplife-ss.png" onerror="this.onerror=null;this.src='http://localhost:5174/assets/poplife-cover.png'" alt=""></div>
+        <div class="cmeta">
+          <div class="cleft"><div class="cnum">01</div><div class="ctitle">POPLife</div><div class="cdesc">2D Pixel Mgmt Sim · GDC 2026</div></div>
+          <div class="cright"><span class="tag ft">Featured</span><span class="tag">Systems</span></div>
+        </div>
+        <div class="cplay"><span class="badge">☆ Steam</span><span class="badge g">Website ↗</span></div>
+      </div>
+      <div class="card">
+        <div class="cdoc">Design Document</div>
+        <div class="cmeta">
+          <div class="cleft"><div class="cnum">02</div><div class="ctitle">POPLife GDD</div><div class="cdesc">Full GDD · Team 7+</div></div>
+          <div class="cright"><span class="tag">Design Doc</span></div>
+        </div>
+        <div class="cplay"><span class="badge">View Doc ↗</span><span class="badge g">PDF</span></div>
+      </div>
+      <div class="card">
+        <div class="cimg-wrap"><img class="cimg" src="http://localhost:5174/assets/timeplex-cover.png" onerror="this.style.display='none'" alt=""></div>
+        <div class="cmeta">
+          <div class="cleft"><div class="cnum">03</div><div class="ctitle">Timeplex</div><div class="cdesc">2D Grid Puzzle · NYU</div></div>
+          <div class="cright"><span class="tag">Game Design</span></div>
+        </div>
+        <div class="cplay"><span class="badge">▶ itch.io</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P6 PUNK STICKER -->
+<div>
+  <div class="swatch-row">
+    <div class="swatch" style="background:#f2f0f5;border:0.5px solid #333;"></div>
+    <div class="swatch" style="background:#ffe100;"></div>
+    <div class="swatch" style="background:#3800c8;"></div>
+    <div class="swatch" style="background:#0e0010;"></div>
+  </div>
+  <div class="pal-name">06 — Punk Sticker &nbsp;·&nbsp; Yellow + Violet</div>
+  <div class="page p6">
+    <div class="nav">
+      <div class="nav-name">ANNA TAN</div>
+      <div class="nav-sub">Game Designer · 2026</div>
+    </div>
+    <div class="filters">
+      <button class="fb on">All</button><button class="fb">Game</button><button class="fb">Doc</button><button class="fb">Tool</button>
+    </div>
+    <div class="feed">
+      <div class="card fc">
+        <div class="cimg-wrap"><img class="cimg" src="http://localhost:5174/assets/poplife-ss.png" onerror="this.onerror=null;this.src='http://localhost:5174/assets/poplife-cover.png'" alt=""></div>
+        <div class="cmeta">
+          <div class="cleft"><div class="cnum">01</div><div class="ctitle">POPLife</div><div class="cdesc">2D Pixel Mgmt Sim · GDC 2026</div></div>
+          <div class="cright"><span class="tag ft">Featured</span><span class="tag">Systems</span></div>
+        </div>
+        <div class="cplay"><span class="badge">☆ Steam</span><span class="badge g">Website ↗</span></div>
+      </div>
+      <div class="card">
+        <div class="cdoc">Design Document</div>
+        <div class="cmeta">
+          <div class="cleft"><div class="cnum">02</div><div class="ctitle">POPLife GDD</div><div class="cdesc">Full GDD · Team 7+</div></div>
+          <div class="cright"><span class="tag">Design Doc</span></div>
+        </div>
+        <div class="cplay"><span class="badge">View Doc ↗</span><span class="badge g">PDF</span></div>
+      </div>
+      <div class="card">
+        <div class="cimg-wrap"><img class="cimg" src="http://localhost:5174/assets/timeplex-cover.png" onerror="this.style.display='none'" alt=""></div>
+        <div class="cmeta">
+          <div class="cleft"><div class="cnum">03</div><div class="ctitle">Timeplex</div><div class="cdesc">2D Grid Puzzle · NYU</div></div>
+          <div class="cright"><span class="tag">Game Design</span></div>
+        </div>
+        <div class="cplay"><span class="badge">▶ itch.io</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="btns">
+  <button class="cbtn" data-c="1" onclick="p(this)">01 Lime + Coral</button>
+  <button class="cbtn" data-c="2" onclick="p(this)">02 Cobalt + Vermillion</button>
+  <button class="cbtn" data-c="3" onclick="p(this)">03 Pink + Mint</button>
+  <button class="cbtn" data-c="4" onclick="p(this)">04 Orange + Cobalt</button>
+  <button class="cbtn" data-c="5" onclick="p(this)">05 Forest + Red</button>
+  <button class="cbtn" data-c="6" onclick="p(this)">06 Yellow + Violet</button>
+</div>
+
+<script>
+function p(btn) {
+  document.querySelectorAll('.cbtn').forEach(b => b.classList.remove('picked'));
+  btn.classList.add('picked');
+  if (window.__companion) window.__companion.select('pal-'+btn.dataset.c, btn.textContent.trim());
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beans and Guns — Anna Tan</title>
+  <script type="module" crossorigin src="/portfolio/assets/cursor-trail-Cv3zRzco.js"></script>
+  <link rel="stylesheet" crossorigin href="/portfolio/assets/cursor-trail-CYZb0a0Q.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-name" data-zh="谈方琳">Anna Tan</span>
+    <div class="nav-links">
+      <a href="/about.html" data-zh="关于">About</a>
+      <a href="https://www.linkedin.com/in/fanglin-tan-2b5745329/" target="_blank">LinkedIn ↗</a>
+      <a href="https://geo404anna.itch.io/" target="_blank">itch.io ↗</a>
+      <a href="https://github.com/tannnfl" target="_blank">GitHub ↗</a>
+      <div class="lang-switch">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="detail-wrap">
+  <div class="detail-inner">
+
+    <a class="back-link" href="/" data-zh="← 全部作品">← All Work</a>
+
+    <div class="detail-num">03</div>
+    <h1 class="detail-title">Beans and Guns</h1>
+    <div class="detail-role" data-zh="主策划 · 项目管理 · 视觉技术美术 · 在线 3D 协作解谜沙盒 · 2026–至今">Lead Designer · PM · Visual Tech Art · Online 3D Collaborative Puzzle Sandbox · 2026–Present</div>
+
+    <div class="detail-tags">
+      <span class="tag" data-zh="游戏设计">Game Design</span>
+      <span class="tag" data-zh="工具开发">Tool Dev</span>
+      <span class="tag" data-zh="多人游戏">Multiplayer</span>
+      <a class="tag tag-black" href="https://psycanic.itch.io/been-and-gone" target="_blank" data-zh="在 itch.io 上玩 ↗">Play on itch.io ↗</a>
+      <a class="tag" href="/project/beans-gdd.html" data-zh="设计文档 ↗">Design Doc ↗</a>
+    </div>
+
+    <img class="detail-img"
+         src="https://img.itch.zone/aW1nLzI0ODcxODM1LnBuZw==/original/iCSqMQ.png"
+         alt="Beans and Guns" />
+
+    <div class="detail-section">
+      <h2 data-zh="总览">Overview</h2>
+      <ul>
+        <li data-zh="异步接力体验：每位玩家继承上一位玩家留下的 3D 场景，每轮放置最多 10 件道具">Asynchronous relay experience: each player inherits the previous player's 3D scene and places up to 10 items per session</li>
+        <li data-zh="场景上限 50 件；超出时最早放置的道具优先移除（FIFO 驱逐）">Scene cap of 50 items; when exceeded, the oldest items are removed first (FIFO eviction)</li>
+        <li data-zh="道具携带隐藏属性，所有属性之和决定场景与六个童年主题结局的相似度">Items carry hidden attributes; their sum determines the scene's proximity to one of six childhood-themed endings</li>
+        <li data-zh="三阶段流程：自由创作（0–50% 相似度）→ 结局锁定（50–90%）→ 遗忘（点击道具溶解，全部消除即胜利）">Three phases: free creation (0–50% similarity) → locked-in ending (50–90%) → forgetting (click items to dissolve; win when all are gone)</li>
+        <li data-zh="视觉风格——色调、抖动颗粒、轮廓粗细、模糊——随场景属性变化通过后处理实时调整">Visual style — hue, dither pattern, outline weight, blur — shifts in real time via post-processing as scene attributes change</li>
+        <li data-zh="动态音乐（FMOD）：随结局相关道具积累而愈发丰富；遗忘阶段渐弱至静默">Dynamic music (FMOD): grows richer as ending-relevant items accumulate; fades to silence during the forgetting phase</li>
+        <li data-zh="每个场景中有一个被困灵魂与玩家交流叙事；解放全部六个场景的灵魂为最终目标">Each scene contains a spirit that narrates the experience; collective goal is to free each spirit across six scenes</li>
+      </ul>
+    </div>
+
+    <div class="detail-section">
+      <h2 data-zh="我的职责">My Role</h2>
+      <ul>
+        <li data-zh="设计完整的异步接力机制：道具放置上限、FIFO 驱逐、相似度评分触发结局锁定">Designed the full asynchronous relay mechanic: item placement limit, FIFO eviction, similarity scoring for ending lock-in</li>
+        <li data-zh="在项目从 Game Jam 扩展后主导玩法扩展讨论">Led gameplay expansion discussions as the project grew post-jam</li>
+        <li data-zh="构建 Unity 编辑器窗口，用于提示文本创作与道具-场景关系映射">Built Unity Editor windows for hint text authoring and item–scene relationship mapping</li>
+        <li data-zh="独自用 C# 实现提示系统全部逻辑">Sole implementer of hint system logic in C#</li>
+        <li data-zh="参与场景上传 / 下载流水线，并导入两个场景及对应道具">Participated in scene upload/download pipeline and imported two scenes with corresponding items</li>
+        <li data-zh="负责视觉技术美术：设计并实现后处理着色器套件，驱动场景随属性变化的实时视觉渐变">Visual Tech Art: designed and implemented the post-processing shader suite driving real-time visual transformation as scene attributes shift</li>
+        <li data-zh="担任项目管理：制定四轮冲刺计划，协调跨职能团队（策划、程序、美术、音频）交付节奏">PM: authored the four-sprint production plan and coordinated delivery across the cross-functional team (design, engineering, art, audio)</li>
+      </ul>
+    </div>
+
+    <div class="detail-section">
+      <h2 data-zh="设计笔记">Design Notes</h2>
+      <ul>
+        <li data-zh="FIFO 驱逐是一种生成性约束：放置有意义的东西，意味着接受更早的东西可能消失">FIFO eviction is a generative constraint: placing something meaningful means accepting something earlier may vanish</li>
+        <li data-zh="异步格式让每次游玩成为跨越时间的对话——无需同步协调">Asynchronous format makes each session a conversation across time — no synchronous coordination needed</li>
+        <li data-zh="六个结局锚定涌现式玩法：即便玩家没有明确意图，场景也会自然漂向某种童年情感原型">Six endings anchor emergent play: scenes drift toward a childhood emotional archetype even without explicit player intent</li>
+        <li data-zh="遗忘阶段完成了整个叙事弧——创造与失去，都是同一个集体故事的一部分">The forgetting phase completes the arc — creation and loss are both part of the same collective story</li>
+      </ul>
+    </div>
+
+    <div class="detail-links">
+      <a class="play-badge" href="https://psycanic.itch.io/been-and-gone" target="_blank" data-zh="在 itch.io 上玩 ↗">Play on itch.io ↗</a>
+      <a class="play-badge" href="/project/beans-gdd.html" data-zh="设计文档 ↗">Design Document ↗</a>
+      <a class="play-badge" href="/project/beans-tool.html" data-zh="道具编辑器 ↗">Item Editor ↗</a>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

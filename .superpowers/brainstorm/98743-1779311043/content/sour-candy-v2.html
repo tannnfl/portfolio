@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sour Candy v2</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Courier New', monospace;
+  background: #141414;
+  padding: 40px 20px 80px;
+}
+
+.wrap { max-width: 640px; margin: 0 auto; }
+.lbl { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: #444; text-align: center; margin-bottom: 16px; }
+
+/* ── PAGE ── */
+.page {
+  background-color: #faf4e4;
+  position: relative;
+  overflow: hidden;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23g)' opacity='0.09'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+}
+.page::before {
+  content: '+ +';
+  position: absolute;
+  top: 5px; right: 10px;
+  font-size: 7px; letter-spacing: 16px;
+  color: rgba(0,0,0,0.1);
+  pointer-events: none; z-index: 40;
+}
+
+/* ── NAV ── */
+.nav {
+  padding: 20px 20% 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative; z-index: 10;
+}
+.nav-name {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #141414;
+  line-height: 1;
+  /* lime green ink bleed */
+  text-shadow: 2px 2px 0 rgba(184,255,0,0.65);
+}
+.nav-right {
+  display: flex; flex-direction: column;
+  align-items: flex-end; gap: 3px;
+}
+.nav-issue {
+  font-size: 7px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(0,0,0,0.3);
+}
+.nav-links {
+  display: flex; gap: 10px;
+  font-size: 8px; text-transform: uppercase;
+  letter-spacing: 0.09em; color: rgba(0,0,0,0.42);
+}
+.lang-sw {
+  display: flex; border: 0.5px solid rgba(0,0,0,0.3);
+}
+.lang-sw span {
+  font-size: 7px; font-weight: 700; padding: 1px 5px;
+}
+.lang-sw span:first-child {
+  border-right: 0.5px solid rgba(0,0,0,0.3);
+  background: #b8ff00; color: #141414;
+}
+.lang-sw span:last-child { color: rgba(0,0,0,0.3); }
+
+/* ── FILTERS — no divider line ── */
+.filters {
+  display: flex;
+  padding: 0 20% 14px;
+  position: relative; z-index: 10;
+}
+.fb {
+  font-family: 'Courier New', monospace;
+  font-size: 8px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  background: none;
+  border: 0.5px solid rgba(0,0,0,0.3);
+  border-right: none;
+  padding: 3px 8px;
+  cursor: pointer; color: rgba(0,0,0,0.45);
+}
+.fb:last-child { border-right: 0.5px solid rgba(0,0,0,0.3); }
+/* active: lime green bg */
+.fb.on { background: #b8ff00; color: #141414; border-color: #b8ff00; font-weight: 700; }
+
+/* ── FEED ── */
+.feed {
+  padding: 2px 20% 32px;
+  display: flex; flex-direction: column;
+  gap: 10px; position: relative; z-index: 10;
+}
+
+/* ── CARD ── */
+.card {
+  background: rgba(255,255,255,0.72);
+  border: 0.5px solid rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.card:hover { background: rgba(255,255,255,0.9); }
+
+/* featured: lime left strip */
+.card.fc { border-left: 3px solid #b8ff00; }
+
+/* ── IMAGE ── */
+.cimg-wrap { position: relative; overflow: hidden; }
+.cimg {
+  width: 100%; height: 110px;
+  object-fit: cover; display: block;
+  filter: contrast(1.04) saturate(0.85);
+  border-bottom: 0.5px solid rgba(0,0,0,0.12);
+}
+/* halftone lime green over images */
+.cimg-wrap::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(184,255,0,0.32) 1px, transparent 1px);
+  background-size: 7px 7px;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* ── CARD BODY ── */
+.cdoc {
+  padding: 8px 11px 0;
+  font-size: 6.5px; letter-spacing: 0.15em;
+  text-transform: uppercase; font-weight: 700;
+  color: rgba(0,0,0,0.28);
+}
+.cmeta {
+  padding: 8px 11px 6px;
+  display: flex; justify-content: space-between;
+  align-items: flex-start; gap: 10px;
+}
+.cleft { flex: 1; min-width: 0; }
+.cnum {
+  font-size: 7px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(0,0,0,0.2); margin-bottom: 2px;
+}
+.ctitle {
+  font-size: 12px; font-weight: 700;
+  text-transform: uppercase; color: #141414;
+  line-height: 1.1; letter-spacing: -0.01em;
+}
+.cdesc {
+  font-size: 7px; color: rgba(0,0,0,0.48);
+  margin-top: 3px; line-height: 1.6;
+}
+.cright {
+  display: flex; flex-direction: column;
+  gap: 3px; align-items: flex-end; flex-shrink: 0;
+}
+.tag {
+  font-size: 7px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 2px 6px; display: inline-block;
+  background: rgba(0,0,0,0.07); color: #141414;
+}
+/* featured: lime, coral rainbow border */
+.tag.ft {
+  background: #b8ff00;
+  color: #141414;
+  animation: rb 3s linear infinite;
+  border: 0.5px solid transparent;
+}
+@keyframes rb {
+  0%  { border-color: #ff3d3d; }
+  33% { border-color: #141414; }
+  66% { border-color: #b8ff00; }
+  100%{ border-color: #ff3d3d; }
+}
+
+/* ── PLAY BAR ── */
+.cplay {
+  border-top: 0.5px solid rgba(0,0,0,0.08);
+  padding: 7px 11px;
+  display: flex; gap: 5px;
+  background: rgba(184,255,0,0.06);
+}
+/* primary badge: lime */
+.badge {
+  font-size: 7.5px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  background: #b8ff00; color: #141414;
+  border: 0.5px solid rgba(0,0,0,0.25);
+  padding: 4px 9px; display: inline-block; cursor: pointer;
+}
+.badge:hover { background: #141414; color: #b8ff00; }
+/* ghost badge: coral accent */
+.badge.g {
+  background: transparent;
+  color: rgba(0,0,0,0.42);
+  border-color: rgba(0,0,0,0.18);
+}
+.badge.g:hover { background: #ff3d3d; color: #fff; border-color: #ff3d3d; }
+
+/* ── coral accent: use on 'Play on itch.io' and steam badge ── */
+.badge.coral {
+  background: #ff3d3d; color: #fff;
+  border-color: transparent;
+}
+.badge.coral:hover { background: #141414; color: #fff; }
+
+/* ── confirm ── */
+.note {
+  font-size: 10px; color: #444;
+  text-align: center; margin-top: 18px; line-height: 1.8;
+}
+.note b { color: #ccc; }
+.btns {
+  display: flex; justify-content: center;
+  gap: 10px; margin-top: 18px;
+}
+.cbtn {
+  font-family: 'Courier New', monospace;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  border: 0.5px solid #555; background: none;
+  color: #555; padding: 9px 22px; cursor: pointer;
+}
+.cbtn:hover { border-color: #b8ff00; color: #b8ff00; }
+.cbtn.yes { background: #b8ff00; color: #141414; border-color: #b8ff00; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="lbl">Sour Candy v2 — 绿色主导，珊瑚红点缀</div>
+
+<div class="page">
+
+  <div class="nav">
+    <div class="nav-name">ANNA TAN</div>
+    <div class="nav-right">
+      <div class="nav-issue">Game Designer · Portfolio 2026</div>
+      <div class="nav-links">
+        <span>About</span>
+        <span>LinkedIn ↗</span>
+        <span>itch.io ↗</span>
+        <span>GitHub ↗</span>
+        <div class="lang-sw">
+          <span>EN</span>
+          <span>中</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="filters">
+    <button class="fb on">All</button>
+    <button class="fb">Game</button>
+    <button class="fb">Design Doc</button>
+    <button class="fb">Tool Dev</button>
+    <button class="fb">Student</button>
+  </div>
+
+  <div class="feed">
+
+    <!-- 01 POPLife -->
+    <div class="card fc">
+      <div class="cimg-wrap">
+        <img class="cimg"
+          src="http://localhost:5174/assets/poplife-ss.png"
+          onerror="this.onerror=null;this.src='http://localhost:5174/assets/poplife-cover.png'"
+          alt="POPLife" />
+      </div>
+      <div class="cmeta">
+        <div class="cleft">
+          <div class="cnum">01</div>
+          <div class="ctitle">POPLife</div>
+          <div class="cdesc">2D Pixel Management Sim · Lead Designer · GDC 2026 · NYU Spring Showcase</div>
+        </div>
+        <div class="cright">
+          <span class="tag ft">Featured</span>
+          <span class="tag">Systems Design</span>
+          <span class="tag">Narrative</span>
+        </div>
+      </div>
+      <div class="cplay">
+        <span class="badge">☆ Wishlist on Steam</span>
+        <span class="badge g">Website ↗</span>
+      </div>
+    </div>
+
+    <!-- 02 POPLife GDD -->
+    <div class="card">
+      <div class="cdoc">Design Document</div>
+      <div class="cmeta">
+        <div class="cleft">
+          <div class="cnum">02</div>
+          <div class="ctitle">POPLife GDD</div>
+          <div class="cdesc">Full production GDD · Systems, NPC, Quest &amp; Economy · Team of 7+</div>
+        </div>
+        <div class="cright">
+          <span class="tag">Design Doc</span>
+          <span class="tag">Systems</span>
+          <span class="tag">Narrative</span>
+        </div>
+      </div>
+      <div class="cplay">
+        <span class="badge">View Doc ↗</span>
+        <span class="badge g">Download PDF</span>
+      </div>
+    </div>
+
+    <!-- 03 Timeplex -->
+    <div class="card">
+      <div class="cimg-wrap">
+        <img class="cimg"
+          src="http://localhost:5174/assets/timeplex-cover.png"
+          onerror="this.style.display='none'"
+          alt="Timeplex" />
+      </div>
+      <div class="cmeta">
+        <div class="cleft">
+          <div class="cnum">03</div>
+          <div class="ctitle">Timeplex</div>
+          <div class="cdesc">2D Grid-Based Puzzle · Lead Designer · NYU Spring Showcase</div>
+        </div>
+        <div class="cright">
+          <span class="tag">Game Design</span>
+          <span class="tag">AI Behavior</span>
+        </div>
+      </div>
+      <div class="cplay">
+        <span class="badge coral">▶ Play on itch.io</span>
+      </div>
+    </div>
+
+    <!-- 05 Beans and Guns -->
+    <div class="card">
+      <div class="cimg-wrap">
+        <img class="cimg"
+          src="http://localhost:5174/assets/beans-cover.png"
+          onerror="this.style.display='none'"
+          alt="Beans and Guns" />
+      </div>
+      <div class="cmeta">
+        <div class="cleft">
+          <div class="cnum">05</div>
+          <div class="ctitle">Beans and Guns</div>
+          <div class="cdesc">Online 3D Collaborative Puzzle · Lead Designer · Async Relay</div>
+        </div>
+        <div class="cright">
+          <span class="tag">Game Design</span>
+          <span class="tag">Tool Dev</span>
+          <span class="tag">Multiplayer</span>
+        </div>
+      </div>
+      <div class="cplay">
+        <span class="badge coral">▶ Play on itch.io</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="note">
+  <b>绿色出现的地方：</b>nav name 阴影 · active filter 底色 · featured tag · 卡片左条 · 所有主要 badge · play 栏背景淡晕 · lang 切换 · halftone 图片叠色<br>
+  <b>珊瑚红点缀：</b>itch.io 按钮 · featured tag 彩虹边框动画
+</div>
+
+<div class="btns">
+  <button class="cbtn yes" data-c="yes" onclick="p(this)">就这个 ✓</button>
+  <button class="cbtn" data-c="more-green" onclick="p(this)">绿再多一点</button>
+  <button class="cbtn" data-c="adjust" onclick="p(this)">还要调整</button>
+</div>
+</div>
+
+<script>
+function p(btn) {
+  document.querySelectorAll('.cbtn').forEach(b => b.classList.remove('yes'));
+  btn.classList.add('yes');
+  if (window.__companion) window.__companion.select(btn.dataset.c, btn.textContent.trim());
+}
+</script>
+</body>
+</html>
