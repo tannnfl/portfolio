@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>POPLife Data Browser — Anna Tan</title>
+  <script type="module" crossorigin src="/portfolio/assets/cursor-trail-Cv3zRzco.js"></script>
+  <link rel="stylesheet" crossorigin href="/portfolio/assets/cursor-trail-CYZb0a0Q.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-name" data-zh="谈方琳">Anna Tan</span>
+    <div class="nav-links">
+      <a href="/about.html" data-zh="关于">About</a>
+      <a href="https://www.linkedin.com/in/fanglin-tan-2b5745329/" target="_blank">LinkedIn ↗</a>
+      <a href="https://geo404anna.itch.io/" target="_blank">itch.io ↗</a>
+      <a href="https://github.com/tannnfl" target="_blank">GitHub ↗</a>
+      <div class="lang-switch">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="detail-wrap">
+  <div class="detail-inner">
+
+    <a class="back-link" href="/" data-zh="← 全部作品">← All Work</a>
+
+    <div class="detail-num" data-zh="08 — 工具开发">08 — Tool Dev</div>
+    <h1 class="detail-title">POPLife Data Browser</h1>
+    <div class="detail-role" data-zh="工具开发 · Unity 编辑器扩展 · C# · 2025–至今">Tool Developer · Unity Editor Extension · C# · 2025–Present</div>
+
+    <div class="detail-tags">
+      <span class="tag" data-zh="工具开发">Tool Dev</span>
+      <span class="tag">Unity Editor</span>
+      <span class="tag">C#</span>
+      <a class="tag" href="/project/poplife.html" data-zh="← 查看游戏">← View Game</a>
+      <a class="tag" href="/project/poplife-gdd.html" data-zh="← 查看 GDD">← View GDD</a>
+    </div>
+
+    <div class="detail-section">
+      <h2 data-zh="总览">Overview</h2>
+      <p data-zh="POPLife Data Browser 是一个自定义 Unity 编辑器窗口，用于创作和管理 POPLife 所有基于 ScriptableObject 的游戏数据。项目中有 86 个货架、66 个任务、40+ 位 NPC 以及多个相互关联的事件系统，分散在深层文件夹结构中的数百个资产里——默认的 Unity Inspector 在这种规模下完全不够用。">POPLife Data Browser is a custom Unity Editor window built to author and manage all ScriptableObject-based game data for POPLife. With 86 shelves, 66 quests, 40+ NPCs, and multiple interlocking event systems spread across hundreds of assets in a deep project hierarchy, the default Unity Inspector was too slow to work with at scale.</p>
+      <p style="margin-top:0.8rem;" data-zh="浏览器将所有资产类型整合进单一可搜索面板——支持实时编辑、SO 之间的内联交叉引用，以及需要跳转文件时的「在 Project 中定位」快捷键。它还引入了默认 Inspector 无法表达的数据关系：任务链通过跨多个任务的激活与完成标记相互链接，使分支任务进程的嵌套触发逻辑成为可能，而这用其他方式根本无法创作。">The browser aggregates every asset type into a single searchable panel — with live editing, inline cross-references between SOs, and a "Select in Project" shortcut when you do need to navigate to the file. It also introduces relationships that the default Inspector can't express: Quest Chains link Activation and Completion Markers across multiple quests, enabling nested trigger logic for branching quest progressions that couldn't be authored any other way.</p>
+    </div>
+
+    <div class="detail-section">
+      <h2 data-zh="成效">Impact</h2>
+      <ul>
+        <li data-zh="节省约 80% 的叙事实现时间——对话动作、操作指南与任务链均可完全在浏览器内完成创作，无需离开">Eliminated ~80% of time spent on narrative implementation — dialogue actions, op guides, and quest chains can be authored entirely without leaving the browser</li>
+        <li data-zh="节省约 80% 的数值与任务设计迭代时间——货架公式属性、任务条件与奖励链一览无余">Eliminated ~80% of iteration time on balance and quest design — shelf formula stats, quest conditions, and reward chains are all visible in one view</li>
+        <li data-zh="消除了 7+ 人团队在数百个 ScriptableObject 中翻找文件夹的额外负担">Removed folder-navigation overhead for a 7+ person team working across hundreds of ScriptableObjects</li>
+        <li data-zh="任务链标签页引入了普通 Inspector 字段无法表达的新数据关系——激活标记跨 SO 边界级联，支持分支式多步任务进程">Quest Chains tab introduced a new data relationship not representable in plain Inspector fields — activation markers cascade across SO boundaries to support branching, multi-step quest progressions</li>
+      </ul>
+    </div>
+
+    <img class="detail-img"
+         src="/portfolio/assets/poplife-tool-shelves-DafHFwiE.png"
+         alt="Shelves tab — 86 shelf assets with formula-computed stats table across all 5 levels" />
+
+    <img class="detail-img"
+         src="/portfolio/assets/poplife-tool-quests-77RxnHvB.png"
+         alt="Quests tab — quest definition with conditions, markers, rewards, and display text" />
+
+    <img class="detail-img"
+         src="/portfolio/assets/poplife-tool-codex-ChlQplcE.png"
+         alt="Codex tab — item description and usage instruction editor, mirroring in-game UI" />
+
+    <div class="detail-section">
+      <h2 data-zh="功能标签页">Tabs</h2>
+      <ul>
+        <li data-zh="货架（Shelves）— 86 个资产。一览公式计算属性（进货费、利润、售价、维护费、吸引力），横跨全部 5 个升级等级。含占地图案编辑器。"><strong>Shelves</strong> — 86 assets. Displays formula-computed stats (Stock Fee, Profit, Price, Maint. Fee, Appeal) across all 5 upgrade levels at a glance. Footprint pattern editor included.</li>
+        <li data-zh="任务（Quests）— 66 个资产。完整任务创作：类型、发布者、激活 / 完成标记、奖励组、触发条件与显示文本，在一个滚动表单内完成。"><strong>Quests</strong> — 66 assets. Full quest authoring: type, giver, activation/completion markers, reward sets, conditions, and display text in one scrollable form.</li>
+        <li data-zh="图鉴（Codex）— 86 个资产。游戏内道具百科——描述与使用说明创作，镜像游戏内图鉴 UI。"><strong>Codex</strong> — 86 assets. In-game item encyclopedia — description and usage instruction authoring, mirroring the in-game Codex UI.</li>
+        <li data-zh="事件缓冲（Buffers）— 8 个资产。含触发类型、出现概率、持续时间、经济修正器负载与可选激活对话。"><strong>Buffers</strong> — 8 assets. Event buffers with trigger type, occurrence probability, duration, economy modifier payload, and optional activation dialogue.</li>
+        <li data-zh="季节活动（Season Events）— 11 个资产。以季节与季内天数定位的日历式季节事件。"><strong>Season Events</strong> — 11 assets. Calendar-based seasonal events positioned by season and day-in-season.</li>
+        <li data-zh="新闻库（News Libraries）— 22 条内容。游戏内新闻推送内容创作，支持上下排序与字符计数。"><strong>News Libraries</strong> — 22 items. In-game news feed content authoring with move-up/move-down ordering and character count.</li>
+        <li data-zh="操作指南（Op Guides）— 12 个资产。多页教程指南，含标记激活与每页截图 + 正文。"><strong>Op Guides</strong> — 12 assets. Multi-page tutorial guides with marker-based activation and per-page screenshot + body text.</li>
+        <li data-zh="对话动作（Dialogue Actions）— 26 个资产。标记触发的对话序列，含执行顺序与 Lua 脚本支持。"><strong>Dialogue Actions</strong> — 26 assets. Marker-triggered conversation sequencing with execution order and Lua scripting support.</li>
+        <li data-zh="任务链（Quest Chains）— 横跨多条链共 68 个任务。分层树视图展示任务进程；每个节点暴露含激活 / 完成标记的触发链，实现默认 Inspector 无法表达的 SO 间嵌套触发逻辑。"><strong>Quest Chains</strong> — 68 quests across chains. Hierarchical tree view of quest progressions; each node exposes Trigger Chain with Activation/Completion Markers, enabling nested SO-to-SO trigger logic not representable in the default Inspector.</li>
+      </ul>
+    </div>
+
+    <img class="detail-img"
+         src="/portfolio/assets/poplife-tool-buffers-NGJUYGw1.png"
+         alt="Buffers tab — event buffer with trigger type, probability, duration, and economy modifier" />
+
+    <img class="detail-img"
+         src="/portfolio/assets/poplife-tool-season-BpjZShV5.png"
+         alt="Season Events tab — calendar-based event authoring with season and day positioning" />
+
+    <img class="detail-img"
+         src="/portfolio/assets/poplife-tool-news-Ca2BOQjD.png"
+         alt="News Libraries tab — in-game news feed content with ordering controls" />
+
+    <img class="detail-img"
+         src="/portfolio/assets/poplife-tool-opguides-byafu7Yr.png"
+         alt="Op Guides tab — multi-page tutorial guide authoring with marker-based activation" />
+
+    <img class="detail-img"
+         src="/portfolio/assets/poplife-tool-dialogue-OrVkhz_T.png"
+         alt="Dialogue Actions tab — marker-triggered conversation sequencing with execution order" />
+
+    <img class="detail-img"
+         src="/portfolio/assets/poplife-tool-questchains-BO0Zmzcc.png"
+         alt="Quest Chains tab — hierarchical quest tree with nested Activation/Completion Marker trigger logic" />
+
+    <div class="detail-links">
+      <a class="play-badge" href="/project/poplife.html" data-zh="查看游戏页面 ↗">View Game Page ↗</a>
+      <a class="play-badge" href="/project/poplife-gdd.html" data-zh="查看设计文档 ↗">View GDD ↗</a>
+    </div>
+
+
+  </div>
+</div>
+
+</body>
+</html>

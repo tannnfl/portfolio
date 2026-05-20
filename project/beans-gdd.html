@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beans and Guns Design Doc — Anna Tan</title>
+  <script type="module" crossorigin src="/portfolio/assets/cursor-trail-Cv3zRzco.js"></script>
+  <link rel="stylesheet" crossorigin href="/portfolio/assets/cursor-trail-CYZb0a0Q.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-name" data-zh="谈方琳">Anna Tan</span>
+    <div class="nav-links">
+      <a href="/about.html" data-zh="关于">About</a>
+      <a href="https://www.linkedin.com/in/fanglin-tan-2b5745329/" target="_blank">LinkedIn ↗</a>
+      <a href="https://geo404anna.itch.io/" target="_blank">itch.io ↗</a>
+      <a href="https://github.com/tannnfl" target="_blank">GitHub ↗</a>
+      <div class="lang-switch">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="detail-wrap">
+  <div class="detail-inner">
+
+    <a class="back-link" href="/" data-zh="← 全部作品">← All Work</a>
+
+    <div class="detail-num" data-zh="06 — 设计文档">06 — Design Doc</div>
+    <h1 class="detail-title">Beans and Guns — Design Document</h1>
+    <div class="detail-role" data-zh="主策划 · 项目管理 · 视觉技术美术 · 异步接力机制、迷雾显现系统与道具-场景映射规范">Lead Designer · PM · Visual Tech Art · Async Relay Mechanic, Fog Reveal System &amp; Item–Scene Mapping</div>
+
+    <div class="detail-tags">
+      <span class="tag" data-zh="设计文档">Design Doc</span>
+      <span class="tag" data-zh="系统">Systems</span>
+      <a class="tag" href="/project/beans-and-guns.html" data-zh="← 查看游戏">← View Game</a>
+    </div>
+
+    <div class="detail-section">
+      <h2 data-zh="文档简介">Document Overview</h2>
+      <p data-zh="Beans and Guns 的设计文档——一款在线 3D 协作解谜沙盒。覆盖异步接力系统、迷雾显现逻辑、道具-场景关系映射的完整机制设计，以及为内容创作构建的 Unity 编辑器工具。">Design document for Beans and Guns — an online 3D collaborative puzzle sandbox. Covers the full mechanic design for the asynchronous relay system, fog reveal logic, item–scene relationship mapping, and the Unity Editor tooling built to support content authoring.</p>
+    </div>
+
+    <div class="detail-section">
+      <h2 data-zh="文档目录">Contents</h2>
+      <ul>
+        <li data-zh="异步接力机制：每位玩家每轮放置最多 10 件道具，场景上限 50 件；超出时自动移除最早放置的道具（FIFO 驱逐），并发提交按顺序处理">Async relay mechanic: 10 items per player per session, 50-item scene cap; FIFO eviction removes oldest items when cap is exceeded; concurrent submissions resolved sequentially</li>
+        <li data-zh="道具系统：3D 模型附带隐藏数值属性；玩家共享无限道具池，每次显示 5 格背包随机刷新；道具缓慢漂浮并相互碰撞">Item system: 3D models with hidden numerical attributes; shared unlimited pool displayed as 5-slot backpack refreshed randomly; items float slowly and collide</li>
+        <li data-zh="三阶段结构 — 自由创作（0–50% 相似度，达到后锁定结局）→ 锁定迭代（50–90%，引导场景趋向锁定结局）→ 遗忘（点击道具溶解，每轮最多 5 件，全部消除即胜利）">Three-phase structure: Free Creation (0–50% similarity, ending locks at 50%) → Locked Iteration (50–90%, guide toward locked ending) → Forgetting (click items to dissolve, max 5/turn, win when all gone)</li>
+        <li data-zh="六个童年主题结局：公交站、校园、爷爷家、卧室、抽象空间、怀旧电脑桌面；相似度评分算法实时计算当前场景属性总和与各结局目标档案的匹配度">Six childhood-themed endings: bus station, school grounds, grandfather's house, bedroom, abstract space, nostalgic computer desktop; similarity scoring algorithm matches room property totals against each ending's target profile</li>
+        <li data-zh="视觉渐变系统：后处理着色器套件根据场景属性实时调整色调、对比度、饱和度、抖动图案、轮廓粗细与模糊强度">Visual progression: post-processing shader suite dynamically shifts hue, contrast, saturation, dither pattern, outline weight, and blur based on room property totals</li>
+        <li data-zh="音频设计（FMOD）：动态音乐随道具数量增强；悬停世界窗口时空间音频淡入；遗忘阶段渐弱至静默">Audio design (FMOD): dynamic music scales with item count; spatial audio fades in on world window hover; quiets during forgetting phase</li>
+        <li data-zh="灵魂 NPC：每个场景中有一个被困灵魂与玩家交流；解放全部六个场景的灵魂为最终目标">Spirit NPCs: each scene contains a bound spirit that communicates with players; freeing all spirits across six scenes is the ultimate goal</li>
+        <li data-zh="世界视图与回放：六个结局缩略图；悬停可按时间倒序回放场景变化，点击暂停；每次提交截图留档">World view &amp; playback: six ending thumbnails; hover rewinds scene changes chronologically, click pauses; each submission captured as screenshot for replay</li>
+        <li data-zh="Unity 编辑器工具：提示文本创作窗口、道具-场景关系映射编辑器">Unity Editor tooling: hint text authoring window, item–scene relationship mapping editor</li>
+      </ul>
+    </div>
+
+    <div class="detail-section">
+      <h2 data-zh="设计思路">Design Process</h2>
+      <p data-zh="FIFO 驱逐规则——场景达到上限时移除最早放置的道具——成为设计中最具生成力的约束。玩家无法单纯堆积；他们必须有意识地构建。将这一规则记录在文档中，帮助团队理解它为何是核心支柱，即便早期测试玩家觉得沮丧，也不应放宽。">The FIFO eviction rule — oldest items removed when the scene cap is hit — emerged as the most generative constraint in the design. Players can't just accumulate; they must build with intention. Documenting this helped the team understand why the rule was load-bearing and shouldn't be relaxed even when playtesters initially found it frustrating.</p>
+    </div>
+
+    <div class="detail-links">
+      <a class="play-badge" href="https://docs.google.com/document/d/1aeH3MieYuRzXxqHSQzuvZHX4tu3lne5i4YjBKm8GAVI/edit?tab=t.3m78zgu0bo37" target="_blank" data-zh="查看 Google 文档 ↗">View Google Doc ↗</a>
+      <a class="play-badge" href="/assets/beans-gdd.pdf" download="Beans-GDD.pdf" data-zh="下载 PDF">Download PDF</a>
+      <a class="play-badge" href="/project/beans-and-guns.html" data-zh="查看游戏页面">View Game Page</a>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
