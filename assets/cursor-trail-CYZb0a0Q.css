@@ -185,12 +185,11 @@ a.tag:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 /* ── STUDENT GRID ── */
 .student-feed{
   width:var(--col);display:grid;grid-template-columns:1fr 1fr;
-  border:2px solid var(--ink);border-right:none;border-bottom:none;
-  margin-bottom:2.5rem;background:var(--paper);
+  gap:.75rem;
+  margin-bottom:2.5rem;
 }
 .student-feed .project-card{
-  width:auto;margin-bottom:0;border:none;
-  border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);
+  width:auto;margin-bottom:0;border:2px solid var(--ink);
 }
 .student-feed .project-card:hover{opacity:.85}
 .student-feed .card-img{height:170px;filter:sepia(.18) contrast(1.04) saturate(.7)}
