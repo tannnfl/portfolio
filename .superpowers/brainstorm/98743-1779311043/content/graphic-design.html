@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graphic Design Direction</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Courier New', monospace;
+  background: #111;
+  padding: 32px 16px 80px;
+}
+
+.outer {
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+.lbl {
+  font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #3a3a3a; text-align: center; margin-bottom: 20px;
+}
+
+/* ════════════════════════════════════════════
+   THE PAGE
+════════════════════════════════════════════ */
+.page {
+  background: #faf4e4;
+  position: relative;
+  /* paper grain */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='0.09'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  overflow: hidden;
+}
+
+/* ── MASTHEAD ── full bleed lime-green block */
+.masthead {
+  background: #b8ff00;
+  padding: 22px 20% 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* dot grid on masthead */
+.masthead::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(0,0,0,0.1) 1px, transparent 1px);
+  background-size: 10px 10px;
+  pointer-events: none;
+}
+
+/* registration marks */
+.masthead::after {
+  content: '+';
+  position: absolute; top: 5px; right: 12px;
+  font-size: 10px; color: rgba(0,0,0,0.2);
+  pointer-events: none;
+}
+
+.masthead-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 10px;
+}
+
+.site-name {
+  font-family: 'Courier New', monospace;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #141414;
+  line-height: 0.95;
+}
+
+.masthead-meta {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 4px;
+}
+.meta-role {
+  font-size: 7.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.5);
+}
+.meta-links {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  font-size: 7.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.55);
+}
+
+.masthead-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid rgba(0,0,0,0.15);
+  padding-top: 8px;
+}
+
+/* filters inside masthead — inverted on lime */
+.filters {
+  display: flex; gap: 0;
+}
+.fb {
+  font-family: 'Courier New', monospace;
+  font-size: 7.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  background: none;
+  border: 1px solid rgba(0,0,0,0.3);
+  border-right: none;
+  padding: 3px 8px;
+  cursor: pointer; color: rgba(0,0,0,0.5);
+}
+.fb:last-child { border-right: 1px solid rgba(0,0,0,0.3); }
+.fb.on { background: #141414; color: #b8ff00; border-color: #141414; }
+
+.lang-sw {
+  display: flex; border: 1px solid rgba(0,0,0,0.3);
+}
+.lang-sw span {
+  font-size: 7px; font-weight: 700; padding: 2px 6px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+.lang-sw span.active { background: #141414; color: #b8ff00; }
+.lang-sw span:not(.active) { color: rgba(0,0,0,0.4); }
+
+/* ── FEED ── */
+.feed {
+  padding: 0 20% 28px;
+}
+
+/* thin divider between cards — no full-width rules, just card gaps */
+
+/* ── CARD ── */
+.card {
+  border-bottom: 0.5px solid rgba(0,0,0,0.12);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.card:last-child { border-bottom: none; }
+.card:hover { background: rgba(184,255,0,0.06); }
+
+/* ── FEATURED CARD — coral background block on image ── */
+.card.featured {
+  /* featured: coral left accent */
+  border-left: 4px solid #ff3d3d;
+}
+
+/* ── IMAGE ── */
+.cimg-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.cimg {
+  width: 100%; height: 120px;
+  object-fit: cover; display: block;
+  filter: contrast(1.05) saturate(0.82);
+}
+/* halftone: lime on regular, coral on featured */
+.cimg-wrap::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, var(--dot-color, rgba(184,255,0,0.25)) 1px, transparent 1px);
+  background-size: 7px 7px;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.card.featured .cimg-wrap { --dot-color: rgba(255,61,61,0.22); }
+
+/* ── CARD BODY ── */
+.card-body {
+  padding: 10px 0 10px;
+  display: grid;
+  grid-template-columns: 38px 1fr auto;
+  align-items: start;
+  gap: 0 10px;
+}
+
+/* BIG project number — graphic design scale drama */
+.cnum {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: rgba(0,0,0,0.1);
+  line-height: 1;
+  padding-top: 2px;
+  text-align: right;
+}
+
+.cinfo {}
+.ctitle {
+  font-size: 13px; font-weight: 700;
+  text-transform: uppercase; color: #141414;
+  line-height: 1.1; letter-spacing: -0.01em;
+  margin-bottom: 3px;
+}
+.cdesc {
+  font-size: 7px; color: rgba(0,0,0,0.45);
+  line-height: 1.65;
+}
+
+/* tags — flat fills */
+.ctags {
+  display: flex; flex-direction: column;
+  gap: 3px; align-items: flex-end;
+  padding-top: 2px;
+}
+.tag {
+  font-size: 6.5px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 2px 5px;
+  background: rgba(0,0,0,0.07); color: #141414;
+}
+.tag.ft {
+  background: #b8ff00; color: #141414;
+  animation: rb 3s linear infinite;
+  outline: 0.5px solid transparent;
+}
+@keyframes rb {
+  0%   { outline-color: #ff3d3d; }
+  50%  { outline-color: #141414; }
+  100% { outline-color: #ff3d3d; }
+}
+
+/* play row */
+.cplay {
+  padding: 0 0 10px;
+  display: flex; gap: 5px;
+  padding-left: 48px;
+}
+.badge {
+  font-size: 7px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 4px 9px; display: inline-block; cursor: pointer;
+}
+.badge.primary {
+  background: #b8ff00; color: #141414;
+  border: 0.5px solid rgba(0,0,0,0.2);
+}
+.badge.primary:hover { background: #141414; color: #b8ff00; }
+.badge.action {
+  background: #ff3d3d; color: #fff;
+  border: none;
+}
+.badge.action:hover { background: #141414; }
+.badge.ghost {
+  background: none; color: rgba(0,0,0,0.4);
+  border: 0.5px solid rgba(0,0,0,0.15);
+}
+.badge.ghost:hover { background: rgba(0,0,0,0.06); }
+
+/* doc card: no image, smaller top padding */
+.card.doc .card-body { padding-top: 8px; }
+.card.doc .cnum { color: rgba(0,0,0,0.06); }
+
+/* ── confirm ── */
+.note {
+  font-size: 9.5px; color: #3a3a3a;
+  text-align: center; margin-top: 18px; line-height: 1.8;
+}
+.btns {
+  display: flex; justify-content: center;
+  gap: 10px; margin-top: 16px;
+}
+.cbtn {
+  font-family: 'Courier New', monospace;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  border: 0.5px solid #444; background: none;
+  color: #555; padding: 8px 20px; cursor: pointer;
+}
+.cbtn:hover { border-color: #b8ff00; color: #b8ff00; }
+.cbtn.yes { background: #b8ff00; color: #141414; border-color: #b8ff00; }
+</style>
+</head>
+<body>
+<div class="outer">
+<div class="lbl">重新出发 — 平面设计思维，色块主导，尺度对比</div>
+
+<div class="page">
+
+  <!-- ── MASTHEAD: full bleed lime green ── -->
+  <div class="masthead">
+    <div class="masthead-top">
+      <div class="site-name">ANNA<br>TAN</div>
+      <div class="masthead-meta">
+        <div class="meta-role">Game Designer · 2026</div>
+        <div class="meta-links">
+          <span>About</span>
+          <span>LinkedIn ↗</span>
+          <span>itch.io ↗</span>
+          <span>GitHub ↗</span>
+        </div>
+      </div>
+    </div>
+    <div class="masthead-bottom">
+      <div class="filters">
+        <button class="fb on">All</button>
+        <button class="fb">Game</button>
+        <button class="fb">Design Doc</button>
+        <button class="fb">Tool Dev</button>
+        <button class="fb">Student</button>
+      </div>
+      <div class="lang-sw">
+        <span class="active">EN</span>
+        <span>中</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FEED ── -->
+  <div class="feed">
+
+    <!-- 01 POPLife -->
+    <div class="card featured">
+      <div class="cimg-wrap">
+        <img class="cimg"
+          src="http://localhost:5174/assets/poplife-ss.png"
+          onerror="this.onerror=null;this.src='http://localhost:5174/assets/poplife-cover.png'"
+          alt="POPLife">
+      </div>
+      <div class="card-body">
+        <div class="cnum">01</div>
+        <div class="cinfo">
+          <div class="ctitle">POPLife</div>
+          <div class="cdesc">2D Pixel Management Sim · Lead Designer · GDC 2026 · NYU Spring Showcase</div>
+        </div>
+        <div class="ctags">
+          <span class="tag ft">Featured</span>
+          <span class="tag">Systems</span>
+          <span class="tag">Narrative</span>
+        </div>
+      </div>
+      <div class="cplay">
+        <span class="badge primary">☆ Wishlist on Steam</span>
+        <span class="badge ghost">Website ↗</span>
+      </div>
+    </div>
+
+    <!-- 02 POPLife GDD -->
+    <div class="card doc">
+      <div class="card-body">
+        <div class="cnum">02</div>
+        <div class="cinfo">
+          <div class="ctitle">POPLife GDD</div>
+          <div class="cdesc">Full production GDD · Systems, NPC, Quest &amp; Economy · Team of 7+</div>
+        </div>
+        <div class="ctags">
+          <span class="tag">Design Doc</span>
+          <span class="tag">Systems</span>
+        </div>
+      </div>
+      <div class="cplay">
+        <span class="badge primary">View Doc ↗</span>
+        <span class="badge ghost">PDF</span>
+      </div>
+    </div>
+
+    <!-- 03 Timeplex -->
+    <div class="card">
+      <div class="cimg-wrap">
+        <img class="cimg"
+          src="http://localhost:5174/assets/timeplex-cover.png"
+          onerror="this.style.display='none'"
+          alt="Timeplex">
+      </div>
+      <div class="card-body">
+        <div class="cnum">03</div>
+        <div class="cinfo">
+          <div class="ctitle">Timeplex</div>
+          <div class="cdesc">2D Grid-Based Puzzle · Lead Designer · NYU Spring Showcase</div>
+        </div>
+        <div class="ctags">
+          <span class="tag">Game Design</span>
+          <span class="tag">AI Behavior</span>
+        </div>
+      </div>
+      <div class="cplay">
+        <span class="badge action">▶ Play on itch.io</span>
+      </div>
+    </div>
+
+    <!-- 05 Beans and Guns -->
+    <div class="card">
+      <div class="cimg-wrap">
+        <img class="cimg"
+          src="http://localhost:5174/assets/beans-cover.png"
+          onerror="this.style.display='none'"
+          alt="Beans and Guns">
+      </div>
+      <div class="card-body">
+        <div class="cnum">05</div>
+        <div class="cinfo">
+          <div class="ctitle">Beans and Guns</div>
+          <div class="cdesc">Online 3D Collaborative Puzzle · Lead Designer · Async Relay</div>
+        </div>
+        <div class="ctags">
+          <span class="tag">Game Design</span>
+          <span class="tag">Tool Dev</span>
+        </div>
+      </div>
+      <div class="cplay">
+        <span class="badge action">▶ Play on itch.io</span>
+      </div>
+    </div>
+
+    <!-- 07 Survival Skills -->
+    <div class="card">
+      <div class="cimg-wrap">
+        <img class="cimg"
+          src="http://localhost:5174/assets/survival-cover.png"
+          onerror="this.style.display='none'"
+          alt="Survival Skills">
+      </div>
+      <div class="card-body">
+        <div class="cnum">07</div>
+        <div class="cinfo">
+          <div class="ctitle">The Survival Skills Game</div>
+          <div class="cdesc">Solo Dev · Physics Mini-Games · Browser Playable</div>
+        </div>
+        <div class="ctags">
+          <span class="tag">Solo Dev</span>
+          <span class="tag">Physics</span>
+        </div>
+      </div>
+      <div class="cplay">
+        <span class="badge action">▶ Play on itch.io</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="note">
+  核心变化：ANNA TAN 在整块石灰绿色底上 · 大数字作为装饰元素 · filter 嵌在 masthead 里 · itch.io 用珊瑚红 · Steam 用绿
+</div>
+
+<div class="btns">
+  <button class="cbtn yes" data-c="yes" onclick="p(this)">方向对了 ✓</button>
+  <button class="cbtn" data-c="adjust" onclick="p(this)">还要调整</button>
+</div>
+</div>
+
+<script>
+function p(btn) {
+  document.querySelectorAll('.cbtn').forEach(b => b.classList.remove('yes'));
+  btn.classList.add('yes');
+  if (window.__companion) window.__companion.select(btn.dataset.c, btn.textContent.trim());
+}
+</script>
+</body>
+</html>

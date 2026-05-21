@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Design B — DIY Punk Xerox</title>
+<style>
+/* ===== OPTION B: DIY PUNK / XEROX ZINE ===== */
+/* Palette: black bg, white, electric pink, yellow */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --col: 680px;
+  --bg: #0D0D0D;
+  --fg: #F0EDE5;
+  --pink: #FF0066;
+  --yellow: #FFE500;
+  --grey: #2A2A2A;
+  --mid: #888;
+  --mono: 'Space Mono', 'Courier New', monospace;
+}
+
+body{
+  font-family: var(--mono);
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.5;
+}
+
+a{color:inherit;text-decoration:none}
+img{display:block}
+
+/* NAV */
+.nav{
+  display:flex;
+  justify-content:center;
+  border-bottom: 1px solid #333;
+}
+.nav-inner{
+  width:var(--col);
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  padding: 1.2rem 0;
+}
+.nav-name{
+  font-size:.9rem;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color: var(--fg);
+  /* glitch double-shadow */
+  text-shadow:
+    1px 0 0 var(--pink),
+    -1px 0 0 var(--yellow);
+}
+.nav-links{
+  display:flex;
+  gap:1.8rem;
+  font-size:.62rem;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color: var(--mid);
+}
+.nav-links a:hover{color:var(--yellow);text-decoration:none}
+
+/* FILTER BAR */
+.filter-bar{
+  display:flex;
+  justify-content:center;
+  padding: .8rem 0;
+  border-bottom: 1px solid #333;
+}
+.filter-inner{
+  width:var(--col);
+  display:flex;
+  gap:.4rem;
+}
+.filter-btn{
+  font-family: var(--mono);
+  font-size:.6rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  background: transparent;
+  border: 1px solid #444;
+  padding: .3rem .9rem;
+  cursor:pointer;
+  color: #666;
+  transition:all .1s;
+}
+.filter-btn.active{
+  border-color: var(--pink);
+  color: var(--pink);
+  background: rgba(255,0,102,.08);
+  /* punk stamp */
+  transform: skewX(-2deg);
+}
+.filter-btn:hover:not(.active){
+  border-color: #888;
+  color: var(--fg);
+}
+
+/* FEED */
+.feed{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding: 3rem 0 6rem;
+}
+
+/* CARD */
+.project-card{
+  width: var(--col);
+  margin-bottom: 2.5rem;
+  cursor:pointer;
+  background: var(--grey);
+  border: 1px solid #3A3A3A;
+  position:relative;
+  transition: border-color .12s;
+  overflow:hidden;
+}
+.project-card::before{
+  /* top accent stripe */
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  background: var(--pink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .2s;
+}
+.project-card:hover::before{transform: scaleX(1)}
+.project-card:hover{border-color: #555}
+
+/* number in corner */
+.card-num{
+  position:absolute;
+  top:.8rem;
+  right:1rem;
+  font-size:.55rem;
+  font-weight:700;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color: var(--pink);
+  z-index:2;
+}
+
+.card-img{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+  border-bottom: 1px solid #3A3A3A;
+  /* xerox: heavy contrast, low saturation */
+  filter: contrast(1.15) saturate(.3) brightness(.85);
+  display:block;
+}
+.project-card:hover .card-img{filter:contrast(1.1) saturate(.5) brightness(.9)}
+
+.card-meta{
+  padding: 1.1rem 1.2rem .9rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:1.2rem;
+}
+.card-left{flex:1;min-width:0}
+.card-title{
+  font-size: 1.2rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  line-height:1.1;
+  color: var(--fg);
+}
+.card-desc{
+  font-size:.62rem;
+  color: #777;
+  margin-top:.45rem;
+  line-height:1.65;
+}
+.card-right{
+  display:flex;
+  flex-direction:column;
+  gap:.35rem;
+  align-items:flex-end;
+  flex-shrink:0;
+  padding-top:.2rem;
+}
+.tag{
+  font-size:.55rem;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  border: 1px solid #444;
+  padding:.18rem .6rem;
+  white-space:nowrap;
+  display:inline-block;
+  color: #888;
+  background: transparent;
+}
+.tag-black{
+  border-color: var(--yellow);
+  color: var(--yellow);
+  background: rgba(255,229,0,.08);
+}
+
+.card-play{
+  border-top: 1px solid #333;
+  padding:.7rem 1.2rem;
+  display:flex;
+  gap:.5rem;
+  align-items:center;
+}
+.play-badge{
+  display:inline-block;
+  font-size:.62rem;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  background: var(--pink);
+  color:#fff;
+  border: none;
+  padding:.5rem 1.2rem;
+  white-space:nowrap;
+  cursor:pointer;
+  position:relative;
+  /* punk offset */
+  box-shadow: 3px 3px 0 rgba(255,0,102,.25);
+}
+.play-badge:hover{
+  background: var(--yellow);
+  color: #000;
+  text-decoration:none;
+  box-shadow:none;
+}
+a.play-badge.ext-link:hover{
+  background:var(--yellow);
+  color:#000;
+  text-decoration:none;
+}
+
+/* doc header */
+.card-doc-header{
+  width:100%;
+  background: #1A1A1A;
+  border-bottom: 1px solid #3A3A3A;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:1.5rem 1.2rem 1rem;
+  min-height:100px;
+  position:relative;
+}
+.card-doc-header::after{
+  content:'';
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:3px;
+  background:var(--pink);
+}
+.card-doc-header .doc-label{
+  font-size:.5rem;
+  font-weight:700;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--pink);
+  margin-bottom:.4rem;
+}
+.card-doc-header .doc-title{
+  font-size:1.1rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  line-height:1.2;
+  color:var(--fg);
+}
+
+/* student grid */
+.student-feed{
+  width:var(--col);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border:1px solid #3A3A3A;
+  margin-bottom:2.5rem;
+  background:var(--grey);
+}
+.student-feed .project-card{
+  width:auto;
+  margin-bottom:0;
+  border:none;
+  border-right:1px solid #3A3A3A;
+  border-bottom:1px solid #3A3A3A;
+}
+.student-feed .project-card::before{display:none}
+.student-feed .project-card:hover{border-color:#3A3A3A;opacity:.8}
+.student-feed .card-img{height:150px}
+.student-feed .card-num{top:.5rem;right:.6rem;font-size:.5rem}
+.student-feed .card-meta{padding:.75rem .9rem;gap:.6rem}
+.student-feed .card-title{font-size:.85rem}
+.student-feed .card-desc{font-size:.58rem}
+.student-feed .card-right{display:none}
+.student-feed .card-play{padding:.5rem .9rem;border-top:1px solid #333}
+
+</style>
+</head>
+<body>
+
+<!-- OPTION LABEL -->
+<div style="background:#FF0066;color:#fff;text-align:center;padding:.5rem;font-family:monospace;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700">
+  Option B — DIY Punk / Xerox Zine
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-name">Anna Tan</span>
+    <div class="nav-links">
+      <a href="#">About</a>
+      <a href="#">LinkedIn ↗</a>
+      <a href="#">itch.io ↗</a>
+      <a href="#">GitHub ↗</a>
+    </div>
+  </div>
+</nav>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">Game</button>
+    <button class="filter-btn">Design Doc</button>
+    <button class="filter-btn">Tool Dev</button>
+    <button class="filter-btn">Student Projects</button>
+  </div>
+</div>
+
+<!-- FEED -->
+<div class="feed">
+
+  <div class="project-card">
+    <div class="card-num">01</div>
+    <img class="card-img" src="/portfolio/assets/poplife-ss-D9Vss71b.png" alt="POPLife"/>
+    <div class="card-meta">
+      <div class="card-left">
+        <div class="card-title">POPLife</div>
+        <div class="card-desc">2D Pixel Management Sim · Lead Designer · GDC 2026 · NYU Spring Showcase</div>
+      </div>
+      <div class="card-right">
+        <span class="tag tag-black">Featured</span>
+        <span class="tag">Systems Design</span>
+        <span class="tag">Narrative</span>
+      </div>
+    </div>
+    <div class="card-play">
+      <a class="play-badge" href="#" target="_blank">☆ Wishlist on Steam</a>
+      <a class="play-badge" href="#" target="_blank">Website ↗</a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="card-num">02</div>
+    <div class="card-doc-header">
+      <div class="doc-label">Design Doc</div>
+      <div class="doc-title">POPLife GDD</div>
+    </div>
+    <div class="card-meta">
+      <div class="card-left">
+        <div class="card-title">POPLife GDD</div>
+        <div class="card-desc">Full production GDD · Systems, NPC, Quest &amp; Economy Design · Team of 7+</div>
+      </div>
+      <div class="card-right">
+        <span class="tag">Design Doc</span>
+        <span class="tag">Systems</span>
+      </div>
+    </div>
+    <div class="card-play">
+      <a class="play-badge" href="#" target="_blank">View Doc ↗</a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="card-num">03</div>
+    <img class="card-img" src="/portfolio/assets/timeplex-cover-DWCQiezg.png" alt="Timeplex"/>
+    <div class="card-meta">
+      <div class="card-left">
+        <div class="card-title">Timeplex</div>
+        <div class="card-desc">2D Grid-Based Puzzle · Lead Designer · Multi-character control · NYU Spring Showcase</div>
+      </div>
+      <div class="card-right">
+        <span class="tag">Game Design</span>
+        <span class="tag">AI Behavior</span>
+      </div>
+    </div>
+    <div class="card-play">
+      <a class="play-badge" href="#" target="_blank">▶ Play on itch.io</a>
+    </div>
+  </div>
+
+  <div style="width:680px;font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:#444;margin-bottom:.6rem;font-family:monospace">
+    — Student Projects —
+  </div>
+  <div class="student-feed">
+    <div class="project-card">
+      <div class="card-num">08</div>
+      <div class="card-meta">
+        <div class="card-left">
+          <div class="card-title">Blind Memory</div>
+          <div class="card-desc">Unity 2D + FMOD · Programmer</div>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="card-num">09</div>
+      <img class="card-img" src="https://fanglint.wordpress.com/wp-content/uploads/2025/05/screenshot-2025-05-18-184011.png" alt="Hiker's Paradise" onerror="this.style.display='none'"/>
+      <div class="card-meta">
+        <div class="card-left">
+          <div class="card-title">Hiker's Paradise</div>
+          <div class="card-desc">Unity · Solo Dev</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

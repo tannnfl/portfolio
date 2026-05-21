@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Design C — Color Schemes</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Anton&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:'Space Mono','Courier New',monospace;
+  background:#1a1a1a;
+}
+img{display:block}
+a{color:inherit;text-decoration:none}
+
+/* ─── SHARED STRUCTURE ─────────────────────── */
+.scheme{
+  padding:2.5rem;
+  margin-bottom:4px;
+}
+.scheme-label{
+  font-family:'Space Mono',monospace;
+  font-size:.62rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  color:#888;
+  background:#111;
+  padding:.5rem 1.2rem;
+  margin-bottom:2rem;
+  display:inline-block;
+}
+.col{max-width:680px;margin:0 auto}
+
+/* NAV */
+.nav{border-bottom:3px double var(--ink)}
+.nav-inner{
+  display:flex;
+  flex-direction:column;
+  gap:.4rem;
+  padding:1.2rem 0 .6rem;
+}
+.nav-top{display:flex;justify-content:space-between;align-items:baseline}
+.nav-name{
+  font-family:'Anton',Impact,sans-serif;
+  font-size:2.2rem;
+  letter-spacing:.03em;
+  color:var(--ink);
+  line-height:1;
+}
+.nav-tagline{font-size:.58rem;color:var(--mid);letter-spacing:.05em;font-style:italic}
+.nav-links{
+  display:flex;
+  font-size:.58rem;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  border:1px solid var(--ink);
+  overflow:hidden;
+}
+.nav-links a{
+  padding:.25rem .7rem;
+  border-right:1px solid var(--ink);
+  color:var(--ink);
+}
+.nav-links a:last-child{border-right:none}
+.nav-links a:hover{background:var(--ink);color:var(--bg)}
+
+/* H-RULE */
+.h-rule{
+  height:5px;
+  background:repeating-linear-gradient(
+    90deg,
+    var(--ink) 0,var(--ink) 3px,
+    var(--accent) 3px,var(--accent) 6px,
+    var(--accent2) 6px,var(--accent2) 9px,
+    transparent 9px,transparent 12px
+  );
+  margin-bottom:0;
+}
+
+/* FILTER BAR */
+.filter-bar{
+  background:var(--ink);
+  padding:.5rem 0;
+}
+.filter-inner{display:flex;gap:0}
+.filter-btn{
+  font-family:'Space Mono',monospace;
+  font-size:.58rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  background:var(--ink);
+  border:none;
+  border-right:1px solid rgba(255,255,255,.12);
+  padding:.35rem .9rem;
+  cursor:pointer;
+  color:rgba(255,255,255,.45);
+}
+.filter-btn:last-child{border-right:none}
+.filter-btn.active{background:var(--accent);color:#fff}
+
+/* FEED */
+.feed{padding:2rem 0 4rem}
+.gap{height:2rem}
+
+/* CARD */
+.project-card{
+  background:#fff;
+  border:2px solid var(--ink);
+  position:relative;
+  cursor:pointer;
+}
+
+/* card-meta: striped bg */
+.card-meta{
+  padding:.9rem 1.1rem .8rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:1.2rem;
+  background:repeating-linear-gradient(
+    0deg,
+    #fff 0,#fff 22px,
+    var(--stripe) 22px,var(--stripe) 23px
+  );
+}
+.card-left{flex:1;min-width:0}
+.card-num{
+  font-size:.5rem;
+  font-weight:700;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:.18rem;
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+}
+.card-num::after{
+  content:'';flex:1;height:1px;background:var(--tan);
+}
+.card-title{
+  font-family:'Anton',Impact,sans-serif;
+  font-size:1.85rem;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+  line-height:1;
+  color:var(--ink);
+}
+.card-desc{
+  font-size:.6rem;color:var(--mid);
+  margin-top:.4rem;line-height:1.6;font-style:italic;
+}
+.card-right{
+  display:flex;flex-direction:column;
+  gap:.35rem;align-items:flex-end;
+  flex-shrink:0;padding-top:.4rem;
+}
+.tag{
+  font-size:.52rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--tan);
+  padding:.18rem .55rem;
+  white-space:nowrap;display:inline-block;
+  background:var(--bg);color:var(--mid);
+}
+.tag-black{background:var(--accent2);color:#fff;border-color:var(--accent2)}
+
+.card-img{
+  width:100%;height:280px;object-fit:cover;
+  border-bottom:2px solid var(--ink);
+  filter:sepia(.12) contrast(1.04) saturate(.88);
+  display:block;
+}
+
+.card-play{
+  border-top:2px solid var(--ink);
+  background:var(--bg);
+  padding:.6rem 1.1rem;
+  display:flex;gap:.5rem;align-items:center;
+}
+.play-badge{
+  display:inline-block;
+  font-size:.58rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  background:var(--accent2);color:#fff;
+  border:1px solid var(--ink);
+  padding:.45rem 1.1rem;
+  white-space:nowrap;cursor:pointer;
+}
+.play-badge:hover{background:var(--ink);color:var(--bg);text-decoration:none}
+
+/* section label */
+.section-label{
+  font-size:.52rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.2em;
+  color:#fff;background:var(--accent2);
+  padding:.22rem 1rem;
+  margin-bottom:.6rem;
+  border:2px solid var(--ink);
+  display:inline-block;
+}
+
+
+/* ═══════════════════════════════════════════
+   SCHEME C1: Original — Newsprint + Olive + Orange
+════════════════════════════════════════════ */
+.c1{
+  --bg:#EDEAD8;
+  --ink:#1C1B14;
+  --accent:#E05C00;
+  --accent2:#4A5C2A;
+  --tan:#C9B98A;
+  --stripe:#DDD7C0;
+  --mid:#6B6350;
+  background:var(--bg);
+}
+
+/* ═══════════════════════════════════════════
+   SCHEME C2: Blueprint — Off-white + Navy + Coral
+════════════════════════════════════════════ */
+.c2{
+  --bg:#F2F0EC;
+  --ink:#1B2B4B;
+  --accent:#C94040;
+  --accent2:#1B2B4B;
+  --tan:#AABBD4;
+  --stripe:#E4E1D8;
+  --mid:#6B7A8A;
+  background:var(--bg);
+}
+
+/* ═══════════════════════════════════════════
+   SCHEME C3: Mimeograph — Pale yellow + Violet + Black
+════════════════════════════════════════════ */
+.c3{
+  --bg:#F7F3DD;
+  --ink:#1E0E2E;
+  --accent:#8B2FC9;
+  --accent2:#1E0E2E;
+  --tan:#D4C87A;
+  --stripe:#EDE8C8;
+  --mid:#7A6A8A;
+  background:var(--bg);
+}
+
+/* ═══════════════════════════════════════════
+   SCHEME C4: Punk Pastoral — Cream + Forest + Hot Red
+════════════════════════════════════════════ */
+.c4{
+  --bg:#F0EBE0;
+  --ink:#1A1A1A;
+  --accent:#CC1B1B;
+  --accent2:#2A4A1E;
+  --tan:#B8B0A0;
+  --stripe:#E4DDD0;
+  --mid:#666;
+  background:var(--bg);
+}
+
+/* ═══════════════════════════════════════════
+   SCHEME C5: Duotone Grain — Cool grey + Cobalt + Acid
+════════════════════════════════════════════ */
+.c5{
+  --bg:#E8E8E4;
+  --ink:#0A0A0A;
+  --accent:#0040C0;
+  --accent2:#0040C0;
+  --tan:#B0B8C8;
+  --stripe:#DCDCD8;
+  --mid:#555;
+  background:var(--bg);
+}
+/* for c5, filter-btn active uses accent */
+</style>
+</head>
+<body>
+
+<!-- ═══ C1: NEWSPRINT + OLIVE + ORANGE ═══ -->
+<div class="scheme c1">
+  <div class="scheme-label">C1 — Newsprint · Olive · Burnt Orange (original)</div>
+  <div class="col">
+    <div class="h-rule"></div>
+    <nav class="nav">
+      <div class="nav-inner">
+        <div class="nav-top">
+          <span class="nav-name">Anna Tan</span>
+          <span class="nav-tagline">Game Designer · NYU BFA 2025</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:.4rem">
+          <div class="nav-links">
+            <a href="#">About</a><a href="#">LinkedIn ↗</a><a href="#">itch.io ↗</a><a href="#">GitHub ↗</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="filter-bar"><div class="filter-inner">
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">Game</button>
+      <button class="filter-btn">Design Doc</button>
+      <button class="filter-btn">Tool Dev</button>
+      <button class="filter-btn">Student Projects</button>
+    </div></div>
+    <div class="feed">
+      <!-- game card -->
+      <div class="project-card" style="margin-bottom:1.5rem">
+        <img class="card-img" src="/portfolio/assets/poplife-ss-D9Vss71b.png" alt="POPLife"/>
+        <div class="card-meta">
+          <div class="card-left">
+            <div class="card-num">01</div>
+            <div class="card-title">POPLife</div>
+            <div class="card-desc">2D Pixel Management Sim · Lead Designer · GDC 2026</div>
+          </div>
+          <div class="card-right">
+            <span class="tag tag-black">Featured</span>
+            <span class="tag">Systems Design</span>
+          </div>
+        </div>
+        <div class="card-play">
+          <a class="play-badge" href="#">☆ Wishlist on Steam</a>
+          <a class="play-badge" href="#">Website ↗</a>
+        </div>
+      </div>
+      <!-- GDD card — NO header box -->
+      <div class="project-card">
+        <div class="card-meta">
+          <div class="card-left">
+            <div class="card-num">02</div>
+            <div class="card-title">POPLife GDD</div>
+            <div class="card-desc">Full production GDD · Systems, NPC, Quest &amp; Economy Design · Team of 7+</div>
+          </div>
+          <div class="card-right">
+            <span class="tag">Design Doc</span>
+            <span class="tag">Systems</span>
+          </div>
+        </div>
+        <div class="card-play">
+          <a class="play-badge" href="#">View Doc ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ C2: BLUEPRINT — OFF-WHITE + NAVY + CORAL ═══ -->
+<div class="scheme c2">
+  <div class="scheme-label">C2 — Blueprint · Navy · Coral Red</div>
+  <div class="col">
+    <div class="h-rule"></div>
+    <nav class="nav">
+      <div class="nav-inner">
+        <div class="nav-top">
+          <span class="nav-name">Anna Tan</span>
+          <span class="nav-tagline">Game Designer · NYU BFA 2025</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:.4rem">
+          <div class="nav-links">
+            <a href="#">About</a><a href="#">LinkedIn ↗</a><a href="#">itch.io ↗</a><a href="#">GitHub ↗</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="filter-bar"><div class="filter-inner">
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">Game</button>
+      <button class="filter-btn">Design Doc</button>
+      <button class="filter-btn">Tool Dev</button>
+      <button class="filter-btn">Student Projects</button>
+    </div></div>
+    <div class="feed">
+      <div class="project-card" style="margin-bottom:1.5rem">
+        <img class="card-img" src="/portfolio/assets/poplife-ss-D9Vss71b.png" alt="POPLife"/>
+        <div class="card-meta">
+          <div class="card-left">
+            <div class="card-num">01</div>
+            <div class="card-title">POPLife</div>
+            <div class="card-desc">2D Pixel Management Sim · Lead Designer · GDC 2026</div>
+          </div>
+          <div class="card-right">
+            <span class="tag tag-black">Featured</span>
+            <span class="tag">Systems Design</span>
+          </div>
+        </div>
+        <div class="card-play">
+          <a class="play-badge" href="#">☆ Wishlist on Steam</a>
+          <a class="play-badge" href="#">Website ↗</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="card-meta">
+          <div class="card-left">
+            <div class="card-num">02</div>
+            <div class="card-title">POPLife GDD</div>
+            <div class="card-desc">Full production GDD · Systems, NPC, Quest &amp; Economy Design · Team of 7+</div>
+          </div>
+          <div class="card-right">
+            <span class="tag">Design Doc</span>
+            <span class="tag">Systems</span>
+          </div>
+        </div>
+        <div class="card-play">
+          <a class="play-badge" href="#">View Doc ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ C3: MIMEOGRAPH — PALE YELLOW + VIOLET ═══ -->
+<div class="scheme c3">
+  <div class="scheme-label">C3 — Mimeograph · Pale Yellow · Violet</div>
+  <div class="col">
+    <div class="h-rule"></div>
+    <nav class="nav">
+      <div class="nav-inner">
+        <div class="nav-top">
+          <span class="nav-name">Anna Tan</span>
+          <span class="nav-tagline">Game Designer · NYU BFA 2025</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:.4rem">
+          <div class="nav-links">
+            <a href="#">About</a><a href="#">LinkedIn ↗</a><a href="#">itch.io ↗</a><a href="#">GitHub ↗</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="filter-bar"><div class="filter-inner">
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">Game</button>
+      <button class="filter-btn">Design Doc</button>
+      <button class="filter-btn">Tool Dev</button>
+      <button class="filter-btn">Student Projects</button>
+    </div></div>
+    <div class="feed">
+      <div class="project-card" style="margin-bottom:1.5rem">
+        <img class="card-img" src="/portfolio/assets/poplife-ss-D9Vss71b.png" alt="POPLife"/>
+        <div class="card-meta">
+          <div class="card-left">
+            <div class="card-num">01</div>
+            <div class="card-title">POPLife</div>
+            <div class="card-desc">2D Pixel Management Sim · Lead Designer · GDC 2026</div>
+          </div>
+          <div class="card-right">
+            <span class="tag tag-black">Featured</span>
+            <span class="tag">Systems Design</span>
+          </div>
+        </div>
+        <div class="card-play">
+          <a class="play-badge" href="#">☆ Wishlist on Steam</a>
+          <a class="play-badge" href="#">Website ↗</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="card-meta">
+          <div class="card-left">
+            <div class="card-num">02</div>
+            <div class="card-title">POPLife GDD</div>
+            <div class="card-desc">Full production GDD · Systems, NPC, Quest &amp; Economy Design · Team of 7+</div>
+          </div>
+          <div class="card-right">
+            <span class="tag">Design Doc</span>
+            <span class="tag">Systems</span>
+          </div>
+        </div>
+        <div class="card-play">
+          <a class="play-badge" href="#">View Doc ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ C4: PUNK PASTORAL — CREAM + FOREST + RED ═══ -->
+<div class="scheme c4">
+  <div class="scheme-label">C4 — Punk Pastoral · Cream · Forest Green · Signal Red</div>
+  <div class="col">
+    <div class="h-rule"></div>
+    <nav class="nav">
+      <div class="nav-inner">
+        <div class="nav-top">
+          <span class="nav-name">Anna Tan</span>
+          <span class="nav-tagline">Game Designer · NYU BFA 2025</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:.4rem">
+          <div class="nav-links">
+            <a href="#">About</a><a href="#">LinkedIn ↗</a><a href="#">itch.io ↗</a><a href="#">GitHub ↗</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="filter-bar"><div class="filter-inner">
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">Game</button>
+      <button class="filter-btn">Design Doc</button>
+      <button class="filter-btn">Tool Dev</button>
+      <button class="filter-btn">Student Projects</button>
+    </div></div>
+    <div class="feed">
+      <div class="project-card" style="margin-bottom:1.5rem">
+        <img class="card-img" src="/portfolio/assets/poplife-ss-D9Vss71b.png" alt="POPLife"/>
+        <div class="card-meta">
+          <div class="card-left">
+            <div class="card-num">01</div>
+            <div class="card-title">POPLife</div>
+            <div class="card-desc">2D Pixel Management Sim · Lead Designer · GDC 2026</div>
+          </div>
+          <div class="card-right">
+            <span class="tag tag-black">Featured</span>
+            <span class="tag">Systems Design</span>
+          </div>
+        </div>
+        <div class="card-play">
+          <a class="play-badge" href="#">☆ Wishlist on Steam</a>
+          <a class="play-badge" href="#">Website ↗</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="card-meta">
+          <div class="card-left">
+            <div class="card-num">02</div>
+            <div class="card-title">POPLife GDD</div>
+            <div class="card-desc">Full production GDD · Systems, NPC, Quest &amp; Economy Design · Team of 7+</div>
+          </div>
+          <div class="card-right">
+            <span class="tag">Design Doc</span>
+            <span class="tag">Systems</span>
+          </div>
+        </div>
+        <div class="card-play">
+          <a class="play-badge" href="#">View Doc ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ C5: DUOTONE — COOL GREY + COBALT ═══ -->
+<div class="scheme c5">
+  <div class="scheme-label">C5 — Duotone · Cool Grey · Cobalt Blue</div>
+  <div class="col">
+    <div class="h-rule"></div>
+    <nav class="nav">
+      <div class="nav-inner">
+        <div class="nav-top">
+          <span class="nav-name">Anna Tan</span>
+          <span class="nav-tagline">Game Designer · NYU BFA 2025</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:.4rem">
+          <div class="nav-links">
+            <a href="#">About</a><a href="#">LinkedIn ↗</a><a href="#">itch.io ↗</a><a href="#">GitHub ↗</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="filter-bar"><div class="filter-inner">
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">Game</button>
+      <button class="filter-btn">Design Doc</button>
+      <button class="filter-btn">Tool Dev</button>
+      <button class="filter-btn">Student Projects</button>
+    </div></div>
+    <div class="feed">
+      <div class="project-card" style="margin-bottom:1.5rem">
+        <img class="card-img" src="/portfolio/assets/poplife-ss-D9Vss71b.png" alt="POPLife"/>
+        <div class="card-meta">
+          <div class="card-left">
+            <div class="card-num">01</div>
+            <div class="card-title">POPLife</div>
+            <div class="card-desc">2D Pixel Management Sim · Lead Designer · GDC 2026</div>
+          </div>
+          <div class="card-right">
+            <span class="tag tag-black">Featured</span>
+            <span class="tag">Systems Design</span>
+          </div>
+        </div>
+        <div class="card-play">
+          <a class="play-badge" href="#">☆ Wishlist on Steam</a>
+          <a class="play-badge" href="#">Website ↗</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="card-meta">
+          <div class="card-left">
+            <div class="card-num">02</div>
+            <div class="card-title">POPLife GDD</div>
+            <div class="card-desc">Full production GDD · Systems, NPC, Quest &amp; Economy Design · Team of 7+</div>
+          </div>
+          <div class="card-right">
+            <span class="tag">Design Doc</span>
+            <span class="tag">Systems</span>
+          </div>
+        </div>
+        <div class="card-play">
+          <a class="play-badge" href="#">View Doc ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Design C — 90s Indie Tabloid</title>
+<style>
+/* ===== OPTION C: 90s INDIE TABLOID / SMALL PRESS ===== */
+/* Palette: newsprint yellow, olive, orange, black */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Anton&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --col: 680px;
+  --bg: #EDEAD8;       /* newsprint */
+  --ink: #1C1B14;
+  --olive: #4A5C2A;    /* dirty green */
+  --orange: #E05C00;   /* warm orange */
+  --tan: #C9B98A;
+  --stripe: #D9D3B8;
+  --mono: 'Space Mono', 'Courier New', monospace;
+  --head: 'Anton', Impact, sans-serif;
+}
+
+body{
+  font-family: var(--mono);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.5;
+}
+a{color:inherit;text-decoration:none}
+img{display:block}
+
+/* horizontal rule accent */
+.h-rule{
+  height:6px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--ink) 0, var(--ink) 3px,
+    var(--orange) 3px, var(--orange) 6px,
+    var(--olive) 6px, var(--olive) 9px,
+    var(--bg) 9px, var(--bg) 12px
+  );
+}
+
+/* NAV */
+.nav{
+  display:flex;
+  justify-content:center;
+}
+.nav-inner{
+  width: var(--col);
+  padding: 1.2rem 0 .6rem;
+  border-bottom: 3px double var(--ink);
+  display:flex;
+  flex-direction:column;
+  gap:.4rem;
+}
+.nav-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+}
+.nav-name{
+  font-family: var(--head);
+  font-size: 2.4rem;
+  letter-spacing:.03em;
+  color: var(--ink);
+  line-height:1;
+}
+.nav-tagline{
+  font-size:.6rem;
+  color:#666;
+  letter-spacing:.05em;
+  font-style:italic;
+}
+.nav-links{
+  display:flex;
+  gap:0;
+  font-size:.6rem;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  border: 1px solid var(--ink);
+  overflow:hidden;
+}
+.nav-links a{
+  padding:.25rem .75rem;
+  border-right:1px solid var(--ink);
+  color:var(--ink);
+  transition: background .1s;
+}
+.nav-links a:last-child{border-right:none}
+.nav-links a:hover{background:var(--ink);color:var(--bg);text-decoration:none}
+
+/* FILTER BAR */
+.filter-bar{
+  display:flex;
+  justify-content:center;
+  padding: .5rem 0;
+  background: var(--ink);
+}
+.filter-inner{
+  width: var(--col);
+  display:flex;
+  gap:0;
+}
+.filter-btn{
+  font-family: var(--mono);
+  font-size:.6rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  background: var(--ink);
+  border: none;
+  border-right: 1px solid #444;
+  padding: .35rem 1rem;
+  cursor:pointer;
+  color: #888;
+  transition:all .1s;
+}
+.filter-btn:last-child{border-right:none}
+.filter-btn.active{
+  background: var(--orange);
+  color:#fff;
+  border-color:var(--orange);
+}
+.filter-btn:hover:not(.active){color:#fff}
+
+/* FEED */
+.feed{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding: 2.5rem 0 6rem;
+}
+
+/* CARD */
+.project-card{
+  width: var(--col);
+  margin-bottom: 2.5rem;
+  cursor:pointer;
+  background: #fff;
+  border: 2px solid var(--ink);
+  position:relative;
+  transition: opacity .15s;
+}
+.project-card:hover{opacity:.88}
+
+/* zebra stripe rule between number and title area */
+.card-meta{
+  padding: .9rem 1.2rem .8rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:1.2rem;
+  background: repeating-linear-gradient(
+    0deg,
+    #fff 0, #fff 23px,
+    var(--stripe) 23px, var(--stripe) 24px
+  );
+}
+.card-left{flex:1;min-width:0}
+
+.card-num{
+  font-size:.55rem;
+  font-weight:700;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color: var(--orange);
+  margin-bottom:.2rem;
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+}
+.card-num::after{
+  content:'';
+  flex:1;
+  height:1px;
+  background:var(--tan);
+}
+
+.card-title{
+  font-family: var(--head);
+  font-size: 1.9rem;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+  line-height:1;
+  color: var(--ink);
+}
+.card-desc{
+  font-size:.62rem;
+  color:#555;
+  margin-top:.4rem;
+  line-height:1.65;
+  font-style:italic;
+}
+.card-right{
+  display:flex;
+  flex-direction:column;
+  gap:.35rem;
+  align-items:flex-end;
+  flex-shrink:0;
+  padding-top:.4rem;
+}
+.tag{
+  font-size:.55rem;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  border: 1px solid var(--tan);
+  padding:.18rem .6rem;
+  white-space:nowrap;
+  display:inline-block;
+  background: var(--bg);
+  color: #666;
+}
+.tag-black{
+  background: var(--olive);
+  color: #fff;
+  border-color: var(--olive);
+}
+
+.card-img{
+  width:100%;
+  height:300px;
+  object-fit:cover;
+  border-bottom: 2px solid var(--ink);
+  /* old-press halftone feel: slight grain + warmth */
+  filter: sepia(.15) contrast(1.05) saturate(.85);
+  display:block;
+}
+.project-card:hover .card-img{filter:sepia(.05) contrast(1.05) saturate(.95)}
+
+.card-play{
+  border-top: 2px solid var(--ink);
+  background: var(--bg);
+  padding:.6rem 1.2rem;
+  display:flex;
+  gap:.5rem;
+  align-items:center;
+}
+.play-badge{
+  display:inline-block;
+  font-size:.6rem;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  background: var(--olive);
+  color:#fff;
+  border: 1px solid var(--ink);
+  padding:.45rem 1.1rem;
+  white-space:nowrap;
+  cursor:pointer;
+}
+.play-badge:hover{background:var(--ink);color:var(--bg);text-decoration:none}
+
+.card-doc-header{
+  width:100%;
+  background: var(--ink);
+  color: var(--bg);
+  border-bottom: 2px solid var(--ink);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:1.5rem 1.2rem 1rem;
+  min-height:100px;
+  position:relative;
+}
+/* tabloid stripe top of doc header */
+.card-doc-header::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:4px;
+  background: var(--orange);
+}
+.card-doc-header .doc-label{
+  font-size:.52rem;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color: var(--tan);
+  margin-bottom:.35rem;
+}
+.card-doc-header .doc-title{
+  font-family: var(--head);
+  font-size: 1.6rem;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+  line-height:1.1;
+  color: var(--bg);
+}
+
+/* section divider */
+.section-label{
+  width:var(--col);
+  font-size:.55rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  color:#fff;
+  background:var(--olive);
+  padding:.25rem 1.2rem;
+  margin-bottom:.7rem;
+  border:2px solid var(--ink);
+}
+
+/* student grid */
+.student-feed{
+  width:var(--col);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border:2px solid var(--ink);
+  margin-bottom:2.5rem;
+  background:#fff;
+}
+.student-feed .project-card{
+  width:auto;
+  margin-bottom:0;
+  border:none;
+  border-right:2px solid var(--ink);
+  border-bottom:2px solid var(--ink);
+}
+.student-feed .project-card:hover{opacity:.85}
+.student-feed .card-img{height:150px;filter:sepia(.2) contrast(1.05) saturate(.7)}
+.student-feed .card-meta{
+  padding:.6rem .9rem;
+  background:#fff;
+}
+.student-feed .card-title{font-size:1rem}
+.student-feed .card-num{font-size:.5rem}
+.student-feed .card-desc{font-size:.58rem}
+.student-feed .card-right{display:none}
+.student-feed .card-play{padding:.4rem .9rem;background:var(--bg);border-top:1px solid var(--ink)}
+
+</style>
+</head>
+<body>
+
+<!-- OPTION LABEL -->
+<div style="background:#E05C00;color:#fff;text-align:center;padding:.5rem;font-family:monospace;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700">
+  Option C — 90s Indie Tabloid / Small Press
+</div>
+
+<div class="h-rule"></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-top">
+      <span class="nav-name">Anna Tan</span>
+      <span class="nav-tagline">Game Designer · NYU BFA 2025</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:.4rem">
+      <div class="nav-links">
+        <a href="#">About</a>
+        <a href="#">LinkedIn ↗</a>
+        <a href="#">itch.io ↗</a>
+        <a href="#">GitHub ↗</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="h-rule"></div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">Game</button>
+    <button class="filter-btn">Design Doc</button>
+    <button class="filter-btn">Tool Dev</button>
+    <button class="filter-btn">Student Projects</button>
+  </div>
+</div>
+
+<!-- FEED -->
+<div class="feed">
+
+  <div class="project-card">
+    <img class="card-img" src="/portfolio/assets/poplife-ss-D9Vss71b.png" alt="POPLife"/>
+    <div class="card-meta">
+      <div class="card-left">
+        <div class="card-num">01</div>
+        <div class="card-title">POPLife</div>
+        <div class="card-desc">2D Pixel Management Sim · Lead Designer · GDC 2026 · NYU Spring Showcase</div>
+      </div>
+      <div class="card-right">
+        <span class="tag tag-black">Featured</span>
+        <span class="tag">Systems Design</span>
+        <span class="tag">Narrative</span>
+      </div>
+    </div>
+    <div class="card-play">
+      <a class="play-badge" href="#" target="_blank">☆ Wishlist on Steam</a>
+      <a class="play-badge" href="#" target="_blank">Website ↗</a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="card-doc-header">
+      <div class="doc-label">Design Doc</div>
+      <div class="doc-title">POPLife GDD</div>
+    </div>
+    <div class="card-meta">
+      <div class="card-left">
+        <div class="card-num">02</div>
+        <div class="card-title">POPLife GDD</div>
+        <div class="card-desc">Full production GDD · Systems, NPC, Quest &amp; Economy Design · Team of 7+</div>
+      </div>
+      <div class="card-right">
+        <span class="tag">Design Doc</span>
+        <span class="tag">Systems</span>
+      </div>
+    </div>
+    <div class="card-play">
+      <a class="play-badge" href="#" target="_blank">View Doc ↗</a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <img class="card-img" src="/portfolio/assets/timeplex-cover-DWCQiezg.png" alt="Timeplex"/>
+    <div class="card-meta">
+      <div class="card-left">
+        <div class="card-num">03</div>
+        <div class="card-title">Timeplex</div>
+        <div class="card-desc">2D Grid-Based Puzzle · Lead Designer · Multi-character control · NYU Spring Showcase</div>
+      </div>
+      <div class="card-right">
+        <span class="tag">Game Design</span>
+        <span class="tag">AI Behavior</span>
+      </div>
+    </div>
+    <div class="card-play">
+      <a class="play-badge" href="#" target="_blank">▶ Play on itch.io</a>
+    </div>
+  </div>
+
+  <div class="section-label">Student Projects</div>
+  <div class="student-feed">
+    <div class="project-card">
+      <div class="card-meta">
+        <div class="card-left">
+          <div class="card-num">08</div>
+          <div class="card-title">Blind Memory</div>
+          <div class="card-desc">Unity 2D + FMOD · Programmer</div>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <img class="card-img" src="https://fanglint.wordpress.com/wp-content/uploads/2025/05/screenshot-2025-05-18-184011.png" alt="Hiker's Paradise" onerror="this.style.display='none'"/>
+      <div class="card-meta">
+        <div class="card-left">
+          <div class="card-num">09</div>
+          <div class="card-title">Hiker's Paradise</div>
+          <div class="card-desc">Unity · Solo Dev</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
