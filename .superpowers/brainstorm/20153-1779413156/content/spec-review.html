@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Nav Redesign Spec</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #f5f5f7; color: #1d1d1f; padding: 2rem; line-height: 1.6; }
+
+  .spec-wrap { max-width: 760px; margin: 0 auto; background: white; border-radius: 12px; padding: 2rem 2.5rem; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+
+  h1 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .meta { font-size: 0.8rem; color: #86868b; margin-bottom: 1.5rem; }
+
+  h2 { font-size: 1rem; font-weight: 700; margin: 1.5rem 0 0.5rem; border-bottom: 1px solid #e5e5e7; padding-bottom: 0.4rem; }
+  h3 { font-size: 0.85rem; font-weight: 700; color: #86868b; text-transform: uppercase; letter-spacing: 0.06em; margin: 1rem 0 0.4rem; }
+
+  ul { list-style: none; padding: 0; }
+  ul li { font-size: 0.88rem; padding: 0.2rem 0 0.2rem 1rem; position: relative; }
+  ul li::before { content: "—"; position: absolute; left: 0; color: #86868b; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 0.5rem 0; }
+  th { text-align: left; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: #86868b; border-bottom: 1px solid #e5e5e7; padding: 0.4rem 0.6rem; }
+  td { padding: 0.5rem 0.6rem; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  td:first-child { font-weight: 600; font-size: 0.8rem; width: 30%; }
+  td del { color: #ff3b30; text-decoration: line-through; }
+  td strong { color: #34c759; }
+
+  code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.78rem; background: #f5f5f7; padding: 0.1rem 0.3rem; border-radius: 3px; color: #e05c00; }
+
+  pre { background: #1d1d1f; color: #f5f5f7; border-radius: 8px; padding: 1rem 1.2rem; font-size: 0.75rem; font-family: 'SF Mono', 'Fira Code', monospace; overflow-x: auto; margin: 0.5rem 0; line-height: 1.6; }
+  pre .remove { color: #ff6b6b; }
+  pre .add { color: #6bcf7f; }
+  pre .comment { color: #86868b; }
+
+  .scope-item { display: flex; gap: 0.5rem; align-items: flex-start; font-size: 0.85rem; padding: 0.3rem 0; }
+  .badge { font-size: 0.65rem; font-weight: 700; padding: 0.1rem 0.45rem; border-radius: 99px; white-space: nowrap; margin-top: 0.15rem; }
+  .badge-change { background: #fff3e0; color: #e05c00; }
+  .badge-remove { background: #ffeaea; color: #ff3b30; }
+  .badge-keep { background: #eafaf1; color: #34c759; }
+
+  .approve-bar { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e5e5e7; display: flex; gap: 0.75rem; }
+  .btn { padding: 0.55rem 1.3rem; border-radius: 8px; border: none; font-size: 0.85rem; font-weight: 600; cursor: pointer; font-family: inherit; }
+  .btn-primary { background: #0071e3; color: white; }
+  .btn-secondary { background: #e5e5e7; color: #1d1d1f; }
+</style>
+<script>
+  function choose(val, label) {
+    if (window.__companion) window.__companion.select(val, label);
+  }
+</script>
+</head>
+<body>
+<div class="spec-wrap">
+
+  <h1>Nav Redesign — Portfolio Top Section</h1>
+  <div class="meta">2026-05-21 &nbsp;·&nbsp; Status: Approved &nbsp;·&nbsp; File: docs/superpowers/specs/2026-05-21-nav-redesign.md</div>
+
+  <h2>问题</h2>
+  <ul>
+    <li><strong>A</strong> — 顶部彩色条纹（<code>body::before</code>，5px sticky）：视觉干扰</li>
+    <li><strong>D</strong> — 全宽黑色筛选栏背景（<code>.filter-bar</code> <code>background: var(--ink)</code>）：太重，破坏米色调性</li>
+    <li><strong>C（轻微）</strong> — 导航链接外框（<code>.nav-links</code> bordered box）：太刻板</li>
+  </ul>
+
+  <h2>改动一览</h2>
+
+  <table>
+    <thead><tr><th>元素</th><th>之前</th><th>之后</th></tr></thead>
+    <tbody>
+      <tr><td>顶部条纹</td><td><del>body::before 5px 渐变</del></td><td><strong>完全删除</strong></td></tr>
+      <tr><td>姓名行</td><td>名字左 + 标语右（两行）</td><td><strong>名字左 + 导航链接右（单行）</strong></td></tr>
+      <tr><td>标语</td><td><del>小斜体 "Game Designer · NYU BFA 2026"</del></td><td><strong>删除</strong>（About 页面有更完整介绍）</td></tr>
+      <tr><td>导航链接</td><td><del>bordered box，白底黑框</del></td><td><strong>纯文字链接，gap: 1rem，无边框</strong></td></tr>
+      <tr><td>语言切换</td><td>独立 flex 元素</td><td>同行，左侧加 1px tan 色竖线分隔</td></tr>
+      <tr><td>筛选栏背景</td><td><del>全宽 background: var(--ink)</del></td><td><strong>无背景，继承 var(--bg)</strong></td></tr>
+      <tr><td>筛选按钮</td><td><del>白字黑底，active = 橙底</del></td><td><strong>灰字，active = 橙色字 + 底部 2px 橙线</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h2>不变的部分</h2>
+  <ul>
+    <li><code>--col: 680px</code> 宽度，与卡片对齐</li>
+    <li>Anton 字体（姓名）、Space Mono（UI 文字）</li>
+    <li>橙色 accent <code>var(--accent)</code></li>
+    <li>筛选逻辑、语言切换的 JS 行为</li>
+    <li>卡片、feed、详情页不变</li>
+  </ul>
+
+  <h2>文件范围</h2>
+  <div class="scope-item"><span class="badge badge-change">改</span>assets/cursor-trail-CYZb0a0Q.css — 删除 body::before，重写 .nav-* 和 .filter-* 样式</div>
+  <div class="scope-item"><span class="badge badge-change">改</span>index.html — 合并 nav-top/nav-bottom 为单行 nav-row，删除 nav-tagline</div>
+  <div class="scope-item"><span class="badge badge-change">改</span>about.html — 同步 nav HTML 结构</div>
+  <div class="scope-item"><span class="badge badge-change">改</span>project/*.html — 同步 nav HTML 结构</div>
+  <div class="scope-item"><span class="badge badge-keep">不变</span>JS 逻辑、卡片样式、详情页样式</div>
+
+  <div class="approve-bar">
+    <button class="btn btn-primary" onclick="choose('approved', '没问题，开始实施')">没问题，开始实施</button>
+    <button class="btn btn-secondary" onclick="choose('adjust', '需要调整')">需要调整</button>
+  </div>
+
+</div>
+<script src="/__companion/helper.js" onerror="console.log('no companion')"></script>
+</body>
+</html>

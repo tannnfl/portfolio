@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Nav Design Proposal</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, sans-serif; background: #f0ede0; padding: 2rem; }
+
+  h2 { font-family: -apple-system, sans-serif; font-size: 1.1rem; color: #1d1d1f; margin-bottom: 0.4rem; }
+  .subtitle { font-size: 0.85rem; color: #86868b; margin-bottom: 1.5rem; }
+
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Anton&display=swap');
+
+  :root {
+    --col: 680px;
+    --bg: #EDEAD8;
+    --ink: #1C1B14;
+    --accent: #E05C00;
+    --tan: #C9B98A;
+    --mid: #6B6350;
+    --stripe: #DDD7C0;
+    --font-mono: 'Space Mono', 'Courier New', monospace;
+    --font-head: 'Anton', Impact, sans-serif;
+  }
+
+  .page-mockup {
+    background: var(--bg);
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .mockup-label {
+    background: #1d1d1f;
+    color: #f5f5f7;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    font-family: -apple-system, sans-serif;
+  }
+
+  /* ── NEW NAV ── */
+  .nav-new {
+    display: flex;
+    justify-content: center;
+    background: var(--bg);
+    padding: 1rem 0 0;
+  }
+
+  .nav-new-inner {
+    width: var(--col);
+  }
+
+  .nav-row1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .nav-name {
+    font-family: var(--font-head);
+    font-size: 2.2rem;
+    letter-spacing: .03em;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    font-family: var(--font-mono);
+  }
+
+  .nav-links-new {
+    display: flex;
+    font-size: .58rem;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    gap: 1rem;
+    color: var(--mid);
+  }
+
+  .nav-links-new a {
+    color: var(--mid);
+    text-decoration: none;
+    transition: color .1s;
+  }
+  .nav-links-new a:hover { color: var(--ink); }
+
+  .lang-new {
+    display: flex;
+    margin-left: 1rem;
+    font-size: .58rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    border-left: 1px solid var(--tan);
+    padding-left: 1rem;
+    gap: 0.4rem;
+    color: var(--mid);
+    font-family: var(--font-mono);
+  }
+  .lang-new .active { color: var(--ink); }
+
+  /* filter row — same width as col, no dark bg */
+  .filter-new {
+    display: flex;
+    justify-content: center;
+    background: var(--bg);
+  }
+
+  .filter-new-inner {
+    width: var(--col);
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--tan);
+  }
+
+  .filter-new-btn {
+    font-family: var(--font-mono);
+    font-size: .55rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    padding: .45rem .9rem;
+    cursor: pointer;
+    color: var(--mid);
+    transition: color .1s;
+  }
+  .filter-new-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .filter-new-btn:first-child { padding-left: 0; }
+  .filter-new-btn:hover:not(.active) { color: var(--ink); }
+
+  /* feed preview */
+  .feed-preview {
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem 0;
+    background: var(--bg);
+  }
+
+  .card-preview {
+    width: var(--col);
+    background: #F0EDE0;
+    border: 2px solid var(--ink);
+    height: 90px;
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.1rem;
+    gap: 1rem;
+    color: var(--mid);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .card-num-preview {
+    font-size: .52rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .card-title-preview {
+    font-family: var(--font-head);
+    font-size: 1.4rem;
+    color: var(--ink);
+    flex: 1;
+  }
+
+  /* annotation */
+  .annotations {
+    max-width: 900px;
+    margin: 1.5rem auto 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    font-family: -apple-system, sans-serif;
+  }
+
+  .ann {
+    background: white;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    border-left: 3px solid #34c759;
+    font-size: 0.82rem;
+    color: #1d1d1f;
+  }
+  .ann.removed { border-left-color: #ff3b30; }
+  .ann strong { display: block; margin-bottom: 0.2rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .ann.removed strong { color: #ff3b30; }
+  .ann strong { color: #34c759; }
+
+  /* select button */
+  .approve-bar {
+    max-width: 900px;
+    margin: 1.5rem auto 0;
+    display: flex;
+    gap: 1rem;
+  }
+
+  .btn {
+    padding: 0.6rem 1.4rem;
+    border-radius: 6px;
+    border: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: -apple-system, sans-serif;
+  }
+  .btn-primary { background: #0071e3; color: white; }
+  .btn-secondary { background: #e5e5e7; color: #1d1d1f; }
+</style>
+<script>
+  function choose(val) {
+    if (window.__companion) window.__companion.select(val, document.querySelector('[data-choice="'+val+'"]')?.textContent || val);
+  }
+</script>
+</head>
+<body>
+
+<h2>设计方案：新版顶部</h2>
+<p class="subtitle">去掉条纹 + 去掉黑底筛选栏 · 导航改为文字链接 · 全部收进 680px 宽度</p>
+
+<div class="page-mockup">
+  <div class="mockup-label">预览 — Portfolio 顶部</div>
+
+  <!-- NEW NAV -->
+  <div class="nav-new">
+    <div class="nav-new-inner">
+      <div class="nav-row1">
+        <span class="nav-name">ANNA TAN</span>
+        <div class="nav-right">
+          <div class="nav-links-new">
+            <a href="#">About</a>
+            <a href="#">LinkedIn ↗</a>
+            <a href="#">itch.io ↗</a>
+            <a href="#">GitHub ↗</a>
+          </div>
+          <div class="lang-new">
+            <span class="active">EN</span>
+            <span>中</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTER ROW -->
+  <div class="filter-new">
+    <div class="filter-new-inner">
+      <button class="filter-new-btn active">All</button>
+      <button class="filter-new-btn">Game</button>
+      <button class="filter-new-btn">Design Doc</button>
+      <button class="filter-new-btn">Tool Dev</button>
+      <button class="filter-new-btn">Student Projects</button>
+    </div>
+  </div>
+
+  <!-- FEED PREVIEW -->
+  <div class="feed-preview">
+    <div class="card-preview">
+      <span class="card-num-preview">01</span>
+      <span class="card-title-preview">POPLIFE</span>
+      <span>2D Pixel Management Sim · Lead Designer · GDC 2026</span>
+    </div>
+  </div>
+</div>
+
+<div class="annotations">
+  <div class="ann removed">
+    <strong>已移除</strong>
+    顶部橙绿黑彩色条纹 — 完全去掉
+  </div>
+  <div class="ann removed">
+    <strong>已移除</strong>
+    全宽黑色筛选栏背景 — 改为贴近背景色的低调下划线
+  </div>
+  <div class="ann">
+    <strong>改动</strong>
+    导航链接改为纯文字+间距，去掉外框，与姓名同行右侧对齐
+  </div>
+  <div class="ann">
+    <strong>保留</strong>
+    680px 宽度、Space Mono 字体、Anton 大标题、橙色 accent — 与卡片风格一致
+  </div>
+</div>
+
+<div class="approve-bar">
+  <button class="btn btn-primary" onclick="choose('approved')">这个方向对，继续</button>
+  <button class="btn btn-secondary" onclick="choose('adjust')">需要调整</button>
+</div>
+
+<script src="/__companion/helper.js" onerror="console.log('no companion')"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Done</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, sans-serif; background: #f5f5f7; color: #1d1d1f; padding: 2rem; }
+  .wrap { max-width: 680px; margin: 0 auto; }
+  h1 { font-size: 1.4rem; margin-bottom: 0.25rem; }
+  .sub { color: #86868b; font-size: 0.85rem; margin-bottom: 2rem; }
+  .row { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.65rem 0; border-bottom: 1px solid #e5e5e7; font-size: 0.85rem; }
+  .check { color: #34c759; font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+  .label { font-weight: 600; }
+  .desc { color: #86868b; margin-top: 0.1rem; font-size: 0.78rem; }
+  .commits { margin-top: 2rem; background: #1d1d1f; border-radius: 8px; padding: 1rem 1.2rem; font-family: 'SF Mono', monospace; font-size: 0.75rem; color: #f5f5f7; line-height: 1.8; }
+  .note { margin-top: 1.5rem; background: #fff3e0; border-radius: 8px; padding: 1rem; font-size: 0.82rem; border-left: 3px solid #e05c00; }
+  .note strong { display: block; margin-bottom: 0.3rem; color: #e05c00; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Nav 改版完成 ✓</h1>
+  <p class="sub">全部 6 个 Task 通过 spec + 代码质量双重审查</p>
+
+  <div class="row"><span class="check">✓</span><div><div class="label">顶部彩色条纹</div><div class="desc">body::before 完全删除</div></div></div>
+  <div class="row"><span class="check">✓</span><div><div class="label">Nav 单行布局</div><div class="desc">名字左 · 链接+语言切换右 · 680px 宽</div></div></div>
+  <div class="row"><span class="check">✓</span><div><div class="label">导航链接去框</div><div class="desc">纯文字 + gap，无边框，hover 变深色</div></div></div>
+  <div class="row"><span class="check">✓</span><div><div class="label">黑色筛选栏</div><div class="desc">改为浅色下划线 tab，与背景色融合</div></div></div>
+  <div class="row"><span class="check">✓</span><div><div class="label">index.html</div><div class="desc">nav 重构完成</div></div></div>
+  <div class="row"><span class="check">✓</span><div><div class="label">about.html + 29 个 project 页面</div><div class="desc">全部同步，lang-switch 移出 nav-links</div></div></div>
+
+  <div class="commits">
+    189c2eb  html: batch update all project pages nav to new structure<br>
+    febad6a  html: update about page nav to match new structure<br>
+    e86ea11  html: restructure index nav to single row with nav-right<br>
+    f3a73af  style: rework filter bar to underline style, no dark bg<br>
+    7246756  style: remove top stripe, rework nav to single row
+  </div>
+
+  <div class="note">
+    <strong>审查员提示（可选后续优化）</strong>
+    .lang-btn 保留了旧的 1px solid var(--ink) 边框，与新的极简链接风格略有反差。如果视觉上感觉 EN/中 按钮太重，可以将 border-color 改为 var(--tan) 或直接去掉边框。
+  </div>
+</div>
+</body>
+</html>

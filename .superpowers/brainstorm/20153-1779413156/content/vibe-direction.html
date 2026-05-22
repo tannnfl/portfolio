@@ -1,0 +1,106 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Anton&display=swap');
+
+  .demo-nav {
+    font-family: 'Space Mono', monospace;
+    background: #EDEAD8;
+    padding: 1rem 1.5rem 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+  }
+  .demo-a .top-stripe { height:5px; background: repeating-linear-gradient(90deg,#1C1B14 0,#1C1B14 3px,#E05C00 3px,#E05C00 6px,#4A5C2A 6px,#4A5C2A 9px,transparent 9px,transparent 12px); margin-bottom:8px; }
+  .demo-a .name { font-family: 'Anton', sans-serif; font-size: 1.8rem; color:#1C1B14; }
+  .demo-a .tagline { font-size:0.5rem; color:#6B6350; font-style:italic; float:right; margin-top:-1.8rem; letter-spacing:.05em; }
+  .demo-a .links { display:flex; border:1px solid #1C1B14; width:fit-content; margin-top:0.5rem; font-size:0.5rem; text-transform:uppercase; letter-spacing:.1em; }
+  .demo-a .links span { padding:0.2rem 0.6rem; border-right:1px solid #1C1B14; }
+  .demo-a .links span:last-child { border:none; }
+  .demo-a .filter { background:#1C1B14; color:rgba(255,255,255,.45); font-size:0.5rem; text-transform:uppercase; letter-spacing:.1em; padding:0.3rem 0; margin: 0.5rem -1.5rem -0.5rem; display:flex; gap:0; }
+  .demo-a .filter span { padding:0.3rem 0.8rem; border-right:1px solid rgba(255,255,255,.12); }
+  .demo-a .filter span.active { background:#E05C00; color:#fff; }
+
+  .demo-b .name { font-family: 'Anton', sans-serif; font-size: 2.2rem; color:#1C1B14; text-align:center; display:block; }
+  .demo-b .tagline { font-size:0.55rem; color:#6B6350; font-style:italic; text-align:center; display:block; letter-spacing:.08em; margin-top:0.2rem; }
+  .demo-b .links { display:flex; justify-content:center; gap:1.5rem; margin-top:0.7rem; font-size:0.52rem; text-transform:uppercase; letter-spacing:.1em; color:#1C1B14; border-top: 1px solid #C9B98A; border-bottom: 1px solid #C9B98A; padding: 0.35rem 0; }
+  .demo-b .filter { display:flex; justify-content:center; gap:0; margin: 0.5rem -1.5rem -0.5rem; border-top:2px solid #1C1B14; font-size:0.5rem; text-transform:uppercase; letter-spacing:.1em; }
+  .demo-b .filter span { padding:0.3rem 0.8rem; border-right:1px solid #C9B98A; color:#6B6350; }
+  .demo-b .filter span:last-child { border:none; }
+  .demo-b .filter span.active { color:#E05C00; font-weight:bold; }
+
+  .demo-c .header-row { display:flex; justify-content:space-between; align-items:center; }
+  .demo-c .name { font-family: 'Anton', sans-serif; font-size: 1.8rem; color:#1C1B14; }
+  .demo-c .tagline { font-size:0.5rem; color:#6B6350; font-style:italic; letter-spacing:.05em; }
+  .demo-c .links { display:flex; gap:1.2rem; margin-top:0.6rem; font-size:0.5rem; text-transform:uppercase; letter-spacing:.1em; color:#1C1B14; }
+  .demo-c .links span { padding-bottom:0.1rem; border-bottom:1px solid transparent; cursor:pointer; }
+  .demo-c .links span:hover { border-bottom:1px solid #1C1B14; }
+  .demo-c .divider { height:2px; background: repeating-linear-gradient(90deg, #1C1B14 0, #1C1B14 12px, transparent 12px, transparent 16px); margin: 0.5rem -1.5rem; }
+  .demo-c .filter { display:flex; gap:0; font-size:0.5rem; text-transform:uppercase; letter-spacing:.1em; margin:0 -1.5rem -0.5rem; background:#EDEAD8; padding: 0 1.5rem; border-top: 1px solid #C9B98A; }
+  .demo-c .filter span { padding:0.35rem 0.8rem 0.35rem 0; margin-right:0.8rem; color:#6B6350; border-bottom:2px solid transparent; }
+  .demo-c .filter span.active { color:#1C1B14; border-bottom:2px solid #E05C00; font-weight:bold; }
+</style>
+
+<h2>你想要哪种顶部感觉？</h2>
+<p class="subtitle">三个方向，每个都去掉了彩色条纹</p>
+
+<div class="options">
+  <div class="option" data-choice="centered" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>居中 · 对称 · 干净</h3>
+      <p>名字居中，筛选栏用浅色线条代替黑底，整体更通透</p>
+      <div class="demo-nav demo-b" style="margin-top:0.8rem">
+        <span class="name">ANNA TAN</span>
+        <span class="tagline">Game Designer · NYU BFA 2026</span>
+        <div class="links">
+          <span>About</span><span>LinkedIn ↗</span><span>itch.io ↗</span><span>GitHub ↗</span><span>EN | 中</span>
+        </div>
+        <div class="filter">
+          <span class="active">All</span><span>Game</span><span>Design Doc</span><span>Tool Dev</span><span>Student</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="underline" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>左对齐 · 低调 · 编辑风</h3>
+      <p>保留现有左对齐布局，去掉条纹和黑底，nav 链接改为朴素文字+下划线，筛选栏融入背景色</p>
+      <div class="demo-nav demo-c" style="margin-top:0.8rem">
+        <div class="header-row">
+          <span class="name">ANNA TAN</span>
+          <span class="tagline">Game Designer · NYU BFA 2026</span>
+        </div>
+        <div class="links">
+          <span>About</span><span>LinkedIn ↗</span><span>itch.io ↗</span><span>GitHub ↗</span><span>EN | 中</span>
+        </div>
+        <div class="divider"></div>
+        <div class="filter">
+          <span class="active">All</span><span>Game</span><span>Design Doc</span><span>Tool Dev</span><span>Student</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="merged" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>合并 · 紧凑 · 单行</h3>
+      <p>名字 + 筛选栏合并成一行，节省空间，视觉更紧凑现代</p>
+      <div class="demo-nav" style="margin-top:0.8rem;padding:0.6rem 1.5rem">
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #1C1B14;padding-bottom:0.5rem;margin-bottom:0.4rem">
+          <span style="font-family:'Anton',sans-serif;font-size:1.4rem;color:#1C1B14">ANNA TAN</span>
+          <div style="display:flex;gap:1rem;font-size:0.48rem;text-transform:uppercase;letter-spacing:.1em;font-family:'Space Mono',monospace;color:#6B6350">
+            <span>About</span><span>LinkedIn ↗</span><span>itch.io ↗</span><span>GitHub ↗</span><span style="color:#1C1B14;font-weight:bold">EN | 中</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:1.5rem;font-size:0.48rem;text-transform:uppercase;letter-spacing:.1em;font-family:'Space Mono',monospace">
+          <span style="color:#E05C00;font-weight:bold;border-bottom:2px solid #E05C00;padding-bottom:2px">All</span>
+          <span style="color:#6B6350">Game</span><span style="color:#6B6350">Design Doc</span><span style="color:#6B6350">Tool Dev</span><span style="color:#6B6350">Student</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="subtitle" style="margin-top:1rem">选一个最接近你心意的方向，也可以在终端补充"我想要X感觉"</p>
