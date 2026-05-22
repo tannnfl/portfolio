@@ -7,7 +7,7 @@
   --bg:#F5F5F0;
   --ink:#0D0D0D;
   --accent:#B8D900;
-  --accent2:#0D0D0D;
+  --accent2:#B8D900;
   --tan:#C8C8C8;
   --stripe:#EBEBEB;
   --mid:#666666;
@@ -151,7 +151,7 @@ a.ext-link:hover{text-decoration:none}
   white-space:nowrap;display:inline-block;
   background:var(--bg);color:var(--mid);
 }
-.tag-black{background:var(--accent2);color:#fff;border-color:var(--accent2)}
+.tag-black{background:var(--accent2);color:var(--ink);border-color:var(--accent2)}
 a.tag{text-decoration:none}
 a.tag:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 
@@ -163,7 +163,7 @@ a.tag:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .play-badge{
   display:inline-block;font-size:.6rem;font-weight:700;
   letter-spacing:.1em;text-transform:uppercase;
-  background:var(--accent2);color:#fff;
+  background:var(--accent2);color:var(--ink);
   border:1px solid var(--ink);padding:.45rem 1.1rem;
   white-space:nowrap;cursor:pointer;text-decoration:none;
 }
