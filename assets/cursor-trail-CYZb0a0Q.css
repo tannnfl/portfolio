@@ -4,14 +4,14 @@
 
 :root{
   --col:680px;
-  --bg:#EDEAD8;
-  --ink:#1C1B14;
-  --accent:#E05C00;
-  --accent2:#4A5C2A;
-  --tan:#C9B98A;
-  --stripe:#DDD7C0;
-  --mid:#6B6350;
-  --paper:#F0EDE0;
+  --bg:#F5F5F0;
+  --ink:#0D0D0D;
+  --accent:#B8D900;
+  --accent2:#0D0D0D;
+  --tan:#C8C8C8;
+  --stripe:#EBEBEB;
+  --mid:#666666;
+  --paper:#FFFFFF;
   --font-mono:'Space Mono','Courier New',Courier,monospace;
   --font-head:'Anton',Impact,sans-serif;
 }
