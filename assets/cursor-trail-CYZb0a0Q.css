@@ -63,19 +63,20 @@ img{display:block}
 .lang-btn:hover:not(.active){background:var(--stripe)}
 
 /* ── FILTER BAR ── */
-.filter-bar{display:flex;justify-content:center;background:var(--ink);padding:.5rem 0}
-.filter-inner{width:var(--col);display:flex;gap:0}
+.filter-bar{display:flex;justify-content:center}
+.filter-inner{width:var(--col);display:flex;gap:0;border-bottom:1px solid var(--tan)}
 .filter-btn{
-  font-family:var(--font-mono);font-size:.6rem;font-weight:700;
+  font-family:var(--font-mono);font-size:.55rem;font-weight:700;
   text-transform:uppercase;letter-spacing:.1em;
-  background:var(--ink);border:none;
-  border-right:1px solid rgba(255,255,255,.12);
-  padding:.35rem .95rem;cursor:pointer;color:rgba(255,255,255,.45);
-  transition:color .1s,background .1s;
+  background:none;border:none;
+  border-bottom:2px solid transparent;
+  margin-bottom:-1px;
+  padding:.45rem .9rem;cursor:pointer;color:var(--mid);
+  transition:color .1s;
 }
-.filter-btn:last-child{border-right:none}
-.filter-btn.active{background:var(--accent);color:#fff}
-.filter-btn:hover:not(.active){color:rgba(255,255,255,.85)}
+.filter-btn:first-child{padding-left:0}
+.filter-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
+.filter-btn:hover:not(.active){color:var(--ink)}
 
 /* ── FEED ── */
 .feed{display:flex;flex-direction:column;align-items:center;padding:2.5rem 0 6rem}
